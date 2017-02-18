@@ -1,6 +1,10 @@
 // Center the map about IL and IN
 Map.setCenter(-87.36, 41.15, 8);
 
-var cdl = ee.ImageCollection('USDA/NASS/CDL');
+var cdl = ee.Image('USDA/NASS/CDL/2014');
+var landsat = ee.Image('LANDSAT/LC8_L1T/LC80440342014077LGN00');
 print(cdl);
-print(cdl.get('features'));
+print(landsat);
+print(cdl.select('cultivated_land'));
+
+Map.addLayer(cdl.select('cultivated_land'));
