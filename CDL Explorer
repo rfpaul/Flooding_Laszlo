@@ -1,0 +1,2 @@
+var cdl = ee.ImageCollection('USDA/NASS/CDL');
+print(cdl);
