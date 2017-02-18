@@ -48,3 +48,7 @@ var collection = ee.ImageCollection('LC8_L1T_TOA')
 var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': .8, 'gamma': 1.6};
 Map.setCenter(-87.36, 41.15, 8);
 Map.addLayer(collection.qualityMosaic('cloudscore'), vizParams);
+
+var cdl = ee.ImageCollection('USDA/NASS/CDL')
+print(cdl)
+Map.addLayer(cdl.)
