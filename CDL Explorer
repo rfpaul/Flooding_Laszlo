@@ -1,2 +1,6 @@
+// Center the map about IL and IN
+Map.setCenter(-87.36, 41.15, 8);
+
 var cdl = ee.ImageCollection('USDA/NASS/CDL');
 print(cdl);
+print(cdl.get('features'));
