@@ -51,4 +51,3 @@ Map.addLayer(collection.qualityMosaic('cloudscore'), vizParams);
 
 var cdl = ee.ImageCollection('USDA/NASS/CDL');
 print(cdl);
-Map.addLayer(cdl);
