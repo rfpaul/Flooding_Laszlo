@@ -44,10 +44,12 @@ var collection = ee.ImageCollection('LC8_L1T_TOA')
       return img.addBands(score);
     });
 
+// Load Cropland Data Layer from 2014
+var cdl = ee.Image("USDA/NASS/CDL/2014");
+
 // Define visualization parameters for a false color image.
 var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': .8, 'gamma': 1.6};
+var masked_lsat = collection.qualityMosaic('cloudscore').updateMask(cdl);
 Map.setCenter(-87.36, 41.15, 8);
 Map.addLayer(collection.qualityMosaic('cloudscore'), vizParams);
 
-var cdl = ee.ImageCollection('USDA/NASS/CDL');
-print(cdl);
