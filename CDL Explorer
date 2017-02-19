@@ -6,8 +6,9 @@ var landsat = ee.Image('LANDSAT/LC8_L1T/LC80440342014077LGN00');
 print(cdl);
 print(landsat);
 var cdl_cult = cdl.select('cultivated_land');
+cdl_cult = cdl_cult.remap([1, 2], [0, 1]);
 print(cdl_cult);
 
 Map.addLayer(cdl_cult);
-var landsat_masked = landsat.updateMask(cdl_cult);
+var landsat_masked = landsat//.updateMask(cdl_cult);
 Map.addLayer(landsat_masked);
