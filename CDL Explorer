@@ -10,7 +10,7 @@ var landsat = ee.ImageCollection('LC8_L1T_TOA')
 print(cdl);
 print(landsat);
 var cdl_cult = cdl.select('cultivated_land');
-cdl_cult = cdl_cult.remap([1, 2], [0, 1]);
+cdl_cult = cdl_cult.eq(1);
 print(cdl_cult);
 
 Map.addLayer(cdl_cult);
