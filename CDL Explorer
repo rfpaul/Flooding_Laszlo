@@ -1,5 +1,32 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var cdl = ee.Image("USDA/NASS/CDL/2014");
+var cdl = ee.Image("USDA/NASS/CDL/2014"),
+    corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
+        [[[-82.1337890625, 42.61132393345391],
+          [-82.4853515625, 44.144375156142864],
+          [-86.396484375, 45.299621281112216],
+          [-87.802734375, 45.39227876798964],
+          [-89.912109375, 45.48478459387111],
+          [-91.93359375, 46.03663519715222],
+          [-95.44921875, 47.09406201244411],
+          [-95.2734375, 48.27734442028102],
+          [-96.15234375, 49.290740050243485],
+          [-100.37109375, 49.290740050243485],
+          [-100.458984375, 48.30658277685742],
+          [-100.5908203125, 46.854181436320886],
+          [-100.458984375, 45.26870174864029],
+          [-100.4150390625, 43.57402423617491],
+          [-99.3603515625, 42.02644643428589],
+          [-100.37109375, 40.573909721497564],
+          [-99.1845703125, 39.90299481572232],
+          [-95.8447265625, 39.22544552735803],
+          [-94.04296874999994, 38.023863033250294],
+          [-92.7685546875, 38.05847296216953],
+          [-90.8349609375, 37.64207544142983],
+          [-87.7587890625, 37.15331243359517],
+          [-86.2646484375, 37.64207544142983],
+          [-84.7705078125, 38.05847296216953],
+          [-82.529296875, 38.747229512898734],
+          [-81.298828125, 41.304222339667696]]]);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Center the map about IL and IN
 Map.setCenter(-87.36, 41.15, 8);
@@ -10,11 +37,13 @@ var landsat = ee.ImageCollection('LC8_L1T_TOA')
 print(cdl);
 print(landsat);
 var cdl_cult = cdl.select('cultivated_land');
+var cdl_class = cdl.select('cropland');
 cdl_cult = cdl_cult.remap([1, 2], [0, 1]);
 print(cdl_cult);
+print(cdl_class);
 
 var visParams = {bands: ['B6', 'B5', 'B7']};
 Map.addLayer(cdl_cult);
 var landsat_masked = landsat.updateMask(cdl_cult);
 Map.addLayer(landsat_masked, visParams);
-Map.addLayer(landsat, visParams);
+Map.addLayer(cdl_class);
