@@ -5,6 +5,9 @@ var cdl = ee.Image('USDA/NASS/CDL/2014');
 var landsat = ee.Image('LANDSAT/LC8_L1T/LC80440342014077LGN00');
 print(cdl);
 print(landsat);
-print(cdl.select('cultivated_land'));
+var cdl_cult = cdl.select('cultivated_land');
+print(cdl_cult);
 
-Map.addLayer(cdl.select('cultivated_land'));
+Map.addLayer(cdl_cult);
+var landsat_masked = landsat.updateMask(cdl_cult);
+Map.addLayer(landsat_masked);
