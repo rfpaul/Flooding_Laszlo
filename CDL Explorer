@@ -31,19 +31,24 @@ var cdl = ee.Image("USDA/NASS/CDL/2014"),
 // Center the map about IL and IN
 Map.setCenter(-87.36, 41.15, 8);
 
-
+var cdl12 = ee.Image("USDA/NASS/CDL/2012");
 var landsat = ee.ImageCollection('LC8_L1T_TOA')
     .filterDate('2013-07-01', '2013-08-20').mosaic();
 print(cdl);
 print(landsat);
 var cdl_cult = cdl.select('cultivated_land');
 var cdl_class = cdl.select('cropland');
+
+var cdl_cult12 = cdl12.select('cultivated_land');
+
 cdl_cult = cdl_cult.remap([1, 2], [0, 1]);
+cdl_cult12 = cdl_cult12.remap([1, 2], [0, 1]);
 print(cdl_cult);
 print(cdl_class);
 
 var visParams = {bands: ['B6', 'B5', 'B7']};
 Map.addLayer(cdl_cult);
+Map.addLayer(cld12_cult);
 var landsat_masked = landsat.updateMask(cdl_cult);
 Map.addLayer(landsat_masked, visParams);
 Map.addLayer(cdl_class);
