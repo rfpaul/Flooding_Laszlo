@@ -870,7 +870,7 @@ var sites = ee.FeatureCollection([vegetation, soil, mixed_soil_veg, water]).flat
 print(sites);
 var training = masked_lsat.sampleRegions({collection:sites, properties:["class"], scale:30});
 print(training);
-var classifier = ee.Classifier.cart().train(training, "class");
+var classifier = ee.Classifier.cart().train(training, "class", LC8_BANDS);
 var classed_lsat = masked_lsat.classify(classifier);
 print(classed_lsat);
 
