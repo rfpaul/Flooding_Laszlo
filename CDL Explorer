@@ -48,7 +48,7 @@ print(cdl_class);
 
 var visParams = {bands: ['B6', 'B5', 'B7']};
 Map.addLayer(cdl_cult);
-Map.addLayer(cld12_cult);
+Map.addLayer(cdl_cult12);
 var landsat_masked = landsat.updateMask(cdl_cult);
 Map.addLayer(landsat_masked, visParams);
 Map.addLayer(cdl_class);
