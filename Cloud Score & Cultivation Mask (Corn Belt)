@@ -239,8 +239,17 @@ cdl_cult = cdl_cult.remap([1, 2], [0, 1]);
 
 // Define visualization parameters for a false color image.
 var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': .8, 'gamma': 1.6};
+
+// Mask image
 var masked_lsat = collection.qualityMosaic('cloudscore').updateMask(cdl_cult);
+// Clip to the Corn Belt only
 masked_lsat = masked_lsat.clip(corn_belt_region);
+
+print(Vegetation);
+
+// Merge classifier points
+var training = masked_lsat.sampleRegions(Vegetation.merge(Water).merge(Soil).merge(Mixed_Soil_Vegetation), ["class"], 30);
+
 Map.setCenter(-94.866,42.967, 8);
 Map.addLayer(masked_lsat, vizParams);
 
