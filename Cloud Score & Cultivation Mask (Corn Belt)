@@ -256,4 +256,6 @@ var classifier = ee.Classifier.cart().train(training, "class");
 
 Map.setCenter(-94.866,42.967, 8);
 Map.addLayer(masked_lsat, vizParams);
+Map.addLayer(masked_lsat.classify(classifier), {min:0, max:3, palette: ["red", "green", "blue"]})
+
 
