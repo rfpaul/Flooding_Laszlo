@@ -868,7 +868,7 @@ print(vegetation);
 //var sites = vegetation.merge(water).merge(soil).merge(mixed_soil_veg);
 var sites = ee.FeatureCollection([vegetation, soil, mixed_soil_veg, water]).flatten();
 print(sites);
-var training = masked_lsat.sampleRegions({collection:sites, properties:["class"], scale:30});
+var training = masked_lsat.sampleRegions(sites, ["class"], 30);
 print(training);
 var classifier = ee.Classifier.cart().train(training, "class", LC8_BANDS);
 var classed_lsat = masked_lsat.classify(classifier);
