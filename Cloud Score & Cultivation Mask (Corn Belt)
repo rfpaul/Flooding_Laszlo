@@ -1027,6 +1027,7 @@ print(training);
 var classifier = ee.Classifier.cart().train(training, "class", LC8_BANDS);
 var classed_lsat = masked_lsat.classify(classifier);
 print(classed_lsat);
+print(classed_lsat.reduce(ee.Reducer.countDistinct()));
 
 Map.setCenter(-94.866,42.967, 8);
 Map.addLayer(masked_lsat, vizParams);
