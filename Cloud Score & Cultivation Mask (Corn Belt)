@@ -252,6 +252,7 @@ print(Vegetation);
 var sites = ee.FeatureCollection([Vegetation, Soil, Mixed_Soil_Vegetation, Water]);
 print(sites);
 var training = masked_lsat.sampleRegions(sites, ["class"], 30);
+print(training);
 var classifier = ee.Classifier.cart().train(training, "class");
 
 Map.setCenter(-94.866,42.967, 8);
