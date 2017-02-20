@@ -1040,5 +1040,6 @@ Export.image.toCloudStorage({
   bucket: 'ee-export',
   fileNamePrefix: '2013_cb_class',
   scale: 30,
-  region: corn_belt_region
+  region: corn_belt_region,
+  maxPixels: 1e13
 });
