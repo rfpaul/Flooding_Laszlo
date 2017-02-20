@@ -238,6 +238,7 @@ var cdl_cult = cdl.select('cultivated_land');
 cdl_cult = cdl_cult.remap([1, 2], [0, 1]);
 
 // Define visualization parameters for a false color image.
+// NIR is green, SWIR1 is red, SWIR2 is blue
 var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': .8, 'gamma': 1.6};
 
 // Mask image
