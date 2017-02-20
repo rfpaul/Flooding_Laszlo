@@ -248,7 +248,11 @@ masked_lsat = masked_lsat.clip(corn_belt_region);
 print(Vegetation);
 
 // Merge classifier points
-var training = masked_lsat.sampleRegions(Vegetation.merge(Water).merge(Soil).merge(Mixed_Soil_Vegetation), ["class"], 30);
+//merged_points = Vegetation.merge(Water).merge(Soil).merge(Mixed_Soil_Vegetation);
+var sites = ee.FeatureCollection([Vegetation, Soil, Mixed_Soil_Vegetation, Water]);
+print(sites);
+var training = masked_lsat.sampleRegions(sites, ["class"], 30);
+var classifier = ee.Classifier.cart().train(training, "class");
 
 Map.setCenter(-94.866,42.967, 8);
 Map.addLayer(masked_lsat, vizParams);
