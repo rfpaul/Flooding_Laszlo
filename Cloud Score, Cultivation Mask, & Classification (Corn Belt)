@@ -1034,13 +1034,6 @@ var classed_lsat = masked_lsat.classify(classifier);
 //print(classed_lsat);
 //print(classed_lsat.reduce(ee.Reducer.count()).getInfo());
 
-var r = classed_lsat.reduceRegion({
-  reducer: ee.Reducer.frequencyHistogram().unweighted(),
-  scale: 30,
-  geometry: corn_belt_region
-});
-print(r);
-
 // Draw to map
 Map.setCenter(-94.866,42.967, 8);
 Map.addLayer(masked_lsat, vizParams);
