@@ -1048,7 +1048,7 @@ Map.addLayer(classed_lsat, {min:0, max:3, palette:['green', 'yellow', 'red', 'bl
   scale: 30,
   region: corn_belt_region,
   maxPixels: 1e13
-});*/
+});
 Export.image.toCloudStorage({
   image: cdl_cult,
   description: '2014_CDL_Corn_Belt',
@@ -1057,4 +1057,4 @@ Export.image.toCloudStorage({
   scale: 30,
   region: corn_belt_region,
   maxPixels: 1e13
-});
+});*/
