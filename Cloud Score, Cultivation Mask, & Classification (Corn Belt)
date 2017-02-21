@@ -1048,15 +1048,13 @@ Map.addLayer(classed_lsat, {min:0, max:3, palette:['green', 'yellow', 'red', 'bl
   scale: 30,
   region: corn_belt_region,
   maxPixels: 1e13
-});
+});*/
 Export.image.toCloudStorage({
   image: cdl_cult,
-  description: '2013_Classified_Corn_Belt',
+  description: '2014_CDL_Corn_Belt',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: '2013_cb_class',
+  fileNamePrefix: '2014_cb_cdl_mask',
   scale: 30,
   region: corn_belt_region,
   maxPixels: 1e13
 });
-*/
-
