@@ -1049,7 +1049,7 @@ var maskAndFill = function(image, aoi, nan_val) {
   return image.multiply(mask).add(fill);
 }
 
-var mask_filled = maskAndFill(classed_lsat, corn_belt_region, -1).toInt();
+var mask_filled = maskAndFill(classed_lsat, corn_belt_region, -1).toInt8();
 //print(mask_filled);
 //Map.addLayer(mask_filled, {min:0, max:3, palette:['green', 'yellow', 'red', 'blue']});
 
