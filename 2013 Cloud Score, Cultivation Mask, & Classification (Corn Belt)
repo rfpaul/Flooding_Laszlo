@@ -1031,7 +1031,7 @@ var training = masked_lsat.sampleRegions(sites, ["class"], 30);
 var classifier = ee.Classifier.cart().train(training, "class", LC8_BANDS);
 // Apply the classifier to the masked Landsat image
 var classed_lsat = masked_lsat.classify(classifier);
-//print(classed_lsat);
+print(classed_lsat);
 //print(classed_lsat.reduce(ee.Reducer.count()).getInfo());
 
 //classed_lsat = classed_lsat.remap([0, 1, 2, 3], [1, 2, 3, 4]);
