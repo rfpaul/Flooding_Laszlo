@@ -334,13 +334,13 @@ var geometry = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "50"
             }),
         ee.Feature(
-            ee.Geometry.Point([-87.71055221557617, 41.039846871821815]),
+            ee.Geometry.Point([-87.70153999328613, 41.03414967547418]),
             {
               "class": 0,
               "system:index": "51"
             }),
         ee.Feature(
-            ee.Geometry.Point([-87.82865524291992, 41.03026494070838]),
+            ee.Geometry.Point([-87.80882835388184, 41.02223576249203]),
             {
               "class": 0,
               "system:index": "52"
@@ -527,7 +527,7 @@ var geometry = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "29"
             }),
         ee.Feature(
-            ee.Geometry.Point([-87.77166366577148, 41.03932896525695]),
+            ee.Geometry.Point([-87.73930549621582, 41.03350223559808]),
             {
               "class": 1,
               "system:index": "30"
@@ -822,13 +822,13 @@ var geometry = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "47"
             }),
         ee.Feature(
-            ee.Geometry.Point([-87.68274307250977, 41.05227540679247]),
+            ee.Geometry.Point([-87.67149925231934, 41.052145954985285]),
             {
               "class": 2,
               "system:index": "48"
             }),
         ee.Feature(
-            ee.Geometry.Point([-87.80101776123047, 41.0605597926365]),
+            ee.Geometry.Point([-87.80470848083496, 41.06101281489821]),
             {
               "class": 2,
               "system:index": "49"
@@ -994,7 +994,7 @@ var cloudScore = function(img) {
 
 // Filter the TOA collection to a time-range and add the cloudscore band.
 var collection = ee.ImageCollection('LC8_L1T_TOA')
-    .filterDate('2015-07-10', '2015-09-30')
+    .filterDate('2015-07-10', '2015-09-20')
     .map(function(img) {
       // Invert the cloudscore so 1 is least cloudy, and rename the band.
       var score = cloudScore(img.select(LC8_BANDS, STD_NAMES));
