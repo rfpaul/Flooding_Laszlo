@@ -32,9 +32,10 @@ var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp'];
 
 // Get the Landsat 8 TOA collection
 var lsat = ee.ImageCollection('LC8_L1T_TOA')
-    .filterDate('2015-07-10', '2015-09-15');
+    .filterDate('2015-07-10', '2015-09-15')
+    .filterBounds(corn_belt_region);
 
-print(lsat);
+//print(lsat);
 print(lsat.mosaic())
 
 var cloudScored = ee.Algorithms.Landsat.simpleCloudScore(lsat);
