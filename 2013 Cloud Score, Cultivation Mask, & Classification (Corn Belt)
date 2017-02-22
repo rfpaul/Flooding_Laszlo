@@ -1049,7 +1049,7 @@ var maskAndFill = function(image, aoi, nan_val) {
   return image.multiply(mask).add(fill);
 }
 
-var mask_filled = maskAndFill(classed_lsat, corn_belt_region, -1).toInt8();
+var mask_filled = classed_lsat.toInt8();
 //print(mask_filled);
 //Map.addLayer(mask_filled, {min:0, max:3, palette:['green', 'yellow', 'red', 'blue']});
 
@@ -1058,7 +1058,7 @@ Export.image.toCloudStorage({
   image: mask_filled,
   description: '2013_Classified_Corn_Belt',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: '2013_cb_class_remask',
+  fileNamePrefix: '2013_cb_class_remask02',
   scale: 30,
   //region: corn_belt_region,
   maxPixels: 1e13
