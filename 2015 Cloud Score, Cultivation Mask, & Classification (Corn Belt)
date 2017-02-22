@@ -1036,27 +1036,35 @@ var classed_lsat = masked_lsat.classify(classifier);
 
 classed_lsat = classed_lsat.remap([0, 1, 2, 3], [1, 2, 3, 4]);*/
 
+
 // Draw to map
-Map.setCenter(-94.866,42.967, 8);
+//Map.setCenter(-94.866,42.967, 8);
+Map.setCenter(-96.37, 48.29, 8);
 Map.addLayer(masked_lsat, vizParams);
-//Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'blue']});
+//Map.addLayer(classed_lsat, {min:0, max:3, palette:['green', 'yellow', 'red', 'blue']});
+
+// Apply a mask value for NaN at the area of interest
+var maskAndFill = function(image, aoi, nan_val) {
+  var mask = ee.Image(0).byte().paint(aoi, 1);
+  var fill = mask.not().multiply(nan_val);
+
+  return image.multiply(mask).add(fill);
+}
+
+// Prepare an 8-bit int image of the classified raster
+// -128 is the placeholder value for NaN
+var mask_filled = maskAndFill(classed_lsat, corn_belt_region, -128).toInt8();
+//print(mask_filled);
+//Map.addLayer(mask_filled, {min:0, max:3, palette:['green', 'yellow', 'red', 'blue']});
 
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
-  image: classed_lsat,
-  description: '2013_Classified_Corn_Belt',
+  image: mask_filled,
+  description: '2015_Classified_Corn_Belt',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: '2013_cb_class',
+  fileNamePrefix: '2015_cb_class_int8',
   scale: 30,
   region: corn_belt_region,
   maxPixels: 1e13
 });
-Export.image.toCloudStorage({
-  image: cdl_cult,
-  description: '2014_CDL_Corn_Belt',
-  bucket: 'gee_export_kovi',
-  fileNamePrefix: '2014_cb_cdl_mask',
-  scale: 30,
-  region: corn_belt_region,
-  maxPixels: 1e13
-});*/
+*/
