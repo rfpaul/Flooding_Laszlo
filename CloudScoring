@@ -39,8 +39,8 @@ var lsat = ee.ImageCollection('LC8_L1T_TOA')
     .filterBounds(corn_belt_region);
 
 function CloudMask (image) {
-  var cloudMask = ee.Algorithms.Landsat.simpleCloudScore(image).lte(.15);
-  return image.updateMask(cloudMask);
+  var cloud_mask = ee.Algorithms.Landsat.simpleCloudScore(image).lte(.15);
+  return image.updateMask(cloud_mask);
 }
 
 //print(lsat);
@@ -48,7 +48,7 @@ print(lsat.mosaic())
 
 var cloudScored = lsat.map(ee.Algorithms.Landsat.simpleCloudScore);
 cloudScored = cloudScored.map(function (image) { return image.lte(.15) });
-lsat = lsat.updateMask(cloudScored);
+//lsat = lsat.updateMask(cloudScored);
 print(cloudScored);
 
 var lsat_median = lsat.median();
