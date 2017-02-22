@@ -37,11 +37,11 @@ var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp'];
 var lsat = ee.ImageCollection('LC8_L1T_TOA')
     .filterDate('2015-06-20', '2015-09-30')
     .filterBounds(corn_belt_region);
-/*
+
 function CloudMask (image) {
-  var cloudMask = ee.Algorithms.Landsat.simpleCloudScore(image).lte(.25);
-  return image;
-}*/
+  var cloudMask = ee.Algorithms.Landsat.simpleCloudScore(image).lte(.15);
+  return image.updateMask(cloudMask);
+}
 
 //print(lsat);
 print(lsat.mosaic())
