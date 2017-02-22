@@ -6,8 +6,11 @@ var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp'];
 var lsat = ee.ImageCollection('LC8_L1T_TOA')
     .filterDate('2015-07-10', '2015-09-15');
 
+var cloudScored = ee.Algorithms.Landsat.simpleCloudScore(lsat);
+print(cloudScored);
+
 var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': .8, 'gamma': 1.6};
 
 // Draw to map
-Map.addLayer(lsat, vizParams);
 Map.addLayer(lsat.mosaic(), vizParams);
+Map.addLayer(cloudScored);
