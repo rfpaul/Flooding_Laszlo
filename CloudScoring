@@ -50,6 +50,7 @@ var lsat_median = lsat.median();
 
 var cloudScored = lsat.map(ee.Algorithms.Landsat.simpleCloudScore);
 cloudScored = cloudScored.map(function (image) { return image.lte(.15) });
+lsat = lsat.updateMask(cloudScored);
 print(cloudScored);
 
 var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': .8, 'gamma': 1.6};
