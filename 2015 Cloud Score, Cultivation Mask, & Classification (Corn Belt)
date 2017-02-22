@@ -112,13 +112,13 @@ var geometry = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "13"
             }),
         ee.Feature(
-            ee.Geometry.Point([-88.00297737121582, 37.902070623652016]),
+            ee.Geometry.Point([-88.00675392150879, 37.900851550508946]),
             {
               "class": 0,
               "system:index": "14"
             }),
         ee.Feature(
-            ee.Geometry.Point([-88.00666809082031, 37.92048971513834]),
+            ee.Geometry.Point([-88.00555229187012, 37.91954178623602]),
             {
               "class": 0,
               "system:index": "15"
@@ -413,7 +413,7 @@ var geometry = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "10"
             }),
         ee.Feature(
-            ee.Geometry.Point([-87.9744815826416, 37.91175476503617]),
+            ee.Geometry.Point([-87.96409606933594, 37.90179972025422]),
             {
               "class": 1,
               "system:index": "11"
@@ -889,7 +889,7 @@ var geometry = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "8"
             }),
         ee.Feature(
-            ee.Geometry.Point([-88.03215980529785, 37.91040041633182]),
+            ee.Geometry.Point([-88.04529190063477, 37.920692841170705]),
             {
               "class": 3,
               "system:index": "9"
