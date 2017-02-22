@@ -1061,8 +1061,8 @@ Export.image.toCloudStorage({
   image: mask_filled,
   description: '2013_Classified_Corn_Belt',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: '2013_cb_class_remask03',
+  fileNamePrefix: '2013_cb_class_int8',
   scale: 30,
-  //region: corn_belt_region,
+  region: corn_belt_region,
   maxPixels: 1e13
 });
