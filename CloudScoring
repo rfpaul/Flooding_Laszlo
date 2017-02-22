@@ -43,12 +43,14 @@ print(lsat.mosaic())
 
 var lsat_median = lsat.median();
 
-//var cloudScored = ee.Algorithms.Landsat.simpleCloudScore(lsat);
-//print(cloudScored);
+var cloudScored = lsat.map(ee.Algorithms.Landsat.simpleCloudScore);
+print(cloudScored);
+
+cloudScored = cloudScored.
 
 var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': .8, 'gamma': 1.6};
 
 // Draw to map
 Map.addLayer(lsat.mosaic(), vizParams);
 Map.addLayer(lsat_median, vizParams);
-//Map.addLayer(cloudScored);
+Map.addLayer(cloudScored);
