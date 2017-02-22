@@ -46,15 +46,13 @@ function CloudMask (image) {
 //print(lsat);
 print(lsat.mosaic())
 
-var lsat_median = lsat.median();
-
-var cloudScored = lsat.map(ee.Algorithms.Landsat.simpleCloudScore);
-cloudScored = cloudScored.map(function (image) { return image.lte(.15) });
-print(cloudScored);
+var clouds_masked = lsat.map(CloudMask);
+print(clouds_masked);
+var lsat_median = clouds_masked.median();
 
 var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': .8, 'gamma': 1.6};
 
 // Draw to map
 Map.addLayer(lsat.mosaic(), vizParams);
-//Map.addLayer(lsat_median, vizParams);
-Map.addLayer(cloudScored);
+Map.addLayer(lsat_median, vizParams);
+Map.addLayer(clouds_masked);
