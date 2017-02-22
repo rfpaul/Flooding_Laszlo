@@ -1,0 +1,3 @@
+var lsat = ee.ImageCollection('LC8_L1T_TOA')
+    .filterDate('2015-07-10', '2015-09-15');
+
