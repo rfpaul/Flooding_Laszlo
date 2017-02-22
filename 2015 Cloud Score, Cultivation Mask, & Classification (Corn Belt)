@@ -28,13 +28,13 @@ var geometry = /* color: #98ff00 */ee.Geometry.Polygon(
           [-81.298828125, 41.304222339667696]]]),
     vegetation = /* color: #35c61d */ee.FeatureCollection(
         [ee.Feature(
-            ee.Geometry.Point([-89.60638046264648, 41.711085276813]),
+            ee.Geometry.Point([-89.60758209228516, 41.740039938974675]),
             {
               "class": 0,
               "system:index": "0"
             }),
         ee.Feature(
-            ee.Geometry.Point([-89.63865280151367, 41.69468038830335]),
+            ee.Geometry.Point([-89.6268081665039, 41.711469716190464]),
             {
               "class": 0,
               "system:index": "1"
@@ -347,13 +347,13 @@ var geometry = /* color: #98ff00 */ee.Geometry.Polygon(
             })]),
     mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection(
         [ee.Feature(
-            ee.Geometry.Point([-89.57835674285889, 41.72519910093124]),
+            ee.Geometry.Point([-89.63998317718506, 41.70379971523236]),
             {
               "class": 1,
               "system:index": "0"
             }),
         ee.Feature(
-            ee.Geometry.Point([-89.571533203125, 41.72013821287914]),
+            ee.Geometry.Point([-89.48141098022461, 41.732693607876094]),
             {
               "class": 1,
               "system:index": "1"
@@ -540,19 +540,19 @@ var geometry = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "0"
             }),
         ee.Feature(
-            ee.Geometry.Point([-89.64534759521484, 41.74452290311045]),
+            ee.Geometry.Point([-89.67658996582031, 41.7308168631562]),
             {
               "class": 2,
               "system:index": "1"
             }),
         ee.Feature(
-            ee.Geometry.Point([-89.64706420898438, 41.725308004473]),
+            ee.Geometry.Point([-89.6484375, 41.71223859000332]),
             {
               "class": 2,
               "system:index": "2"
             }),
         ee.Feature(
-            ee.Geometry.Point([-89.5993423461914, 41.703959916983564]),
+            ee.Geometry.Point([-89.52878952026367, 41.70434439897135]),
             {
               "class": 2,
               "system:index": "3"
