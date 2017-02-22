@@ -39,7 +39,8 @@ var lsat = ee.ImageCollection('LC8_L1T_TOA')
     .filterBounds(corn_belt_region);
 
 function CloudMask (image) {
-  var cloud_mask = ee.Algorithms.Landsat.simpleCloudScore(image).lte(.15);
+  var cloud_mask = ee.Algorithms.Landsat.simpleCloudScore(image);
+  cloud_mask = cloud_mask.lte(.15);
   return image.updateMask(cloud_mask);
 }
 
