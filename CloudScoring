@@ -38,15 +38,19 @@ var lsat = ee.ImageCollection('LC8_L1T_TOA')
     .filterDate('2015-06-20', '2015-09-30')
     .filterBounds(corn_belt_region);
 
+function CloudMask (image) {
+  var cloudMask = ee.Algorithms.Landsat.simpleCloudScore(image).lte(.25);
+  return image;
+}
+
 //print(lsat);
 print(lsat.mosaic())
 
 var lsat_median = lsat.median();
 
 var cloudScored = lsat.map(ee.Algorithms.Landsat.simpleCloudScore);
+cloudScored = cloudScored.map(function (image) { return image.lte(.25) });
 print(cloudScored);
-
-cloudScored = cloudScored.
 
 var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': .8, 'gamma': 1.6};
 
