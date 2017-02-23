@@ -344,6 +344,30 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 0,
               "system:index": "52"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.63552474975586, 48.14621693084755]),
+            {
+              "class": 0,
+              "system:index": "53"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.6405029296875, 48.14919483128466]),
+            {
+              "class": 0,
+              "system:index": "54"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.59501266479492, 48.14661781212461]),
+            {
+              "class": 0,
+              "system:index": "55"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.55080986022949, 48.148736704002395]),
+            {
+              "class": 0,
+              "system:index": "56"
             })]),
     mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection(
         [ee.Feature(
