@@ -1,5 +1,5 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var geometry = /* color: #98ff00 */ee.Geometry.Polygon(
+var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
         [[[-82.1337890625, 42.61132393345391],
           [-82.4853515625, 44.144375156142864],
           [-86.396484375, 45.299621281112216],
