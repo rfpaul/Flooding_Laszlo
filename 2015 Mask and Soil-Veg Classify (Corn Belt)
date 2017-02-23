@@ -1125,9 +1125,9 @@ var mask_filled = maskAndFill(classed_lsat, corn_belt_region, -128).toInt8();
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
   image: mask_filled,
-  description: '2013_Classified_Corn_Belt',
+  description: '2015_Classified_Corn_Belt',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: '2013_cb_class_int8',
+  fileNamePrefix: '2015_cb_class_int8',
   scale: 30,
   region: corn_belt_region,
   maxPixels: 1e13
