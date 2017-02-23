@@ -43,7 +43,7 @@ var CloudMask = function (image) {
   // Get the simple cloud scores of the image
   var cloud_mask = ee.Algorithms.Landsat.simpleCloudScore(image).select('cloud');
   // Mask from cloud scores less than or equal to 10
-  cloud_mask = cloud_mask.lte(10);
+  cloud_mask = cloud_mask.lte(15);
   return image.updateMask(cloud_mask);
 }
 
