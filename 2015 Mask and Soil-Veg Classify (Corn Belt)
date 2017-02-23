@@ -1034,7 +1034,7 @@ var lsat = ee.ImageCollection('LC8_L1T_TOA')
     .filterBounds(corn_belt_region)
     .select(LC8_BANDS);
 
-var CloudMask = function (image) {
+var cloudMask = function (image) {
   // Get the simple cloud scores of the image
   var cloud_mask = ee.Algorithms.Landsat.simpleCloudScore(image).select('cloud');
   // Mask from cloud scores less than or equal to 10
@@ -1043,7 +1043,7 @@ var CloudMask = function (image) {
 }
 
 // Max values of cloudless pixels in the growing season
-var cloud_masked = lsat.map(CloudMask).max();
+var cloud_masked = lsat.map(cloudMask).max();
 
 // Load Cropland Data Layer from 2014
 var cdl = ee.Image("USDA/NASS/CDL/2014");
