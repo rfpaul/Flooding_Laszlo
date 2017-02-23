@@ -36,7 +36,8 @@ var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp'];
 // Get the Landsat 8 TOA collection
 var lsat = ee.ImageCollection('LC8_L1T_TOA')
     .filterDate('2015-06-20', '2015-09-30')
-    .filterBounds(corn_belt_region);
+    .filterBounds(corn_belt_region)
+    .select(LC8_BANDS);
 
 function CloudMask (image) {
   var cloud_mask = ee.Algorithms.Landsat.simpleCloudScore(image);
@@ -47,8 +48,9 @@ function CloudMask (image) {
 //print(lsat);
 //print(lsat.mosaic())
 
-var cloud_masked = lsat.map(ee.Algorithms.Landsat.simpleCloudScore);
-cloud_masked = cloud_masked.map(function (image) { return image.lte(.15) });
+/*var cloud_masked = lsat.map(ee.Algorithms.Landsat.simpleCloudScore);
+cloud_masked = cloud_masked.map(function (image) { return image.lte(.15) });*/
+var cloud_masked = lsat.map(CloudMask);
 //lsat = lsat.updateMask(cloud_masked);
 print(cloud_masked);
 
