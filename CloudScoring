@@ -35,7 +35,7 @@ var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp1', 'temp
 
 // Get the Landsat 8 TOA collection
 var lsat = ee.ImageCollection('LC8_L1T_TOA')
-    .filterDate('2015-05-20', '2015-10-15')
+    .filterDate('2015-06-10', '2015-09-10')
     .filterBounds(corn_belt_region)
     .select(LC8_BANDS);
 
@@ -43,7 +43,7 @@ var CloudMask = function (image) {
   // Get the simple cloud scores of the image
   var cloud_mask = ee.Algorithms.Landsat.simpleCloudScore(image).select('cloud');
   // Mask from cloud scores less than or equal to 10
-  cloud_mask = cloud_mask.lte(15);
+  cloud_mask = cloud_mask.lte(5);
   return image.updateMask(cloud_mask);
 }
 
