@@ -30,8 +30,8 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
 
 
 // A mapping from a common name to the sensor-specific bands.
-var LC8_BANDS = ['B2',   'B3',    'B4',  'B5',  'B6',    'B7',    'B10'];
-var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp'];
+var LC8_BANDS = ['B2',   'B3',    'B4',  'B5',  'B6',    'B7',    'B10',   'B11'];
+var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp1', 'temp2'];
 
 // Get the Landsat 8 TOA collection
 var lsat = ee.ImageCollection('LC8_L1T_TOA')
