@@ -994,9 +994,6 @@ var classifier = ee.Classifier.cart().train(training, "class", LC8_BANDS);
 // Apply the classifier to the masked Landsat image
 var classed_lsat = masked_lsat.classify(classifier);
 
-
-//classed_lsat = classed_lsat.remap([0, 1, 2, 3], [1, 2, 3, 4]);
-
 // Draw to map
 //Map.setCenter(-94.866,42.967, 8);
 //Map.setCenter(-96.37, 48.29, 8);
