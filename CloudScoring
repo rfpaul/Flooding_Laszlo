@@ -41,7 +41,7 @@ var lsat = ee.ImageCollection('LC8_L1T_TOA')
 
 var CloudMask = function (image) {
   var cloud_mask = ee.Algorithms.Landsat.simpleCloudScore(image).select('cloud');
-  cloud_mask = cloud_mask.lte(.15);
+  cloud_mask = cloud_mask.lte(15);
   return image.updateMask(cloud_mask);
 }
 
