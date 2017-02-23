@@ -961,9 +961,9 @@ var geometry = /* color: #98ff00 */ee.Geometry.Polygon(
 var LC8_BANDS = ['B2',   'B3',    'B4',  'B5',  'B6',    'B7',    'B10',   'B11'];
 var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp1', 'temp2'];
 
-// Get the Landsat 8 TOA collection
+// Get the Landsat 8 TOA collection of the 2013 growing season
 var lsat = ee.ImageCollection('LC8_L1T_TOA')
-    .filterDate('2015-06-10', '2015-09-10')
+    .filterDate('2013-06-10', '2013-09-10')
     .filterBounds(corn_belt_region)
     .select(LC8_BANDS);
 
