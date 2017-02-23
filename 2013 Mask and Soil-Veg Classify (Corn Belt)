@@ -368,6 +368,54 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 0,
               "system:index": "56"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.35820579528809, 48.1845728038961]),
+            {
+              "class": 0,
+              "system:index": "57"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.30902481079102, 48.19058119922813]),
+            {
+              "class": 0,
+              "system:index": "58"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.32807922363281, 48.17925049406698]),
+            {
+              "class": 0,
+              "system:index": "59"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-95.86463928222656, 44.78195688750334]),
+            {
+              "class": 0,
+              "system:index": "60"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-95.86669921875, 44.76587124256518]),
+            {
+              "class": 0,
+              "system:index": "61"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-95.81365585327148, 44.788048764814604]),
+            {
+              "class": 0,
+              "system:index": "62"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-95.85296630859375, 44.779763654297824]),
+            {
+              "class": 0,
+              "system:index": "63"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-95.82498550415039, 44.77428020677966]),
+            {
+              "class": 0,
+              "system:index": "64"
             })]),
     mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection(
         [ee.Feature(
@@ -555,6 +603,18 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 1,
               "system:index": "30"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-95.79460144042969, 44.76989307384685]),
+            {
+              "class": 1,
+              "system:index": "31"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-95.89570999145508, 44.772696002774936]),
+            {
+              "class": 1,
+              "system:index": "32"
             })]),
     soil = /* color: #e18b1d */ee.FeatureCollection(
         [ee.Feature(
@@ -582,7 +642,7 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "3"
             }),
         ee.Feature(
-            ee.Geometry.Point([-96.46957397460938, 41.51832064078248]),
+            ee.Geometry.Point([-96.52587890625, 41.53554142165828]),
             {
               "class": 2,
               "system:index": "4"
@@ -856,6 +916,18 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 2,
               "system:index": "49"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-95.89090347290039, 44.780616588222294]),
+            {
+              "class": 2,
+              "system:index": "50"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-95.81451416015625, 44.770014943150585]),
+            {
+              "class": 2,
+              "system:index": "51"
             })]),
     water = /* color: #2b3fa7 */ee.FeatureCollection(
         [ee.Feature(
