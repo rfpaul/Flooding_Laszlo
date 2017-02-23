@@ -1225,7 +1225,7 @@ var mask_filled = maskAndFill(classed_lsat, corn_belt_region, -128).toInt8();
 //Map.addLayer(mask_filled, {min:0, max:3, palette:['green', 'yellow', 'red', 'blue']});
 
 //Export image and mask. Uncomment this when ready to export data.
-Export.image.toCloudStorage({
+/*Export.image.toCloudStorage({
   image: mask_filled,
   description: '2013_Classified_Corn_Belt',
   bucket: 'gee_export_kovi',
@@ -1233,4 +1233,4 @@ Export.image.toCloudStorage({
   scale: 30,
   region: corn_belt_region,
   maxPixels: 1e13
-});
+});*/
