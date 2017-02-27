@@ -7,21 +7,19 @@ var modis_veg = ee.ImageCollection("MODIS/MCD43A4_EVI"),
           [-87.91259765625, 37.819331381024945],
           [-89.9560546875, 38.04463063673991]]]);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
-// Plot a time series of a band's value in regions of the American West.
-
-
+// Plot a time series of a band's value in defined region
 
 var COLOR = {
   FOREST: '00ff00'
 };
 
 // Get brightness temperature data for 1 year.
-var modis_year = modis_veg
+var modis_years = modis_veg
     .filterDate('2012-01-01', '2016-12-31');
 
 
 var eviTimeSeries = ui.Chart.image.seriesByRegion({
-  imageCollection: modis_year,
+  imageCollection: modis_years,
   regions: shawnee,
   reducer: ee.Reducer.mean(),
   scale: 200,
