@@ -17,7 +17,7 @@ var COLOR = {
 
 // Get brightness temperature data for 1 year.
 var modis_year = modis_veg
-    .filterDate('2013-01-01', '2013-12-31');
+    .filterDate('2012-01-01', '2016-12-31');
 
 
 var eviTimeSeries = ui.Chart.image.seriesByRegion({
