@@ -17,7 +17,6 @@ var COLOR = {
 var modis_years = modis_veg
     .filterDate('2012-01-01', '2016-12-31');
 
-
 var eviTimeSeries = ui.Chart.image.seriesByRegion({
   imageCollection: modis_years,
   regions: shawnee,
