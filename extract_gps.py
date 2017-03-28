@@ -68,14 +68,14 @@ def get_exif_location(exif_data):
         gpsAlt:
         lat = _convert_to_degress(gps_latitude)
         if gps_latitude_ref != 'N':
-            lat = 0 - lat
+            lat = -(lat)
 
         lon = _convert_to_degress(gps_longitude)
         if gps_longitude_ref != 'E':
-            lon = 0 - lon
+            lon = -(lon)
         
         mslAlt = gpsAlt[0]/gpsAlt[1]
-        if gpsAlt_ref != 0:
+        if gpsAlt_ref == 1:
             mslAlt = -(mslAlt)
 
     return lat, lon, mslAlt
