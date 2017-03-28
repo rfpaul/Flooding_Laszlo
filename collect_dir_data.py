@@ -30,7 +30,12 @@ def gps_dir_df(searchDir):
     
     df = pd.DataFrame(
         gps_list,
-        columns=["Datetime", "Latitude", "Longitude", "MSL Altitude"])
+        columns=["Datetime", "Latitude", "Longitude", "MSL_Altitude"])
+    # Add relative altitudes vs. the minimum value recorded
+    relAlt = df['MSL_Altitude'] - min(df['MSL_Altitude'])
+    df = df.assign(Relative_Altitude=relAlt)
+    #df.rename(columns={"rel" : "Relative Altitude"}, inplace=True)
+    
     return df
 
 ################
@@ -40,3 +45,4 @@ if __name__ == "__main__":
     # Where is the directory with the GPS-tagged images?
     # searchDir = "/images/path/here/*.JPG"
     gps_df = gps_dir_df(searchDir)
+    

@@ -2,7 +2,6 @@
 # Gets lat, lon, and alt from Parrot Sequoia exif tags
 # Based on https://gist.github.com/erans/983821
 
-import exifread
 from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
 
