@@ -1,0 +1,66 @@
+/**** Start of imports. If edited, may not auto-convert in the playground. ****/
+var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
+        [[[-82.1337890625, 42.61132393345391],
+          [-82.4853515625, 44.144375156142864],
+          [-86.396484375, 45.299621281112216],
+          [-87.802734375, 45.39227876798964],
+          [-89.912109375, 45.48478459387111],
+          [-91.93359375, 46.03663519715222],
+          [-95.44921875, 47.09406201244411],
+          [-95.2734375, 48.27734442028102],
+          [-96.15234375, 49.290740050243485],
+          [-100.37109375, 49.290740050243485],
+          [-100.458984375, 48.30658277685742],
+          [-100.5908203125, 46.854181436320886],
+          [-100.458984375, 45.26870174864029],
+          [-100.4150390625, 43.57402423617491],
+          [-99.3603515625, 42.02644643428589],
+          [-100.37109375, 40.573909721497564],
+          [-99.1845703125, 39.90299481572232],
+          [-95.8447265625, 39.22544552735803],
+          [-94.04296874999994, 38.023863033250294],
+          [-92.7685546875, 38.05847296216953],
+          [-90.8349609375, 37.64207544142983],
+          [-87.7587890625, 37.15331243359517],
+          [-86.2646484375, 37.64207544142983],
+          [-84.7705078125, 38.05847296216953],
+          [-82.529296875, 38.747229512898734],
+          [-81.298828125, 41.304222339667696]]]);
+/***** End of imports. If edited, may not auto-convert in the playground. *****/
+
+
+// A mapping from a common name to the sensor-specific bands.
+var LC8_BANDS = ['B2',   'B3',    'B4',  'B5',  'B6',    'B7',    'B10',   'B11'];
+var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp1', 'temp2'];
+
+// Get the Landsat 8 TOA collection
+var lsat = ee.ImageCollection('LC8_L1T_TOA')
+    .filterDate('2015-06-10', '2015-09-10')
+    .filterBounds(corn_belt_region)
+    .select(LC8_BANDS);
+
+var CloudMask = function (image) {
+  // Get the simple cloud scores of the image
+  var cloud_mask = ee.Algorithms.Landsat.simpleCloudScore(image).select('cloud');
+  // Mask from cloud scores less than or equal to 10
+  cloud_mask = cloud_mask.lte(5);
+  return image.updateMask(cloud_mask);
+}
+
+//print(lsat);
+//print(lsat.mosaic())
+
+/*var cloud_masked = lsat.map(ee.Algorithms.Landsat.simpleCloudScore);
+cloud_masked = cloud_masked.map(function (image) { return image.lte(.15) });*/
+var cloud_masked = lsat.map(CloudMask);
+//lsat = lsat.updateMask(cloud_masked);
+print(cloud_masked);
+
+var lsat_median = lsat.median();
+
+var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': .8, 'gamma': 1.6};
+
+// Draw to map
+Map.addLayer(lsat.mosaic(), vizParams);
+//Map.addLayer(lsat_median, vizParams);
+Map.addLayer(cloud_masked.max(), vizParams);
