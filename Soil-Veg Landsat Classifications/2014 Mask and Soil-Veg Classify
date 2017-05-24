@@ -1139,7 +1139,7 @@ var mask_filled = maskAndFill(classed_lsat, corn_belt_region, -128).toInt8();
   image: mask_filled,
   description: '2014_Classified_Corn_Belt',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: '2014_cb_class_int8',
+  fileNamePrefix: '2014/2014_cb_class_int8',
   scale: 30,
   region: corn_belt_region,
   maxPixels: 1e13
