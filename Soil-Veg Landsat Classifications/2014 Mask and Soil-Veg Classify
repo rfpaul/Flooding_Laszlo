@@ -714,7 +714,7 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "3"
             }),
         ee.Feature(
-            ee.Geometry.Point([-96.52587890625, 41.53554142165828]),
+            ee.Geometry.Point([-96.47266387939453, 41.48296513136832]),
             {
               "class": 2,
               "system:index": "4"
