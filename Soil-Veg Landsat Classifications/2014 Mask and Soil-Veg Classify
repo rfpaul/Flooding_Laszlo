@@ -720,7 +720,7 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "4"
             }),
         ee.Feature(
-            ee.Geometry.Point([-94.16072845458984, 42.71982750585304]),
+            ee.Geometry.Point([-94.16776657104492, 42.7135213775217]),
             {
               "class": 2,
               "system:index": "5"
@@ -732,37 +732,37 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "6"
             }),
         ee.Feature(
-            ee.Geometry.Point([-94.0810775756836, 42.71522409532615]),
+            ee.Geometry.Point([-94.13618087768555, 42.710431140700955]),
             {
               "class": 2,
               "system:index": "7"
             }),
         ee.Feature(
-            ee.Geometry.Point([-94.08262252807617, 42.727835365081084]),
+            ee.Geometry.Point([-94.07266616821289, 42.72745706428622]),
             {
               "class": 2,
               "system:index": "8"
             }),
         ee.Feature(
-            ee.Geometry.Point([-94.12090301513672, 42.743028539550195]),
+            ee.Geometry.Point([-94.0927505493164, 42.739750659157]),
             {
               "class": 2,
               "system:index": "9"
             }),
         ee.Feature(
-            ee.Geometry.Point([-94.05326843261719, 42.7122600749546]),
+            ee.Geometry.Point([-94.05086517333984, 42.71200781136516]),
             {
               "class": 2,
               "system:index": "10"
             }),
         ee.Feature(
-            ee.Geometry.Point([-94.06391143798828, 42.723736983584985]),
+            ee.Geometry.Point([-94.03627395629883, 42.705196306876026]),
             {
               "class": 2,
               "system:index": "11"
             }),
         ee.Feature(
-            ee.Geometry.Point([-94.00829315185547, 42.70797145448908]),
+            ee.Geometry.Point([-94.01721954345703, 42.71982750585304]),
             {
               "class": 2,
               "system:index": "12"
