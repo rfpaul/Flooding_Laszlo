@@ -900,7 +900,7 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "34"
             }),
         ee.Feature(
-            ee.Geometry.Point([-96.96953773498535, 44.83559202501961]),
+            ee.Geometry.Point([-96.95820808410645, 44.842043392385]),
             {
               "class": 2,
               "system:index": "35"
@@ -936,7 +936,7 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "40"
             }),
         ee.Feature(
-            ee.Geometry.Point([-97.59721755981445, 44.782127456917365]),
+            ee.Geometry.Point([-97.60193824768066, 44.78681824551358]),
             {
               "class": 2,
               "system:index": "41"
@@ -1051,7 +1051,7 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "13"
             }),
         ee.Feature(
-            ee.Geometry.Point([-97.61009216308594, 44.73361336156256]),
+            ee.Geometry.Point([-97.57172584533691, 44.75440140984545]),
             {
               "class": 3,
               "system:index": "14"
