@@ -798,13 +798,13 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "17"
             }),
         ee.Feature(
-            ee.Geometry.Point([-99.0582275390625, 48.27403070491016]),
+            ee.Geometry.Point([-99.04569625854492, 48.26980318977534]),
             {
               "class": 2,
               "system:index": "18"
             }),
         ee.Feature(
-            ee.Geometry.Point([-99.0029525756836, 48.27345943951937]),
+            ee.Geometry.Point([-98.99677276611328, 48.290594623001354]),
             {
               "class": 2,
               "system:index": "19"
@@ -816,7 +816,7 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "20"
             }),
         ee.Feature(
-            ee.Geometry.Point([-99.41082000732422, 48.18529385411664]),
+            ee.Geometry.Point([-99.42317962646484, 48.18941391456987]),
             {
               "class": 2,
               "system:index": "21"
@@ -973,13 +973,13 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "0"
             }),
         ee.Feature(
-            ee.Geometry.Point([-99.00964736938477, 48.363298007093434]),
+            ee.Geometry.Point([-99.07230377197266, 48.373219624922704]),
             {
               "class": 3,
               "system:index": "1"
             }),
         ee.Feature(
-            ee.Geometry.Point([-99.04157638549805, 48.33180973628732]),
+            ee.Geometry.Point([-98.96072387695312, 48.344247646029935]),
             {
               "class": 3,
               "system:index": "2"
@@ -991,7 +991,7 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "3"
             }),
         ee.Feature(
-            ee.Geometry.Point([-99.04638290405273, 48.25586133761089]),
+            ee.Geometry.Point([-99.02990341186523, 48.28237045228335]),
             {
               "class": 3,
               "system:index": "4"
