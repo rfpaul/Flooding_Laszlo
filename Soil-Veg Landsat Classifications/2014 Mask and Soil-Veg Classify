@@ -1054,7 +1054,7 @@ var maskAndFill = function(image, aoi, nan_val) {
 // Prepare an 8-bit int image of the classified raster
 // -128 is the placeholder value for NaN
 var mask_filled = maskAndFill(classed_lsat, corn_belt_region, -128).toInt8();
-Map.addLayer(mask_filled, {min:0, max:3, palette:['green', 'yellow', 'red', 'blue']});
+//Map.addLayer(mask_filled, {min:0, max:3, palette:['green', 'yellow', 'red', 'blue']});
 
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
