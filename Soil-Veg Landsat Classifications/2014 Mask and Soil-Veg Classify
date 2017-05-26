@@ -1038,6 +1038,8 @@ var classifier = ee.Classifier.cart().train(training, "class", LC8_BANDS);
 var classed_lsat = masked_lsat.classify(classifier);
 // Remap values to prevent category 0 being lost to background after export
 classed_lsat = classed_lsat.remap([0, 1, 2, 3], [1, 2, 3, 4]);
+// Recast classified image as 8-bit depth integer
+classed_lsat = classed_lsat.toInt8();
 
 // Draw to map
 //Map.setCenter(-94.866,42.967, 8);
@@ -1045,22 +1047,9 @@ classed_lsat = classed_lsat.remap([0, 1, 2, 3], [1, 2, 3, 4]);
 Map.addLayer(masked_lsat, vizParams);
 Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'blue']});
 
-// Apply a mask value for NaN at the area of interest
-var maskAndFill = function(image, aoi, nan_val) {
-  var mask = ee.Image(0).byte().paint(aoi, 1);
-  var fill = mask.not().multiply(nan_val);
-
-  return image.multiply(mask).add(fill);
-}
-
-// Prepare an 8-bit int image of the classified raster
-// -128 is the placeholder value for NaN
-var mask_filled = maskAndFill(classed_lsat, corn_belt_region, -1).toInt8();
-//Map.addLayer(mask_filled, {min:0, max:3, palette:['green', 'yellow', 'red', 'blue']});
-
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
-  image: mask_filled,
+  image: classed_lsat,
   description: '2014_Classified_Corn_Belt',
   bucket: 'gee_export_kovi',
   fileNamePrefix: '2014/2014_cb_class+1_int8',
