@@ -37,6 +37,8 @@ print(cdl);
 print(landsat);
 var cdl_cult = cdl.select('cultivated_land');
 var cdl_class = cdl.select('cropland');
+// Clip to AOI
+cdl_cult = cdl_cult.clip(corn_belt_region);
 
 
 cdl_cult = cdl_cult.remap([1, 2], [0, 1]);
