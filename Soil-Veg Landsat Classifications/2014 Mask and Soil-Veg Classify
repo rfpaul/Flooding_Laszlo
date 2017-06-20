@@ -304,7 +304,7 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "45"
             }),
         ee.Feature(
-            ee.Geometry.Point([-99.65045928955078, 48.14930936246624]),
+            ee.Geometry.Point([-99.6573257446289, 48.15870004955379]),
             {
               "class": 0,
               "system:index": "46"
@@ -322,7 +322,7 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "48"
             }),
         ee.Feature(
-            ee.Geometry.Point([-99.35854911804199, 48.18548841438948]),
+            ee.Geometry.Point([-99.38601493835449, 48.1959023325713]),
             {
               "class": 0,
               "system:index": "49"
@@ -756,19 +756,19 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "12"
             }),
         ee.Feature(
-            ee.Geometry.Point([-96.3911247253418, 47.74693050785243]),
+            ee.Geometry.Point([-96.40691757202148, 47.69149643283542]),
             {
               "class": 2,
               "system:index": "13"
             }),
         ee.Feature(
-            ee.Geometry.Point([-96.54853820800781, 47.902165969482944]),
+            ee.Geometry.Point([-96.51832580566406, 47.856573618440144]),
             {
               "class": 2,
               "system:index": "14"
             }),
         ee.Feature(
-            ee.Geometry.Point([-96.65205001831055, 47.900439717578635]),
+            ee.Geometry.Point([-96.5614128112793, 47.842404191003986]),
             {
               "class": 2,
               "system:index": "15"
@@ -804,7 +804,7 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "20"
             }),
         ee.Feature(
-            ee.Geometry.Point([-99.42317962646484, 48.18941391456987]),
+            ee.Geometry.Point([-99.43090438842773, 48.19536452827893]),
             {
               "class": 2,
               "system:index": "21"
