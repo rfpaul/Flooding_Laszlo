@@ -882,13 +882,13 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "33"
             }),
         ee.Feature(
-            ee.Geometry.Point([-95.86189270019531, 44.77830145254117]),
+            ee.Geometry.Point([-95.8502197265625, 44.777204776923405]),
             {
               "class": 2,
               "system:index": "34"
             }),
         ee.Feature(
-            ee.Geometry.Point([-95.81451416015625, 44.770014943150585]),
+            ee.Geometry.Point([-95.8114242553711, 44.777570337776964]),
             {
               "class": 2,
               "system:index": "35"
@@ -1033,7 +1033,7 @@ var sites = vegetation.merge(water).merge(soil).merge(mixed_soil_veg);
 // Sample pixels for classification
 var training = masked_lsat.sampleRegions(sites, ["class"], 30);
 // Train the classifier
-var classifier = ee.Classifier.cart().train(training, "class", LC8_BANDS);
+var classifier = ee.Classifier.randomForest().train(training, "class", LC8_BANDS);
 // Apply the classifier to the masked Landsat image
 var classed_lsat = masked_lsat.classify(classifier);
 // Remap values to prevent category 0 being lost to background after export
