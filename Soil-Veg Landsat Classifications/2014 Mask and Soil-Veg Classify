@@ -548,6 +548,48 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 0,
               "system:index": "86"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.62059020996094, 40.673096919885666]),
+            {
+              "class": 0,
+              "system:index": "87"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.57389831542969, 40.71552695728404]),
+            {
+              "class": 0,
+              "system:index": "88"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.5965576171875, 40.725154552294526]),
+            {
+              "class": 0,
+              "system:index": "89"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.65904235839844, 40.68220994218474]),
+            {
+              "class": 0,
+              "system:index": "90"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.69680786132812, 40.68845815176204]),
+            {
+              "class": 0,
+              "system:index": "91"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.56703186035156, 40.71786893288036]),
+            {
+              "class": 0,
+              "system:index": "92"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.5914077758789, 40.712143958195284]),
+            {
+              "class": 0,
+              "system:index": "93"
             })]),
     mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection(
         [ee.Feature(
@@ -759,6 +801,36 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 1,
               "system:index": "34"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.44343566894531, 40.72073123561206]),
+            {
+              "class": 1,
+              "system:index": "35"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.58213806152344, 40.766511323809404]),
+            {
+              "class": 1,
+              "system:index": "36"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.4156265258789, 40.77561156525727]),
+            {
+              "class": 1,
+              "system:index": "37"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.50626373291016, 40.747526809683116]),
+            {
+              "class": 1,
+              "system:index": "38"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-99.33597564697266, 40.72567490728569]),
+            {
+              "class": 1,
+              "system:index": "39"
             })]),
     soil = /* color: #e18b1d */ee.FeatureCollection(
         [ee.Feature(
