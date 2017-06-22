@@ -26,9 +26,81 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
           [-84.7705078125, 38.05847296216953],
           [-82.529296875, 38.747229512898734],
           [-81.298828125, 41.304222339667696]]]),
-    vegetation = /* color: #35c61d */ee.FeatureCollection([]),
-    mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection([]),
-    soil = /* color: #e18b1d */ee.FeatureCollection([]),
+    vegetation = /* color: #35c61d */ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Point([-82.96995162963867, 40.71610269105921]),
+            {
+              "class": 0,
+              "system:index": "0"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.01801681518555, 40.71922527987441]),
+            {
+              "class": 0,
+              "system:index": "1"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-82.98986434936523, 40.71994085251553]),
+            {
+              "class": 0,
+              "system:index": "2"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-82.97475814819336, 40.72651075083395]),
+            {
+              "class": 0,
+              "system:index": "3"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.02316665649414, 40.71213418976526]),
+            {
+              "class": 0,
+              "system:index": "4"
+            })]),
+    mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Point([-83.01037788391113, 40.71402088381144]),
+            {
+              "class": 1,
+              "system:index": "0"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-82.94729232788086, 40.71532202096979]),
+            {
+              "class": 1,
+              "system:index": "1"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.00823211669922, 40.70640872195707]),
+            {
+              "class": 1,
+              "system:index": "2"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.01664352416992, 40.72566515672145]),
+            {
+              "class": 1,
+              "system:index": "3"
+            })]),
+    soil = /* color: #e18b1d */ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Point([-82.96205520629883, 40.705953265881305]),
+            {
+              "class": 2,
+              "system:index": "0"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-82.9713249206543, 40.70894620593007]),
+            {
+              "class": 2,
+              "system:index": "1"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-82.9496955871582, 40.706213526877434]),
+            {
+              "class": 2,
+              "system:index": "2"
+            })]),
     water = /* color: #2b3fa7 */ee.FeatureCollection([]);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
