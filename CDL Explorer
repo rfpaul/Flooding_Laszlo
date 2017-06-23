@@ -34,8 +34,8 @@ Map.setCenter(-87.36, 41.15, 8);
 var landsat = ee.ImageCollection('LC8_L1T_TOA')
     .filterDate('2013-07-01', '2013-08-20').mosaic();
 
-var cdl2014 = ee.Image('USDA/NASS/CDL/2014');
-print (cdl2014);
+var cdl2013 = ee.Image('USDA/NASS/CDL/2013');
+print (cdl2013);
 print(cdl2014);
 var cdl2015 = ee.Image('USDA/NASS/CDL/2015');
 print (cdl2015);
