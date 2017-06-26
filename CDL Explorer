@@ -50,7 +50,7 @@ var maize_bean = cdl_class.eq(1).or(cdl_class.eq(5));
 
 // Clip to AOI
 cdl_cult = cdl_cult.clip(corn_belt_region);
-
+maize_bean = maize_bean.clip(corn_belt_region);
 
 cdl_cult = cdl_cult.remap([1, 2], [0, 1]);
 print(cdl_cult);
