@@ -46,7 +46,7 @@ print(landsat);
 
 var cdl_cult = cdl2014.select('cultivated_land');
 var cdl_class = cdl2014.select('cropland');
-var maize_bean = cdl_class.eq(1).or(cdl_class.eq(5));
+var maize_bean14 = cdl_class.eq(1).or(cdl_class.eq(5));
 
 // Clip to AOI
 cdl_cult = cdl_cult.clip(corn_belt_region);
