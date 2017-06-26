@@ -50,18 +50,18 @@ var maize_bean = cdl_class.eq(1).or(cdl_class.eq(5));
 
 // Clip to AOI
 cdl_cult = cdl_cult.clip(corn_belt_region);
-maize_bean = maize_bean.clip(corn_belt_region);
+maize_bean14 = maize_bean14.clip(corn_belt_region);
 
 cdl_cult = cdl_cult.remap([1, 2], [0, 1]);
 print(cdl_cult);
 print(cdl_class);
-print(maize_bean);
+print(maize_bean14);
 
 var visParams = {bands: ['B6', 'B5', 'B7']};
 Map.addLayer(cdl_cult);
 var landsat_masked = landsat.updateMask(cdl_cult);
 Map.addLayer(landsat_masked, visParams);
-Map.addLayer(maize_bean);
+Map.addLayer(maize_bean14);
 
 //Export mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
