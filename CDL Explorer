@@ -46,7 +46,7 @@ print(landsat);
 
 var cdl_cult = cdl2014.select('cultivated_land');
 var cdl_class = cdl2014.select('cropland');
-var maize_bean = cdl_class.eq()
+var maize_bean = cdl_class.eq(1).or(cdl_class.eq(5));
 
 // Clip to AOI
 cdl_cult = cdl_cult.clip(corn_belt_region);
@@ -61,7 +61,7 @@ var visParams = {bands: ['B6', 'B5', 'B7']};
 Map.addLayer(cdl_cult);
 var landsat_masked = landsat.updateMask(cdl_cult);
 Map.addLayer(landsat_masked, visParams);
-Map.addLayer(cdl_class);
+Map.addLayer(maize_bean);
 
 //Export mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
