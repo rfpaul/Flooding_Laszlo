@@ -46,6 +46,8 @@ print(landsat);
 
 var cdl_cult = cdl2014.select('cultivated_land');
 var cdl_class = cdl2014.select('cropland');
+var maize_bean = cdl_class.eq()
+
 // Clip to AOI
 cdl_cult = cdl_cult.clip(corn_belt_region);
 
@@ -53,6 +55,7 @@ cdl_cult = cdl_cult.clip(corn_belt_region);
 cdl_cult = cdl_cult.remap([1, 2], [0, 1]);
 print(cdl_cult);
 print(cdl_class);
+print(maize_bean);
 
 var visParams = {bands: ['B6', 'B5', 'B7']};
 Map.addLayer(cdl_cult);
