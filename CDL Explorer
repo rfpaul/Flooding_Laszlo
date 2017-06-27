@@ -46,13 +46,13 @@ print(landsat);
 
 var cdl_cult = cdl2014.select('cultivated_land');
 
-// 2014 CDL for corn (1) and soybeans (5)
-var cdl_class = cdl2014.select('cropland');
-var maize_bean14 = cdl_class.eq(1).or(cdl_class.eq(5));
-
 // 2013 CDL for corn (0) and soybeans (4)
 var mb2013 = cdl2013.select('cropland');
 mb2013 = mb2013.eq(0).or(mb2013.eq(4));
+
+// 2014 CDL for corn (1) and soybeans (5)
+var mb2014 = cdl2014.select('cropland');
+mb2014 = mb2014.eq(1).or(mb2014.eq(5));
 
 // 2015 CDL for corn (1) and soybeans (5)
 var mb2015 = cdl2015.select('cropland');
@@ -62,6 +62,10 @@ mb2015 = mb2015.eq(1).or(mb2015.eq(5));
 var mb2016 = cdl2016.select('cropland');
 mb2016 = mb2016.eq(1).or(mb2016.eq(5));
 
+// Multiply maize and bean CDL classifications
+// across years together
+
+
 // Clip to AOI
 cdl_cult = cdl_cult.clip(corn_belt_region);
 maize_bean14 = maize_bean14.clip(corn_belt_region);
@@ -69,13 +73,13 @@ maize_bean14 = maize_bean14.clip(corn_belt_region);
 cdl_cult = cdl_cult.remap([1, 2], [0, 1]);
 print(cdl_cult);
 print(cdl_class);
-print(maize_bean14);
+print(maize_bean);
 
 var visParams = {bands: ['B6', 'B5', 'B7']};
 Map.addLayer(cdl_cult);
 var landsat_masked = landsat.updateMask(cdl_cult);
 Map.addLayer(landsat_masked, visParams);
-Map.addLayer(maize_bean14);
+Map.addLayer(maize_bean);
 
 //Export mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
