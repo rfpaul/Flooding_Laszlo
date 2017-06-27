@@ -46,9 +46,9 @@ print(landsat);
 
 var cdl_cult = cdl2014.select('cultivated_land');
 
-// 2013 CDL for corn (0) and soybeans (4)
+// 2013 CDL for corn (1) and soybeans (5)
 var mb2013 = cdl2013.select('cropland');
-mb2013 = mb2013.eq(0).or(mb2013.eq(4));
+mb2013 = mb2013.eq(1).or(mb2013.eq(5));
 
 // 2014 CDL for corn (1) and soybeans (5)
 var mb2014 = cdl2014.select('cropland');
