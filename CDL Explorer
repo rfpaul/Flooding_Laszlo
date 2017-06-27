@@ -83,10 +83,10 @@ Map.addLayer(maize_bean);
 
 //Export mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
-  image: cdl_cult,
-  description: '2014_CDL_Maize-Bean',
+  image: maize_bean,
+  description: 'CDL_Maize-Bean',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: '2014/2014_cb_mask',
+  fileNamePrefix: 'cb_mask_2013-2016',
   scale: 30,
   region: corn_belt_region,
   maxPixels: 1e13
