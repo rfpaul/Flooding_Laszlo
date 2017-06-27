@@ -76,7 +76,7 @@ print(maize_bean);
 
 var visParams = {bands: ['B6', 'B5', 'B7']};
 Map.addLayer(cdl_cult);
-var landsat_masked = landsat.updateMask(cdl_cult);
+var landsat_masked = landsat.updateMask(maize_bean);
 //Map.addLayer(landsat_masked, visParams);
 //Map.addLayer(mb2013);
 Map.addLayer(maize_bean);
