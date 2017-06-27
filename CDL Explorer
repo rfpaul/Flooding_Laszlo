@@ -64,7 +64,7 @@ mb2016 = mb2016.eq(1).or(mb2016.eq(5));
 
 // Multiply maize and bean CDL classifications
 // across years together
-var maize_bean = 
+var maize_bean = mb2013.multiply(mb2014).multiply(mb2015).multiply(mb2016);
 
 // Clip to AOI
 cdl_cult = cdl_cult.clip(corn_belt_region);
