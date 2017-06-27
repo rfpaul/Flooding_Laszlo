@@ -104,7 +104,7 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
     water = /* color: #2b3fa7 */ee.FeatureCollection([]);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
-// 2014 Classification of cloud-free regions
+// 2016 Classification of cloud-free regions
 
 // A mapping from a common name to the sensor-specific bands.
 var LC8_BANDS = ['B2',   'B3',    'B4',  'B5',  'B6',    'B7',    'B10',   'B11'];
