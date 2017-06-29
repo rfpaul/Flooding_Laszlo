@@ -129,6 +129,7 @@ var cloud_masked = lsat.map(CloudMask).max();
 
 // Load Cropland Data Layer of maize and soybeans plots from 2013-2016
 var cdl_cult = ee.Image("users/RobertFPaul/cb_mask_2013-2016");
+print(cdl_cult);
 
 // Define visualization parameters for a false color image.
 // NIR is green, SWIR1 is red, SWIR2 is blue
