@@ -73,7 +73,7 @@ var CDL_Mask = function(years, crops, extent) {
   var crop;
   var temp_img;
   var year_img;
-  var result_img;
+  var result_img = ee.Image(1);
   
   for (year in years) {
     year_img = ee.Image('USDA/NASS/CDL/' + year.toString());
