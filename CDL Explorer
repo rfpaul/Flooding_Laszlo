@@ -88,6 +88,8 @@ var CDL_Mask = function(years, crops, extent) {
   return result_img;
 }
 
+cdl_func = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], corn_belt_region);
+
 // Clip to AOI
 cdl_cult = cdl_cult.clip(corn_belt_region);
 maize_bean = maize_bean.clip(corn_belt_region);
@@ -95,6 +97,7 @@ maize_bean = maize_bean.clip(corn_belt_region);
 cdl_cult = cdl_cult.remap([1, 2], [0, 1]);
 print(cdl_cult);
 print(maize_bean);
+print(cdl_func);
 
 var visParams = {bands: ['B6', 'B5', 'B7']};
 Map.addLayer(cdl_cult);
@@ -102,6 +105,7 @@ var landsat_masked = landsat.updateMask(maize_bean);
 //Map.addLayer(landsat_masked, visParams);
 //Map.addLayer(mb2013);
 Map.addLayer(maize_bean);
+Map.addLayer(cdl_func);
 
 //Export mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
