@@ -67,7 +67,7 @@ mb2016 = mb2016.eq(1).or(mb2016.eq(5));
 var maize_bean = mb2013.multiply(mb2014).multiply(mb2015).multiply(mb2016);
 
 // Create a mask of all pixels matching CDL crop class indices
-// for the specified years (as text!) within the extent
+// for the specified years within the extent
 var CDL_Mask = function(years, crops, extent) {
   var year;
   var crop;
@@ -76,7 +76,7 @@ var CDL_Mask = function(years, crops, extent) {
   var result_img;
   
   for (year in years) {
-    year_img = ee.Image('USDA/NASS/CDL/' + year);
+    year_img = ee.Image('USDA/NASS/CDL/' + year.toString());
     year_img = year_img.clip(extent);
     
     for (crop in crops) {
