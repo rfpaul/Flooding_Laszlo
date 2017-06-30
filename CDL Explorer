@@ -95,7 +95,7 @@ var CDL_Mask = function(years, crops, extent) {
     // Intersect unified crop mask with previous mask results
     result_img = result_img.multiply(crop_img);
   }
-  
+  // Return resulting mask
   return result_img;
 }
 
