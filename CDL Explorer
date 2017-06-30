@@ -88,7 +88,7 @@ var CDL_Mask = function(years, crops, extent) {
   return result_img;
 }
 
-var cdl_func = CDL_Mask([2013], [1, 5], corn_belt_region);
+var cdl_func = CDL_Mask([2013], [1], corn_belt_region);
 
 // Clip to AOI
 cdl_cult = cdl_cult.clip(corn_belt_region);
