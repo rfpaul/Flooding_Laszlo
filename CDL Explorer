@@ -73,22 +73,26 @@ var CDL_Mask = function(years, crops, extent) {
   var crop;
   var temp_img;
   var year_img;
+  var crop_img;
   var result_img = ee.Image(1).clip(extent);
   
   for (year in years) {
+    crop_img = ee.Image(0).clip(extent);
     year_img = ee.Image('USDA/NASS/CDL/' + years[year]);
     year_img = year_img.clip(extent);
     
     for (crop in crops) {
       temp_img = year_img.eq(crops[crop]);
-      result_img = result_img.multiply(temp_img);
+      crop_img = crop_img.or(temp_img);
     }
+    
+    result_img = result_img.multiply(crop_img);
   }
   
   return result_img;
 }
 
-var cdl_func = CDL_Mask([2013, 2014], [1], corn_belt_region);
+var cdl_func = CDL_Mask([2013, 2014, 2015], [1, 5], corn_belt_region);
 
 // Clip to AOI
 cdl_cult = cdl_cult.clip(corn_belt_region);
