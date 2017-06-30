@@ -71,8 +71,13 @@ var maize_bean = mb2013.multiply(mb2014).multiply(mb2015).multiply(mb2016);
 var CDL_Mask = function(years, crops, extent) {
   var year;
   var crop;
-  for (year in years){
-    
+  var temp_img;
+  var result_img;
+  
+  for (year in years) {
+    for (crop in crops) {
+      
+    }
   }
 }
 
