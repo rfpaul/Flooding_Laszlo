@@ -76,7 +76,7 @@ var CDL_Mask = function(years, crops, extent) {
   var result_img = ee.Image(1);
   
   for (year in years) {
-    year_img = ee.Image('USDA/NASS/CDL/' + year.toString());
+    year_img = ee.Image('USDA/NASS/CDL/' + year);
     year_img = year_img.clip(extent);
     
     for (crop in crops) {
@@ -88,7 +88,7 @@ var CDL_Mask = function(years, crops, extent) {
   return result_img;
 }
 
-cdl_func = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], corn_belt_region);
+var cdl_func = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], corn_belt_region);
 
 // Clip to AOI
 cdl_cult = cdl_cult.clip(corn_belt_region);
