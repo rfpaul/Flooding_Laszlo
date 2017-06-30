@@ -74,7 +74,7 @@ var CDL_Mask = function(years, crops, extent) {
   var temp_img;
   var year_img;
   var crop_img;
-  // Result-holding raster filled to 1 values
+  // Result-holding raster filled with 1 values
   var result_img = ee.Image(1).clip(extent);
   
   // Go through each year to extract
