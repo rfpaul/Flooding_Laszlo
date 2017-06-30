@@ -99,6 +99,7 @@ var CDL_Mask = function(years, crops, extent) {
   return result_img;
 }
 
+// Get CDL of corn (1) and soybean (5) for years 2013-2016 inclusive
 var cdl_func = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], corn_belt_region);
 
 // Clip to AOI
