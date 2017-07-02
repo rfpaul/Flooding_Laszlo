@@ -34,28 +34,22 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "0"
             }),
         ee.Feature(
-            ee.Geometry.Point([-83.01801681518555, 40.71922527987441]),
+            ee.Geometry.Point([-82.98986434936523, 40.71994085251553]),
             {
               "class": 0,
               "system:index": "1"
             }),
         ee.Feature(
-            ee.Geometry.Point([-82.98986434936523, 40.71994085251553]),
+            ee.Geometry.Point([-82.97475814819336, 40.72651075083395]),
             {
               "class": 0,
               "system:index": "2"
             }),
         ee.Feature(
-            ee.Geometry.Point([-82.97475814819336, 40.72651075083395]),
+            ee.Geometry.Point([-83.02299499511719, 40.71213418976526]),
             {
               "class": 0,
               "system:index": "3"
-            }),
-        ee.Feature(
-            ee.Geometry.Point([-83.02316665649414, 40.71213418976526]),
-            {
-              "class": 0,
-              "system:index": "4"
             })]),
     mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection(
         [ee.Feature(
@@ -65,22 +59,16 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
               "system:index": "0"
             }),
         ee.Feature(
-            ee.Geometry.Point([-82.94729232788086, 40.71532202096979]),
+            ee.Geometry.Point([-83.00823211669922, 40.70640872195707]),
             {
               "class": 1,
               "system:index": "1"
             }),
         ee.Feature(
-            ee.Geometry.Point([-83.00823211669922, 40.70640872195707]),
-            {
-              "class": 1,
-              "system:index": "2"
-            }),
-        ee.Feature(
             ee.Geometry.Point([-83.01664352416992, 40.72566515672145]),
             {
               "class": 1,
-              "system:index": "3"
+              "system:index": "2"
             })]),
     soil = /* color: #e18b1d */ee.FeatureCollection(
         [ee.Feature(
