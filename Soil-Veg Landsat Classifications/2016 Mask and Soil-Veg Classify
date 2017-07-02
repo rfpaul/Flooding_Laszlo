@@ -156,11 +156,12 @@ var CDL_Mask = function(years, crops, extent) {
   // Return resulting mask
   return result_img;
 }
+
 // Max values of cloudless pixels in the growing season
 var cloud_masked = lsat.map(CloudMask).max();
 
 // Load Cropland Data Layer of maize and soybeans plots from 2013-2016
-var cdl_cult = ee.Image("users/RobertFPaul/cb_mask_2013-2016");
+var cdl_cult = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], corn_belt_region);
 print(cdl_cult);
 
 // Define visualization parameters for a false color image.
