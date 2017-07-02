@@ -205,7 +205,7 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
 var LC8_BANDS = ['B2',   'B3',    'B4',  'B5',  'B6',    'B7',    'B10',   'B11'];
 var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp1', 'temp2'];
 
-// Get the Landsat 8 TOA collection of the 2013 growing season
+// Get the Landsat 8 TOA collection of the 2016 growing season
 var lsat = ee.ImageCollection('LANDSAT/LC08/C01/T1_TOA')
     .filterDate('2016-06-15', '2016-09-10')
     .filterBounds(corn_belt_region)
