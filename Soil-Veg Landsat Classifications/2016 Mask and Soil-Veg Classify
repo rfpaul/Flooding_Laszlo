@@ -1,0 +1,386 @@
+/**** Start of imports. If edited, may not auto-convert in the playground. ****/
+var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
+        [[[-82.1337890625, 42.61132393345391],
+          [-82.4853515625, 44.144375156142864],
+          [-86.396484375, 45.299621281112216],
+          [-87.802734375, 45.39227876798964],
+          [-89.912109375, 45.48478459387111],
+          [-91.93359375, 46.03663519715222],
+          [-95.44921875, 47.09406201244411],
+          [-95.2734375, 48.27734442028102],
+          [-96.15234375, 49.290740050243485],
+          [-100.37109375, 49.290740050243485],
+          [-100.458984375, 48.30658277685742],
+          [-100.5908203125, 46.854181436320886],
+          [-100.458984375, 45.26870174864029],
+          [-100.4150390625, 43.57402423617491],
+          [-99.3603515625, 42.02644643428589],
+          [-100.37109375, 40.573909721497564],
+          [-99.1845703125, 39.90299481572232],
+          [-95.8447265625, 39.22544552735803],
+          [-94.04296874999994, 38.023863033250294],
+          [-92.7685546875, 38.05847296216953],
+          [-90.8349609375, 37.64207544142983],
+          [-87.7587890625, 37.15331243359517],
+          [-86.2646484375, 37.64207544142983],
+          [-84.7705078125, 38.05847296216953],
+          [-82.529296875, 38.747229512898734],
+          [-81.298828125, 41.304222339667696]]]),
+    vegetation = /* color: #35c61d */ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Point([-82.96995162963867, 40.71610269105921]),
+            {
+              "class": 0,
+              "system:index": "0"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-82.98986434936523, 40.71994085251553]),
+            {
+              "class": 0,
+              "system:index": "1"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-82.97475814819336, 40.72651075083395]),
+            {
+              "class": 0,
+              "system:index": "2"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.02299499511719, 40.71213418976526]),
+            {
+              "class": 0,
+              "system:index": "3"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.23521137237549, 39.51599332950302]),
+            {
+              "class": 0,
+              "system:index": "4"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.21555614471436, 39.51860872644045]),
+            {
+              "class": 0,
+              "system:index": "5"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.21714401245117, 39.51056358348532]),
+            {
+              "class": 0,
+              "system:index": "6"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.22941780090332, 39.50281552823623]),
+            {
+              "class": 0,
+              "system:index": "7"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.18675994873047, 39.49066192386962]),
+            {
+              "class": 0,
+              "system:index": "8"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.1332015991211, 39.47426609455704]),
+            {
+              "class": 0,
+              "system:index": "9"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.1190824508667, 39.46074905066921]),
+            {
+              "class": 0,
+              "system:index": "10"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.14873695373535, 39.43834738539335]),
+            {
+              "class": 0,
+              "system:index": "11"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.83272171020508, 38.95737315590945]),
+            {
+              "class": 0,
+              "system:index": "12"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.8624620437622, 38.95827418257734]),
+            {
+              "class": 0,
+              "system:index": "13"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.85473728179932, 38.95059840333903]),
+            {
+              "class": 0,
+              "system:index": "14"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.89057159423828, 38.90302341581449]),
+            {
+              "class": 0,
+              "system:index": "15"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.89881134033203, 38.905394573904026]),
+            {
+              "class": 0,
+              "system:index": "16"
+            })]),
+    mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Point([-83.01037788391113, 40.71402088381144]),
+            {
+              "class": 1,
+              "system:index": "0"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.00823211669922, 40.70640872195707]),
+            {
+              "class": 1,
+              "system:index": "1"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.01664352416992, 40.72566515672145]),
+            {
+              "class": 1,
+              "system:index": "2"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.22371006011963, 39.52039640945766]),
+            {
+              "class": 1,
+              "system:index": "3"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.22937488555908, 39.49529842690369]),
+            {
+              "class": 1,
+              "system:index": "4"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.19474220275879, 39.488045474974]),
+            {
+              "class": 1,
+              "system:index": "5"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.12689304351807, 39.47757869485843]),
+            {
+              "class": 1,
+              "system:index": "6"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.11719417572021, 39.45803207300868]),
+            {
+              "class": 1,
+              "system:index": "7"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.13144207000732, 39.442457106348876]),
+            {
+              "class": 1,
+              "system:index": "8"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.8762378692627, 38.959075085552854]),
+            {
+              "class": 1,
+              "system:index": "9"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.87057304382324, 38.95957564531555]),
+            {
+              "class": 1,
+              "system:index": "10"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.83975982666016, 38.949163274109786]),
+            {
+              "class": 1,
+              "system:index": "11"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.88220310211182, 38.906930774898434]),
+            {
+              "class": 1,
+              "system:index": "12"
+            })]),
+    soil = /* color: #e18b1d */ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Point([-82.96205520629883, 40.705953265881305]),
+            {
+              "class": 2,
+              "system:index": "0"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-82.9713249206543, 40.70894620593007]),
+            {
+              "class": 2,
+              "system:index": "1"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-82.9496955871582, 40.706213526877434]),
+            {
+              "class": 2,
+              "system:index": "2"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.23066234588623, 39.51483457786263]),
+            {
+              "class": 2,
+              "system:index": "3"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.13642024993896, 39.4786386936395]),
+            {
+              "class": 2,
+              "system:index": "4"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.14916610717773, 39.43960684177755]),
+            {
+              "class": 2,
+              "system:index": "5"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.85769844055176, 38.963646733378035]),
+            {
+              "class": 2,
+              "system:index": "6"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.86516571044922, 38.95290122440222]),
+            {
+              "class": 2,
+              "system:index": "7"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-83.89833927154541, 38.90749849294023]),
+            {
+              "class": 2,
+              "system:index": "8"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-86.2635326385498, 41.06530992473087]),
+            {
+              "class": 2,
+              "system:index": "9"
+            })]),
+    water = /* color: #2b3fa7 */ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Point([-83.23439598083496, 39.507682997166924]),
+            {
+              "system:index": "0"
+            })]);
+/***** End of imports. If edited, may not auto-convert in the playground. *****/
+// Robert F Paul
+// 2016 Classification of cloud-free regions
+
+// A mapping from a common name to the sensor-specific bands.
+var LC8_BANDS = ['B2',   'B3',    'B4',  'B5',  'B6',    'B7',    'B10',   'B11'];
+var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp1', 'temp2'];
+
+// Get the Landsat 8 TOA collection of the 2016 growing season
+var lsat = ee.ImageCollection('LANDSAT/LC08/C01/T1_TOA')
+    .filterDate('2016-06-15', '2016-09-10')
+    .filterBounds(corn_belt_region)
+    .select(LC8_BANDS);
+
+var CloudMask = function (image) {
+  // Get the simple cloud scores of the image
+  var cloud_mask = ee.Algorithms.Landsat.simpleCloudScore(image).select('cloud');
+  // Mask from cloud scores less than or equal to 5
+  cloud_mask = cloud_mask.lte(2);
+  return image.updateMask(cloud_mask);
+}
+
+// Create a mask of all pixels matching CDL crop class indices
+// for the specified years within the extent
+var CDL_Mask = function(years, crops, extent) {
+  var year;
+  var crop;
+  var temp_img;
+  var year_img;
+  var crop_img;
+  // Result-holding raster filled with 1 values
+  var result_img = ee.Image(1).clip(extent);
+  
+  // Go through each year to extract
+  for (year in years) {
+    // Crop-holding raster filled with 0 values
+    crop_img = ee.Image(0).clip(extent);
+    // Get CDL for current year and clip it
+    year_img = ee.Image('USDA/NASS/CDL/' + years[year]);
+    year_img = year_img.select('cropland').clip(extent);
+    
+    // Combine crops together
+    for (crop in crops) {
+      // Crop matches index
+      temp_img = year_img.eq(crops[crop]);
+      // Union with crop image
+      crop_img = crop_img.or(temp_img);
+    }
+    // Intersect unified crop mask with previous mask results
+    result_img = result_img.multiply(crop_img);
+  }
+  // Return resulting mask
+  return result_img;
+}
+
+// Max values of cloudless pixels in the growing season
+var cloud_masked = lsat.map(CloudMask).max();
+
+// Load Cropland Data Layer of maize and soybeans plots from 2013-2016
+var cdl_cult = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], corn_belt_region);
+print(cdl_cult);
+
+// Define visualization parameters for a false color image.
+// NIR is green, SWIR1 is red, SWIR2 is blue
+var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': .8, 'gamma': 1.6};
+
+// Mask image
+var masked_lsat = cloud_masked.updateMask(cdl_cult);
+// Clip to the Corn Belt only
+masked_lsat = masked_lsat.clip(corn_belt_region);
+
+//print(vegetation);
+/*
+// Merge classifier points
+var sites = vegetation.merge(water).merge(soil).merge(mixed_soil_veg);
+//var sites = ee.FeatureCollection([vegetation, soil, mixed_soil_veg, water]).flatten();
+// Sample pixels for classification
+var training = masked_lsat.sampleRegions(sites, ["class"], 30);
+// Train the classifier
+var classifier = ee.Classifier.cart().train(training, "class", LC8_BANDS);
+// Apply the classifier to the masked Landsat image
+var classed_lsat = masked_lsat.classify(classifier);
+// Remap values to prevent category 0 being lost to background after export
+classed_lsat = classed_lsat.remap([0, 1, 2, 3], [1, 2, 3, 4]);
+// Recast classified image as 8-bit depth integer
+classed_lsat = classed_lsat.toInt8();
+
+// Confusion matrix for classification
+var trainAcc = classifier.confusionMatrix();
+print('Resubstitution error matrix: ', trainAcc);
+print('Training overall accuracy: ', trainAcc.accuracy());
+
+// Draw to map
+//Map.setCenter(-94.866,42.967, 8);
+//Map.setCenter(-96.37, 48.29, 8); */
+Map.addLayer(cdl_cult);
+Map.addLayer(masked_lsat, vizParams);
+//Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'blue']});
+
+//Export image and mask. Uncomment this when ready to export data.
+/*Export.image.toCloudStorage({
+  image: classed_lsat,
+  description: '2014_Classified_Corn_Belt',
+  bucket: 'gee_export_kovi',
+  fileNamePrefix: '2014/2014_cb_class+1_int8',
+  scale: 30,
+  region: corn_belt_region,
+  maxPixels: 1e13
+});*/

@@ -1,5 +1,5 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var cdl = ee.Image("USDA/NASS/CDL/2014"),
+var cdl2014 = ee.Image("USDA/NASS/CDL/2014"),
     corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
         [[[-82.1337890625, 42.61132393345391],
           [-82.4853515625, 44.144375156142864],
@@ -31,24 +31,101 @@ var cdl = ee.Image("USDA/NASS/CDL/2014"),
 // Center the map about IL and IN
 Map.setCenter(-87.36, 41.15, 8);
 
-var cdl2 = ee.Image("USDA/NASS/CDL/2015");
 var landsat = ee.ImageCollection('LC8_L1T_TOA')
     .filterDate('2013-07-01', '2013-08-20').mosaic();
-print(cdl);
-print(landsat);
-var cdl_cult = cdl.select('cultivated_land');
-var cdl_class = cdl.select('cropland');
 
-var cdl_cult2 = cdl2.select('cultivated_land');
+var cdl2013 = ee.Image('USDA/NASS/CDL/2013');
+print (cdl2013);
+print(cdl2014);
+var cdl2015 = ee.Image('USDA/NASS/CDL/2015');
+print (cdl2015);
+var cdl2016 = ee.Image('USDA/NASS/CDL/2016');
+print (cdl2016);
+
+print(landsat);
+
+var cdl_cult = cdl2014.select('cultivated_land');
+
+// 2013 CDL for corn (1) and soybeans (5)
+var mb2013 = cdl2013.select('cropland');
+mb2013 = mb2013.eq(1).or(mb2013.eq(5));
+
+// 2014 CDL for corn (1) and soybeans (5)
+var mb2014 = cdl2014.select('cropland');
+mb2014 = mb2014.eq(1).or(mb2014.eq(5));
+
+// 2015 CDL for corn (1) and soybeans (5)
+var mb2015 = cdl2015.select('cropland');
+mb2015 = mb2015.eq(1).or(mb2015.eq(5));
+
+// 2015 CDL for corn (1) and soybeans (5)
+var mb2016 = cdl2016.select('cropland');
+mb2016 = mb2016.eq(1).or(mb2016.eq(5));
+
+// Multiply maize and bean CDL classifications
+// across years together
+var maize_bean = mb2013.multiply(mb2014).multiply(mb2015).multiply(mb2016);
+
+// Create a mask of all pixels matching CDL crop class indices
+// for the specified years within the extent
+var CDL_Mask = function(years, crops, extent) {
+  var year;
+  var crop;
+  var temp_img;
+  var year_img;
+  var crop_img;
+  // Result-holding raster filled with 1 values
+  var result_img = ee.Image(1).clip(extent);
+  
+  // Go through each year to extract
+  for (year in years) {
+    // Crop-holding raster filled with 0 values
+    crop_img = ee.Image(0).clip(extent);
+    // Get CDL for current year and clip it
+    year_img = ee.Image('USDA/NASS/CDL/' + years[year]);
+    year_img = year_img.select('cropland').clip(extent);
+    
+    // Combine crops together
+    for (crop in crops) {
+      // Crop matches index
+      temp_img = year_img.eq(crops[crop]);
+      // Union with crop image
+      crop_img = crop_img.or(temp_img);
+    }
+    // Intersect unified crop mask with previous mask results
+    result_img = result_img.multiply(crop_img);
+  }
+  // Return resulting mask
+  return result_img;
+}
+
+// Get CDL of corn (1) and soybean (5) for years 2013-2016 inclusive
+var cdl_func = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], corn_belt_region);
+
+// Clip to AOI
+cdl_cult = cdl_cult.clip(corn_belt_region);
+maize_bean = maize_bean.clip(corn_belt_region);
 
 cdl_cult = cdl_cult.remap([1, 2], [0, 1]);
-cdl_cult2 = cdl_cult2.remap([1, 2], [0, 1]);
 print(cdl_cult);
-print(cdl_class);
+print(maize_bean);
+print(cdl_func);
 
 var visParams = {bands: ['B6', 'B5', 'B7']};
 Map.addLayer(cdl_cult);
-Map.addLayer(cdl_cult2);
-var landsat_masked = landsat.updateMask(cdl_cult);
-Map.addLayer(landsat_masked, visParams);
-Map.addLayer(cdl_class);
+var landsat_masked = landsat.updateMask(maize_bean);
+//Map.addLayer(landsat_masked, visParams);
+//Map.addLayer(mb2013);
+Map.addLayer(maize_bean);
+Map.addLayer(cdl_func);
+
+//Export mask. Uncomment this when ready to export data.
+/*Export.image.toCloudStorage({
+  image: maize_bean,
+  description: 'CDL_Maize-Bean',
+  bucket: 'gee_export_kovi',
+  fileNamePrefix: 'cb_mask_2013-2016',
+  scale: 30,
+  region: corn_belt_region,
+  maxPixels: 1e13
+});*/
