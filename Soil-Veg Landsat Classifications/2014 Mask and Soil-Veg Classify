@@ -1204,15 +1204,45 @@ var CloudMask = function (image) {
   return image.updateMask(cloud_mask);
 }
 
+// Create a mask of all pixels matching CDL crop class indices
+// for the specified years within the extent
+var CDL_Mask = function(years, crops, extent) {
+  var year;
+  var crop;
+  var temp_img;
+  var year_img;
+  var crop_img;
+  // Result-holding raster filled with 1 values
+  var result_img = ee.Image(1).clip(extent);
+  
+  // Go through each year to extract
+  for (year in years) {
+    // Crop-holding raster filled with 0 values
+    crop_img = ee.Image(0).clip(extent);
+    // Get CDL for current year and clip it
+    year_img = ee.Image('USDA/NASS/CDL/' + years[year]);
+    year_img = year_img.select('cropland').clip(extent);
+    
+    // Combine crops together
+    for (crop in crops) {
+      // Crop matches index
+      temp_img = year_img.eq(crops[crop]);
+      // Union with crop image
+      crop_img = crop_img.or(temp_img);
+    }
+    // Intersect unified crop mask with previous mask results
+    result_img = result_img.multiply(crop_img);
+  }
+  // Return resulting mask
+  return result_img;
+}
+
 // Max values of cloudless pixels in the growing season
 var cloud_masked = lsat.map(CloudMask).max();
 
-// Load Cropland Data Layer from 2014
-var cdl = ee.Image("USDA/NASS/CDL/2014");
-// Cultivated land cover types only
-var cdl_cult = cdl.select('cultivated_land');
-// Remap values to mask out (0, black) non-cultivated pixels
-cdl_cult = cdl_cult.remap([1, 2], [0, 1]);
+// Load Cropland Data Layer of maize and soybeans plots from 2013-2016
+var cdl_cult = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], corn_belt_region);
+print(cdl_cult);
 
 // Define visualization parameters for a false color image.
 // NIR is green, SWIR1 is red, SWIR2 is blue
