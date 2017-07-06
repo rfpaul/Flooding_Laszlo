@@ -1034,10 +1034,10 @@ var lsat = ee.ImageCollection('LC8_L1T_TOA')
     .filterBounds(corn_belt_region)
     .select(LC8_BANDS);
 
-var cloudMask = function (image) {
+var CloudMask = function (image) {
   // Get the simple cloud scores of the image
   var cloud_mask = ee.Algorithms.Landsat.simpleCloudScore(image).select('cloud');
-  // Mask from cloud scores less than or equal to 10
+  // Mask from cloud scores less than or equal to 5
   cloud_mask = cloud_mask.lte(5);
   return image.updateMask(cloud_mask);
 }
