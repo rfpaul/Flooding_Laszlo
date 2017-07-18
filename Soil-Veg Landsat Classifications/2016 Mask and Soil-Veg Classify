@@ -1059,6 +1059,18 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 1,
               "system:index": "68"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-89.4884705543518, 41.7126526533785]),
+            {
+              "class": 1,
+              "system:index": "69"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-89.4887924194336, 41.71077852418612]),
+            {
+              "class": 1,
+              "system:index": "70"
             })]),
     soil = /* color: #e18b1d */ee.FeatureCollection(
         [ee.Feature(
@@ -1372,6 +1384,12 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 2,
               "system:index": "51"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-89.4815182685852, 41.71092268991008]),
+            {
+              "class": 2,
+              "system:index": "52"
             })]),
     water = /* color: #2b3fa7 */ee.FeatureCollection(
         [ee.Feature(
