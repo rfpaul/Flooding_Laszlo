@@ -3950,7 +3950,7 @@ var masked_lsat = cloud_masked.updateMask(cdl_cult);
 masked_lsat = masked_lsat.clip(corn_belt_region);
 
 //print(vegetation);
-/*
+
 // Merge classifier points
 var sites = vegetation.merge(water).merge(soil).merge(mixed_soil_veg);
 //var sites = ee.FeatureCollection([vegetation, soil, mixed_soil_veg, water]).flatten();
@@ -3972,10 +3972,10 @@ print('Training overall accuracy: ', trainAcc.accuracy());
 
 // Draw to map
 //Map.setCenter(-94.866,42.967, 8);
-//Map.setCenter(-96.37, 48.29, 8); */
+//Map.setCenter(-96.37, 48.29, 8); 
 Map.addLayer(cdl_cult);
 Map.addLayer(masked_lsat, vizParams);
-//Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'blue']});
+Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'blue']});
 
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
