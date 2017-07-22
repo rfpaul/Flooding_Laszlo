@@ -1107,6 +1107,11 @@ classed_lsat = classed_lsat.remap([0, 1, 2, 3], [1, 2, 3, 4]);
 // Recast classified image as 8-bit depth integer
 classed_lsat = classed_lsat.toInt8();
 
+// Confusion matrix for classification
+var trainAcc = classifier.confusionMatrix();
+print('Resubstitution error matrix: ', trainAcc);
+print('Training overall accuracy: ', trainAcc.accuracy());
+
 // Draw to map
 //Map.setCenter(-94.866,42.967, 8);
 //Map.setCenter(-96.37, 48.29, 8);
