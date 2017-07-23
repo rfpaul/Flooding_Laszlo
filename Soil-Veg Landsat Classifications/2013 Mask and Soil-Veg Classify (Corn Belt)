@@ -3671,6 +3671,30 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 3,
               "system:index": "16"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-92.67139434814453, 39.00337760655924]),
+            {
+              "class": 3,
+              "system:index": "17"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-92.67148017883301, 39.00272728063139]),
+            {
+              "class": 3,
+              "system:index": "18"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-92.6712441444397, 39.00135990918236]),
+            {
+              "class": 3,
+              "system:index": "19"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-92.7061128616333, 38.998141479399834]),
+            {
+              "class": 3,
+              "system:index": "20"
             })]);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
