@@ -1832,6 +1832,66 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 0,
               "system:index": "300"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.79793548583984, 42.53739795519656]),
+            {
+              "class": 0,
+              "system:index": "301"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.8006820678711, 42.527910760746245]),
+            {
+              "class": 0,
+              "system:index": "302"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.80823516845703, 42.55472417643461]),
+            {
+              "class": 0,
+              "system:index": "303"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.85801696777344, 42.52474804234817]),
+            {
+              "class": 0,
+              "system:index": "304"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.89217758178711, 42.52613965817037]),
+            {
+              "class": 0,
+              "system:index": "305"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.7900390625, 42.52487455415844]),
+            {
+              "class": 0,
+              "system:index": "306"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.84634399414062, 42.53588010092859]),
+            {
+              "class": 0,
+              "system:index": "307"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.9105453491211, 42.558770484213184]),
+            {
+              "class": 0,
+              "system:index": "308"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.91363525390625, 42.5435954772254]),
+            {
+              "class": 0,
+              "system:index": "309"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.90127563476562, 42.54308958011845]),
+            {
+              "class": 0,
+              "system:index": "310"
             })]),
     mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection(
         [ee.Feature(
@@ -2931,6 +2991,36 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 1,
               "system:index": "182"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.84016418457031, 42.552700924157655]),
+            {
+              "class": 1,
+              "system:index": "183"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.77767944335938, 42.55598867579946]),
+            {
+              "class": 1,
+              "system:index": "184"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.88754272460938, 42.527404736562765]),
+            {
+              "class": 1,
+              "system:index": "185"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.8475456237793, 42.52031996758724]),
+            {
+              "class": 1,
+              "system:index": "186"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.83879089355469, 42.50690731238577]),
+            {
+              "class": 1,
+              "system:index": "187"
             })]),
     soil = /* color: #e18b1d */ee.FeatureCollection(
         [ee.Feature(
@@ -3796,6 +3886,18 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 2,
               "system:index": "143"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.80033874511719, 42.539548185588544]),
+            {
+              "class": 2,
+              "system:index": "144"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-94.76188659667969, 42.55219510083977]),
+            {
+              "class": 2,
+              "system:index": "145"
             })]),
     water = /* color: #2b3fa7 */ee.FeatureCollection(
         [ee.Feature(
@@ -3995,7 +4097,7 @@ Map.addLayer(masked_lsat, vizParams);
 Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'blue']});
 
 //Export image and mask. Uncomment this when ready to export data.
-/*Export.image.toCloudStorage({
+Export.image.toCloudStorage({
   image: classed_lsat,
   description: '2016_Classified_Corn_Belt',
   bucket: 'gee_export_kovi',
@@ -4003,4 +4105,4 @@ Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'bl
   scale: 30,
   region: corn_belt_region,
   maxPixels: 1e13
-});*/
+});
