@@ -1123,7 +1123,7 @@ Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'bl
   image: classed_lsat,
   description: '2015_Classified_Corn_Belt',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: '2015/2015_cb_class_int8',
+  fileNamePrefix: '2015/2015_cb_class_randomForest_int8',
   scale: 30,
   region: corn_belt_region,
   maxPixels: 1e13
