@@ -1028,6 +1028,48 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 0,
               "system:index": "166"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-86.3606071472168, 40.1875290003824]),
+            {
+              "class": 0,
+              "system:index": "167"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-86.38189315795898, 40.196839187145606]),
+            {
+              "class": 0,
+              "system:index": "168"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-86.38944625854492, 40.19106964454306]),
+            {
+              "class": 0,
+              "system:index": "169"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-86.36369705200195, 40.174413893582376]),
+            {
+              "class": 0,
+              "system:index": "170"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-86.42034530639648, 40.17283991040105]),
+            {
+              "class": 0,
+              "system:index": "171"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-86.46137237548828, 40.177561750426584]),
+            {
+              "class": 0,
+              "system:index": "172"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-86.46137237548828, 40.19041398364302]),
+            {
+              "class": 0,
+              "system:index": "173"
             })]),
     mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection(
         [ee.Feature(
@@ -1449,6 +1491,12 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 1,
               "system:index": "69"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-86.32627487182617, 40.15434287360936]),
+            {
+              "class": 1,
+              "system:index": "70"
             })]),
     soil = /* color: #e18b1d */ee.FeatureCollection(
         [ee.Feature(
