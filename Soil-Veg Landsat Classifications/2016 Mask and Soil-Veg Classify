@@ -4420,7 +4420,7 @@ var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp1', 'temp
 
 // Get the Landsat 8 TOA collection of the 2016 growing season
 var lsat = ee.ImageCollection('LANDSAT/LC08/C01/T1_TOA')
-    .filterDate('2016-06-15', '2016-09-10')
+    .filterDate('2016-06-10', '2016-09-10')
     .filterBounds(corn_belt_region)
     .select(LC8_BANDS);
 
