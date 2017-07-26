@@ -2072,6 +2072,24 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 0,
               "system:index": "340"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.04125785827637, 37.831775669240166]),
+            {
+              "class": 0,
+              "system:index": "341"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.03696632385254, 37.838893314035666]),
+            {
+              "class": 0,
+              "system:index": "342"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.04147243499756, 37.838757746264825]),
+            {
+              "class": 0,
+              "system:index": "343"
             })]),
     mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection(
         [ee.Feature(
@@ -4199,6 +4217,12 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 3,
               "system:index": "26"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.04460525512695, 37.83194514495398]),
+            {
+              "class": 3,
+              "system:index": "27"
             })]);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
