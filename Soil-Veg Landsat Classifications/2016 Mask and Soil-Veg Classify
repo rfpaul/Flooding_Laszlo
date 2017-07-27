@@ -5198,6 +5198,6 @@ Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'bl
   collection: trainAcc,
   description:'2016_confusion_matrix',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: '2016_confusion_matrix',
+  fileNamePrefix: '2016/2016_confusion_matrix',
   fileFormat: 'CSV'
 });*/
