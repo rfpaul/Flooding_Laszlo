@@ -128,6 +128,54 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 0,
               "system:index": "16"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.45692253112793, 38.37993176741997]),
+            {
+              "class": 0,
+              "system:index": "17"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.45331764221191, 38.38356499156617]),
+            {
+              "class": 0,
+              "system:index": "18"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.46224403381348, 38.37582735027593]),
+            {
+              "class": 0,
+              "system:index": "19"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.47031211853027, 38.37253019080881]),
+            {
+              "class": 0,
+              "system:index": "20"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.47597694396973, 38.36055149019011]),
+            {
+              "class": 0,
+              "system:index": "21"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.46996879577637, 38.35254215204421]),
+            {
+              "class": 0,
+              "system:index": "22"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.46971130371094, 38.36842535377603]),
+            {
+              "class": 0,
+              "system:index": "23"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.43658065795898, 38.35799398270416]),
+            {
+              "class": 0,
+              "system:index": "24"
             })]),
     mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection(
         [ee.Feature(
@@ -183,6 +231,36 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 1,
               "system:index": "8"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.44936943054199, 38.36667568033511]),
+            {
+              "class": 1,
+              "system:index": "9"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.44301795959473, 38.380133617993245]),
+            {
+              "class": 1,
+              "system:index": "10"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.48147010803223, 38.33012475794673]),
+            {
+              "class": 1,
+              "system:index": "11"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.47992515563965, 38.40509146367529]),
+            {
+              "class": 1,
+              "system:index": "12"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.4101448059082, 38.40542776394859]),
+            {
+              "class": 1,
+              "system:index": "13"
             })]),
     soil = /* color: #e18b1d */ee.FeatureCollection(
         [ee.Feature(
@@ -208,8 +286,26 @@ var corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
             {
               "class": 2,
               "system:index": "3"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.44267463684082, 38.36822347053778]),
+            {
+              "class": 2,
+              "system:index": "4"
             })]),
-    water = /* color: #2b3fa7 */ee.FeatureCollection([]);
+    water = /* color: #2b3fa7 */ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Point([-87.79732704162598, 38.32736417874693]),
+            {
+              "class": 3,
+              "system:index": "0"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.43756771087646, 38.369107757011214]),
+            {
+              "class": 3,
+              "system:index": "1"
+            })]);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
 // 2016 Classification of cloud-free regions
