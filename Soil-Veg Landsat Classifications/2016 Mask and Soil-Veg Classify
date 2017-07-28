@@ -5172,8 +5172,11 @@ classed_lsat = classed_lsat.toInt8();
 
 // Confusion matrix for classification
 var trainAcc = classifier.confusionMatrix();
-print('Resubstitution error matrix: ', trainAcc);
+print('Confusion matrix: ', trainAcc);
 print('Training overall accuracy: ', trainAcc.accuracy());
+print('Consumers Accuracy', trainAcc.consumersAccuracy());
+print('Producers Accuracy', trainAcc.producersAccuracy());
+print('Kappa', trainAcc.kappa());
 
 // Draw to map
 //Map.setCenter(-94.866,42.967, 8);
@@ -5191,13 +5194,4 @@ Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'bl
   scale: 30,
   region: corn_belt_region,
   maxPixels: 1e13
-});*/
-
-// Export confusion matrix. Uncomment when ready to export.
-/*Export.table.toCloudStorage({
-  collection: trainAcc,
-  description:'2016_confusion_matrix',
-  bucket: 'gee_export_kovi',
-  fileNamePrefix: '2016/2016_confusion_matrix',
-  fileFormat: 'CSV'
 });*/
