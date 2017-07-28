@@ -3484,13 +3484,11 @@ Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'bl
 // Export confusion matrix. Uncomment when ready to export.
 Export.table.toCloudStorage({
   collection: ee.FeatureCollection(
-    ee.Feature(
-      null,
-      {'matrix': trainAcc.array()},
-      trainAcc.accuracy(),
-      trainAcc.consumersAccuracy(),
-      trainAcc.producersAccuracy(),
-      trainAcc.kappa())),
+    {'matrix': trainAcc.array()},
+    trainAcc.accuracy(),
+    trainAcc.consumersAccuracy(),
+    trainAcc.producersAccuracy(),
+    trainAcc.kappa()),
   description:'2015_confusion_matrix',
   bucket: 'gee_export_kovi',
   fileNamePrefix: '2015/2015_confusion_matrix',
