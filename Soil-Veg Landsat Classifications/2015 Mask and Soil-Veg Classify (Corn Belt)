@@ -3484,7 +3484,7 @@ Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'bl
 // Export confusion matrix. Uncomment when ready to export.
 Export.table.toCloudStorage({
   collection: ee.FeatureCollection(
-    [{'matrix': trainAcc.array()},
+    [ee.Feature(null, {'matrix': trainAcc.array()}),
     trainAcc.accuracy(),
     trainAcc.consumersAccuracy(),
     trainAcc.producersAccuracy(),
