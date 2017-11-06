@@ -2734,7 +2734,7 @@ var masked_lsat = cloud_masked.updateMask(cdl_cult);
 // Clip to the Corn Belt only
 masked_lsat = masked_lsat.clip(corn_belt_region);
 
-//print(vegetation);
+/*print(vegetation);
 
 // Merge classifier points
 var sites = vegetation.merge(water).merge(soil).merge(mixed_soil_veg);
