@@ -2661,7 +2661,8 @@ var vegetation = /* color: #35c61d */ee.FeatureCollection(
               "class": 3,
               "system:index": "7"
             })]),
-    champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
+    champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
+    sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
 // 2013 Classification of cloud-free regions
@@ -2669,6 +2670,8 @@ var vegetation = /* color: #35c61d */ee.FeatureCollection(
 
 // Add county shape
 Map.addLayer(champaign);
+// Add sinks
+Map.addLayer(sinks);
 
 // A mapping from a common name to the sensor-specific bands.
 var LC8_BANDS = ['B2',   'B3',    'B4',  'B5',  'B6',    'B7',    'B10',   'B11'];
