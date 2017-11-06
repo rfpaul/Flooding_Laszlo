@@ -2667,6 +2667,9 @@ var vegetation = /* color: #35c61d */ee.FeatureCollection(
 // 2013 Classification of cloud-free regions
 // Champaign County Only
 
+// Add county shape
+Map.addLayer(champaign);
+
 // A mapping from a common name to the sensor-specific bands.
 var LC8_BANDS = ['B2',   'B3',    'B4',  'B5',  'B6',    'B7',    'B10',   'B11'];
 var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp1', 'temp2'];
@@ -2674,7 +2677,7 @@ var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp1', 'temp
 // Get the Landsat 8 TOA collection of the 2013 growing season
 var lsat = ee.ImageCollection('LC8_L1T_TOA')
     .filterDate('2013-06-10', '2013-09-10')
-    .filterBounds(corn_belt_region)
+    .filterBounds(champaign)
     .select(LC8_BANDS);
 
 var CloudMask = function (image) {
@@ -2722,7 +2725,7 @@ var CDL_Mask = function(years, crops, extent) {
 var cloud_masked = lsat.map(CloudMask).max();
 
 // Load Cropland Data Layer of maize and soybeans plots from 2013-2016
-var cdl_cult = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], corn_belt_region);
+var cdl_cult = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], champaign);
 print(cdl_cult);
 
 // Define visualization parameters for a false color image.
@@ -2732,7 +2735,7 @@ var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': .8, 'gamma': 1.6};
 // Mask image
 var masked_lsat = cloud_masked.updateMask(cdl_cult);
 // Clip to the Corn Belt only
-masked_lsat = masked_lsat.clip(corn_belt_region);
+masked_lsat = masked_lsat.clip(champaign);
 
 /*print(vegetation);
 
@@ -2771,6 +2774,6 @@ Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'bl
   bucket: 'gee_export_kovi',
   fileNamePrefix: '2013/2013_cb_class_randomForest02_int8',
   scale: 30,
-  region: corn_belt_region,
+  region: champaign,
   maxPixels: 1e13
 });*/
