@@ -2677,7 +2677,7 @@ var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp1', 'temp
 
 // Get the Landsat 8 TOA collection of the 2013 growing season
 var lsat = ee.ImageCollection('LC8_L1T_TOA')
-    .filterDate('2013-06-10', '2013-09-10')
+    .filterDate('2015-05-10', '2015-10-10')
     .filterBounds(champaign)
     .select(LC8_BANDS);
 
