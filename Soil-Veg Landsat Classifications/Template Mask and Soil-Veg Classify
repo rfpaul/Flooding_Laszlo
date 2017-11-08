@@ -75,7 +75,7 @@ var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': .8, 'gamma': 1.6};
 
 // Mask image
 var masked_lsat = cloud_masked.updateMask(cdl_cult);
-// Clip to the Corn Belt only
+// Clip to region of interest
 masked_lsat = masked_lsat.clip(champaign);
 
 /*print(vegetation);
