@@ -494,8 +494,153 @@ var vegetation = /* color: #35c61d */ee.FeatureCollection(
             ee.Geometry.Point([-88.13472747802734, 40.00182026819516]),
             {
               "system:index": "98"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.11541557312012, 39.91438478315293]),
+            {
+              "system:index": "99"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.12726020812988, 39.92748419541372]),
+            {
+              "system:index": "100"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.05353164672852, 39.9441346036207]),
+            {
+              "system:index": "101"
             })]),
-    mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection([]),
+    mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Point([-88.08391571044922, 39.92485134895723]),
+            {
+              "system:index": "0"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.05919647216797, 39.912673117061274]),
+            {
+              "system:index": "1"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.97645568847656, 39.89875498460029]),
+            {
+              "system:index": "2"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.98057556152344, 39.967425212844375]),
+            {
+              "system:index": "3"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.03902626037598, 40.0033324639397]),
+            {
+              "system:index": "4"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.05524826049805, 39.987419857130206]),
+            {
+              "system:index": "5"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.05803775787354, 40.06081675754502]),
+            {
+              "system:index": "6"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.0221176147461, 40.17583106205013]),
+            {
+              "system:index": "7"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.05353164672852, 40.16494382542778]),
+            {
+              "system:index": "8"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.94452667236328, 40.159893128782294]),
+            {
+              "system:index": "9"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.97679901123047, 40.132337260405194]),
+            {
+              "system:index": "10"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.95147895812988, 40.243869475322214]),
+            {
+              "system:index": "11"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.22587966918945, 40.25642154243527]),
+            {
+              "system:index": "12"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.2150650024414, 40.26467436069456]),
+            {
+              "system:index": "13"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-87.94332504272461, 40.36899211750243]),
+            {
+              "system:index": "14"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.18897247314453, 40.33733425476531]),
+            {
+              "system:index": "15"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.19292068481445, 40.383769417504595]),
+            {
+              "system:index": "16"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.29351425170898, 40.29819926470713]),
+            {
+              "system:index": "17"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.30690383911133, 40.265722265581196]),
+            {
+              "system:index": "18"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.38844299316406, 40.17396916505554]),
+            {
+              "system:index": "19"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.44234466552734, 40.094830826467046]),
+            {
+              "system:index": "20"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.43238830566406, 39.92680028214322]),
+            {
+              "system:index": "21"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.17678451538086, 39.95622140085223]),
+            {
+              "system:index": "22"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.32123756408691, 39.99748073793727]),
+            {
+              "system:index": "23"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.32595825195312, 40.04953689734982]),
+            {
+              "system:index": "24"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.09481620788574, 40.20835119463106]),
+            {
+              "system:index": "25"
+            })]),
     soil = /* color: #e18b1d */ee.FeatureCollection(
         [ee.Feature(
             ee.Geometry.Point([-87.99070358276367, 40.17148262801404]),
@@ -742,7 +887,22 @@ var vegetation = /* color: #35c61d */ee.FeatureCollection(
             {
               "system:index": "48"
             })]),
-    water = /* color: #2b3fa7 */ee.FeatureCollection([]),
+    water = /* color: #2b3fa7 */ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Point([-88.02042245864868, 40.06635745829561]),
+            {
+              "system:index": "0"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.00984382629395, 40.06616039946653]),
+            {
+              "system:index": "1"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.07147026062012, 40.06510940941751]),
+            {
+              "system:index": "2"
+            })]),
     champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
     sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
