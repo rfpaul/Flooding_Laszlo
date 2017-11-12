@@ -444,6 +444,56 @@ var vegetation = /* color: #35c61d */ee.FeatureCollection(
             ee.Geometry.Point([-88.23017120361328, 39.9508863658734]),
             {
               "system:index": "88"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.11434268951416, 39.95678063275685]),
+            {
+              "system:index": "89"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.13035011291504, 39.95878725076994]),
+            {
+              "system:index": "90"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.09610366821289, 39.97716017833062]),
+            {
+              "system:index": "91"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.13138008117676, 39.972621752083285]),
+            {
+              "system:index": "92"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.1389331817627, 39.95532034938605]),
+            {
+              "system:index": "93"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.1488037109375, 39.95143844487087]),
+            {
+              "system:index": "94"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.15438270568848, 39.94985930202826]),
+            {
+              "system:index": "95"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.10957908630371, 40.00425291451659]),
+            {
+              "system:index": "96"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.08777809143066, 40.005502077593604]),
+            {
+              "system:index": "97"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.13472747802734, 40.00182026819516]),
+            {
+              "system:index": "98"
             })]),
     mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection([]),
     soil = /* color: #e18b1d */ee.FeatureCollection(
