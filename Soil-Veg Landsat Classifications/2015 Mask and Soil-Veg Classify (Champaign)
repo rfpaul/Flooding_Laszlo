@@ -1,5 +1,30 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var vegetation = /* color: #35c61d */ee.FeatureCollection([]),
+var vegetation = /* color: #35c61d */ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Point([-88.14657211303711, 40.023645237326974]),
+            {
+              "system:index": "0"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.17403793334961, 40.01970148246846]),
+            {
+              "system:index": "1"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.16734313964844, 40.0225278632606]),
+            {
+              "system:index": "2"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.17395210266113, 40.00865775618966]),
+            {
+              "system:index": "3"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.18262100219727, 40.00464738953646]),
+            {
+              "system:index": "4"
+            })]),
     mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection([]),
     soil = /* color: #e18b1d */ee.FeatureCollection(
         [ee.Feature(
