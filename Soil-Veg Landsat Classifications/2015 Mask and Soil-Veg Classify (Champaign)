@@ -1188,9 +1188,9 @@ print('Kappa', trainAcc.kappa());
 //Map.setCenter(-94.866,42.967, 8);
 //Map.setCenter(-96.37, 48.29, 8);*/
 Map.addLayer(masked_lsat, vizParams, "Landsat Bands");
+Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'blue']}, "Classification");
 // Add sinks
 Map.addLayer(sinks, {min:0, max: 20, opacity: .50, palette:['white', 'blue', 'yellow', 'red']}, "Sinks");
-Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'blue']}, "Classification");
 
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
