@@ -2777,6 +2777,150 @@ var vegetation = /* color: #35c61d */ee.FeatureCollection(
             {
               "class": 0,
               "system:index": "462"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.11185359954834, 40.33262917356455]),
+            {
+              "class": 0,
+              "system:index": "463"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.11429977416992, 40.33354516946263]),
+            {
+              "class": 0,
+              "system:index": "464"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.11365604400635, 40.331680450419555]),
+            {
+              "class": 0,
+              "system:index": "465"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.11309814453125, 40.329717532603254]),
+            {
+              "class": 0,
+              "system:index": "466"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.11601638793945, 40.327983574375736]),
+            {
+              "class": 0,
+              "system:index": "467"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.1132698059082, 40.32804900757046]),
+            {
+              "class": 0,
+              "system:index": "468"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.11022281646729, 40.32831073971511]),
+            {
+              "class": 0,
+              "system:index": "469"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.12434196472168, 40.33194216848139]),
+            {
+              "class": 0,
+              "system:index": "470"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.11979293823242, 40.330306413942886]),
+            {
+              "class": 0,
+              "system:index": "471"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.10614585876465, 40.33311988719909]),
+            {
+              "class": 0,
+              "system:index": "472"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.10593128204346, 40.33118972631794]),
+            {
+              "class": 0,
+              "system:index": "473"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.10455799102783, 40.33315260131453]),
+            {
+              "class": 0,
+              "system:index": "474"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.09417247772217, 40.33403587643625]),
+            {
+              "class": 0,
+              "system:index": "475"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.08812141418457, 40.33249831599268]),
+            {
+              "class": 0,
+              "system:index": "476"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.09000968933105, 40.32389387382538]),
+            {
+              "class": 0,
+              "system:index": "477"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.10661792755127, 40.324613679090035]),
+            {
+              "class": 0,
+              "system:index": "478"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.10507297515869, 40.32219248541542]),
+            {
+              "class": 0,
+              "system:index": "479"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.10206890106201, 40.32081825577997]),
+            {
+              "class": 0,
+              "system:index": "480"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.11395645141602, 40.32291230882214]),
+            {
+              "class": 0,
+              "system:index": "481"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.12069416046143, 40.32179985123121]),
+            {
+              "class": 0,
+              "system:index": "482"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.12631607055664, 40.32140721476339]),
+            {
+              "class": 0,
+              "system:index": "483"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.13043594360352, 40.318985906084556]),
+            {
+              "class": 0,
+              "system:index": "484"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.12605857849121, 40.327983574375736]),
+            {
+              "class": 0,
+              "system:index": "485"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.11215400695801, 40.324875424555984]),
+            {
+              "class": 0,
+              "system:index": "486"
             })]),
     mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection(
         [ee.Feature(
@@ -3654,6 +3798,36 @@ var vegetation = /* color: #35c61d */ee.FeatureCollection(
             {
               "class": 1,
               "system:index": "145"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.11421394348145, 40.32827802325252]),
+            {
+              "class": 1,
+              "system:index": "146"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.13236713409424, 40.331418731342744]),
+            {
+              "class": 1,
+              "system:index": "147"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.1291913986206, 40.32340309310782]),
+            {
+              "class": 1,
+              "system:index": "148"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.109450340271, 40.33285817370471]),
+            {
+              "class": 1,
+              "system:index": "149"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.07387351989746, 40.33187673906109]),
+            {
+              "class": 1,
+              "system:index": "150"
             })]),
     soil = /* color: #e18b1d */ee.FeatureCollection(
         [ee.Feature(
