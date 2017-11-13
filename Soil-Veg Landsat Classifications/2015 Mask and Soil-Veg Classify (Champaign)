@@ -2555,6 +2555,48 @@ var vegetation = /* color: #35c61d */ee.FeatureCollection(
             {
               "class": 0,
               "system:index": "425"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.26016902923584, 40.35961312420977]),
+            {
+              "class": 0,
+              "system:index": "426"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.25604915618896, 40.35990743505449]),
+            {
+              "class": 0,
+              "system:index": "427"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.2919692993164, 40.36232727551036]),
+            {
+              "class": 0,
+              "system:index": "428"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.27724933624268, 40.37148264245796]),
+            {
+              "class": 0,
+              "system:index": "429"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.26317310333252, 40.35084861253336]),
+            {
+              "class": 0,
+              "system:index": "430"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.2670783996582, 40.35094672904352]),
+            {
+              "class": 0,
+              "system:index": "431"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.26287269592285, 40.35415178987903]),
+            {
+              "class": 0,
+              "system:index": "432"
             })]),
     mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection(
         [ee.Feature(
@@ -3390,6 +3432,12 @@ var vegetation = /* color: #35c61d */ee.FeatureCollection(
             {
               "class": 1,
               "system:index": "138"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.25939655303955, 40.359155304786526]),
+            {
+              "class": 1,
+              "system:index": "139"
             })]),
     soil = /* color: #e18b1d */ee.FeatureCollection(
         [ee.Feature(
@@ -3967,6 +4015,12 @@ var vegetation = /* color: #35c61d */ee.FeatureCollection(
             {
               "class": 2,
               "system:index": "95"
+            }),
+        ee.Feature(
+            ee.Geometry.Point([-88.2636022567749, 40.35284362018176]),
+            {
+              "class": 2,
+              "system:index": "96"
             })]),
     water = /* color: #2b3fa7 */ee.FeatureCollection([]),
     champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
