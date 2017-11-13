@@ -4570,7 +4570,7 @@ Map.addLayer(sinks, {min:0, max: 20, opacity: .50, palette:['white', 'blue', 'ye
   description: '2015_Classified_Champaign',
   bucket: 'gee_export_kovi',
   fileNamePrefix: 'cmi/2015_class_randomForest_int8',
-  crs: 'EPSG:26916'.
+  crs: 'EPSG:26916',
   scale: 30,
   region: champaign,
   maxPixels: 1e13
