@@ -1232,25 +1232,7 @@ var vegetation = /* color: #35c61d */ee.FeatureCollection(
               "class": 2,
               "system:index": "51"
             })]),
-    water = /* color: #2b3fa7 */ee.FeatureCollection(
-        [ee.Feature(
-            ee.Geometry.Point([-88.02042245864868, 40.06635745829561]),
-            {
-              "class": 3,
-              "system:index": "0"
-            }),
-        ee.Feature(
-            ee.Geometry.Point([-88.00984382629395, 40.06616039946653]),
-            {
-              "class": 3,
-              "system:index": "1"
-            }),
-        ee.Feature(
-            ee.Geometry.Point([-88.07147026062012, 40.06510940941751]),
-            {
-              "class": 3,
-              "system:index": "2"
-            })]),
+    water = /* color: #2b3fa7 */ee.FeatureCollection([]),
     champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
     sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
