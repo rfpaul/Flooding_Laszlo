@@ -4453,48 +4453,6 @@ var vegetation = /* color: #35c61d */ee.FeatureCollection(
             {
               "class": 2,
               "system:index": "103"
-            }),
-        ee.Feature(
-            ee.Geometry.Point([-88.12496423721313, 40.111361734636645]),
-            {
-              "class": 2,
-              "system:index": "104"
-            }),
-        ee.Feature(
-            ee.Geometry.Point([-88.12846183776855, 40.10995040052339]),
-            {
-              "class": 2,
-              "system:index": "105"
-            }),
-        ee.Feature(
-            ee.Geometry.Point([-88.13813924789429, 40.05529613646142]),
-            {
-              "class": 2,
-              "system:index": "106"
-            }),
-        ee.Feature(
-            ee.Geometry.Point([-88.07305812835693, 40.06398399047506]),
-            {
-              "class": 2,
-              "system:index": "107"
-            }),
-        ee.Feature(
-            ee.Geometry.Point([-88.01971435546875, 39.965282655973326]),
-            {
-              "class": 2,
-              "system:index": "108"
-            }),
-        ee.Feature(
-            ee.Geometry.Point([-88.09528827667236, 39.92102891335012]),
-            {
-              "class": 2,
-              "system:index": "109"
-            }),
-        ee.Feature(
-            ee.Geometry.Point([-88.1381607055664, 39.889095811855]),
-            {
-              "class": 2,
-              "system:index": "110"
             })]),
     water = /* color: #2b3fa7 */ee.FeatureCollection([]),
     champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
@@ -4513,7 +4471,7 @@ var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp1', 'temp
 
 // Get the Landsat 8 TOA collection of the 2013 growing season
 var lsat = ee.ImageCollection('LC8_L1T_TOA')
-    .filterDate('2015-05-15', '2015-09-10')
+    .filterDate('2015-06-15', '2015-09-10')
     .filterBounds(champaign)
     .select(LC8_BANDS);
 
@@ -4567,7 +4525,7 @@ print(cdl_cult);
 
 // Define visualization parameters for a false color image.
 // NIR is green, SWIR1 is red, SWIR2 is blue
-var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': .8, 'gamma': 1.6};
+var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': [0.5, .8, .41], 'gamma': 1.6};
 
 // Mask image
 var masked_lsat = cloud_masked.updateMask(cdl_cult);
@@ -4608,10 +4566,10 @@ Map.addLayer(sinks, {min:0, max: 20, opacity: .50, palette:['white', 'blue', 'ye
 
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
-  image: masked_lsat,
+  image: classed_lsat,
   description: '2015_Classified_Champaign',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'cmi/2015_class_randomForest02_int8',
+  fileNamePrefix: 'cmi/2015_class_randomForest_int8',
   crs: 'EPSG:26916',
   scale: 30,
   region: champaign,
