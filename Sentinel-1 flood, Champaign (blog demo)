@@ -16,8 +16,8 @@ var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(pt)
 .select('VV');
 
 // Filter by date
-var before = collection.filterDate('2016-05-20', '2016-05-30').mosaic();
-var after = collection.filterDate('2016-05-31', '2016-06-06').mosaic();
+var before = collection.filterDate('2016-08-01', '2016-08-12').mosaic();
+var after = collection.filterDate('2016-08-13', '2016-08-20').mosaic();
 
 // Threshold smoothed radar intensities to identify "flooded" areas.
 var SMOOTHING_RADIUS = 100;
