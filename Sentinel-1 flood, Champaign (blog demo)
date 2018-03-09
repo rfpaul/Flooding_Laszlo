@@ -26,10 +26,10 @@ var diff = wet.subtract(dry);
 var POND_THRESH = -8;
 
 // select areas smaller than the threshold
-var paddies_th = paddies.lt(paddies_th);
+var diff_thresholded = diff.lt(POND_THRESH);
 
 // mask the areas that are not flooded
-var mypaddies = paddies_th.updateMask(paddies_th).clip(Ca)
+var mypaddies = paddies_th.updateMask(paddies_th).clip(cco)
 
 // Display map
 Map.centerObject(cco,8);
