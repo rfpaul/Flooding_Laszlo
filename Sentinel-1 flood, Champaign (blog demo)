@@ -25,8 +25,18 @@ var diff = wet.subtract(dry);
 // set the ponding threshold
 var POND_THRESH = -8;
 
+// select areas smaller than the threshold
+var paddies_th = paddies.lt(paddies_th);
+
+// mask the areas that are not flooded
+var mypaddies = paddies_th.updateMask(paddies_th).clip(Ca)
+
 // Display map
 Map.centerObject(cco,8);
-Map.addLayer(diff_smoothed, {min:-10,max:10}, 'diff smoothed', 0); 
+Map.addLayer(diff, {min:-10,max:10}, 'diff', 0);
+ 
+var paddies_viz = {palette:"c2c64d"};
+Map.addLayer(mypaddies, paddies_viz, 'Rice');
+
 Map.addLayer(diff_thresholded.updateMask(diff_thresholded),
   {palette:"0000FF"},'flooded areas - blue',1);
