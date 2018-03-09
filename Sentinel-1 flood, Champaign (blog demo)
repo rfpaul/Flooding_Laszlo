@@ -1,5 +1,5 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var champaign = /* color: #ffc82d */ee.Geometry.Point([-88.24819564819336, 40.10400077060651]);
+var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 
 
@@ -16,12 +16,12 @@ var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(pt)
 .select('VV');
 
 // Filter by date
-var before = collection.filterDate('2016-08-01', '2016-08-12').mosaic();
-var after = collection.filterDate('2016-08-13', '2016-08-20').mosaic();
+var before = collection.filterDate('2016-02-01', '2016-04-21').mosaic();
+var after = collection.filterDate('2016-04-22', '2016-06-20').mosaic();
 
 // Threshold smoothed radar intensities to identify "flooded" areas.
 var SMOOTHING_RADIUS = 100;
-var DIFF_UPPER_THRESHOLD = -3; 
+var DIFF_UPPER_THRESHOLD = -7; 
 
 var diff_smoothed = after.focal_median(SMOOTHING_RADIUS, 'circle', 'meters')
     .subtract(before.focal_median(SMOOTHING_RADIUS, 'circle', 'meters'));
