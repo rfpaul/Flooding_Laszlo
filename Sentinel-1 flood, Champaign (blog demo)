@@ -19,11 +19,14 @@ var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(cco)
 var wet = collection.reduce(ee.Reducer.percentile([10]));
 var dry = collection.reduce(ee.Reducer.percentile([90]));
 
+// calculate the difference between wet and dry conditions
+var diff = wet.subtract(dry);
+
+// set the ponding threshold
+var POND_THRESH = -8;
+
 // Display map
 Map.centerObject(cco,8);
-Map.addLayer(before, {min:-30,max:0}, 'Before flood');
-Map.addLayer(after, {min:-30,max:0}, 'After flood');
-Map.addLayer(after.subtract(before), {min:-10,max:10}, 'After - before', 0); 
 Map.addLayer(diff_smoothed, {min:-10,max:10}, 'diff smoothed', 0); 
 Map.addLayer(diff_thresholded.updateMask(diff_thresholded),
   {palette:"0000FF"},'flooded areas - blue',1);
