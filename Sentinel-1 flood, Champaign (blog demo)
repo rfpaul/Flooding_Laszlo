@@ -1,5 +1,6 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
+var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
+    sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Load Sentinel-1 images to map Champaign County flooding, 2016.
 // This script adapted from Open Geo Blog,
@@ -36,3 +37,4 @@ Map.centerObject(cco,8);
 Map.addLayer(diff, {min:-10,max:10}, 'diff', 0);
 Map.addLayer(diff_thresholded.updateMask(diff_mask),
   {palette:"0000FF"},'flooded areas - blue',1);
+Map.addLayer(sinks);
