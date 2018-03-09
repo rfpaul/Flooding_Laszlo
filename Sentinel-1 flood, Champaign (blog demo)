@@ -14,7 +14,10 @@ var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(cco)
 .filterDate('2016-03-01', '2016-11-01')
 .select('VV');
 
-
+// Get the wet and dry pixels; dry has low scatter/high reflectance to satellite,
+// wet has high scatter/low reflectance back to satellite
+var wet = collection.reduce(ee.Reducer.percentile([10]));
+var dry = collection.reduce(ee.Reducer.percentile([90]));
 
 // Display map
 Map.centerObject(cco,8);
