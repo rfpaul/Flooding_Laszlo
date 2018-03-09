@@ -29,14 +29,10 @@ var POND_THRESH = -8;
 var diff_thresholded = diff.lt(POND_THRESH);
 
 // mask the areas that are not flooded
-var mypaddies = paddies_th.updateMask(paddies_th).clip(cco)
+var diff_mask = diff_thresholded.updateMask(diff_thresholded).clip(cco);
 
 // Display map
 Map.centerObject(cco,8);
 Map.addLayer(diff, {min:-10,max:10}, 'diff', 0);
- 
-var paddies_viz = {palette:"c2c64d"};
-Map.addLayer(mypaddies, paddies_viz, 'Rice');
-
-Map.addLayer(diff_thresholded.updateMask(diff_thresholded),
+Map.addLayer(diff_thresholded.updateMask(diff_mask),
   {palette:"0000FF"},'flooded areas - blue',1);
