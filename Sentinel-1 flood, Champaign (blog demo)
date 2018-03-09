@@ -13,11 +13,8 @@ var cco = champaign;
 // Load Sentinel-1 C-band SAR Ground Range collection (log scaling, VV co-polar)
 var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(cco)
 .filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VV'))
+.filterDate('2016-03-01', '2016-11-01')
 .select('VV');
-
-// Filter by date
-var before = collection.filterDate('2016-08-01', '2016-08-12').mosaic();
-var after = collection.filterDate('2016-08-13', '2016-08-20').mosaic();
 
 // Threshold smoothed radar intensities to identify "flooded" areas.
 var SMOOTHING_RADIUS = 100;
