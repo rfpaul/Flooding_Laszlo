@@ -1,5 +1,5 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var champaign = /* color: #ffc82d */ee.Geometry.Point([-88.24819564819336, 40.10400077060651]);
+var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 
 
@@ -8,10 +8,10 @@ var champaign = /* color: #ffc82d */ee.Geometry.Point([-88.24819564819336, 40.10
 // and adapted by Simon Gascoin (CNRS/CESBIO) and Michel Le Page (IRD/CESBIO)
 
 // Default location
-var pt = champaign;
+var cco = champaign;
 
 // Load Sentinel-1 C-band SAR Ground Range collection (log scaling, VV co-polar)
-var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(pt)
+var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(cco)
 .filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VV'))
 .select('VV');
 
