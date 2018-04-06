@@ -19,7 +19,7 @@ var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(pt)
 var dry = collection.filterDate('2017-03-19', '2017-03-29').mosaic();
 var wet = collection.filterDate('2017-04-29', '2017-05-08').mosaic();
 
-wet = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters');
+wet = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters').clip(champaign);
 
 // Threshold smoothed radar intensities to identify "flooded" areas.
 var SMOOTHING_RADIUS = 100;
@@ -32,7 +32,6 @@ var diff_thresholded = diff_smoothed.lt(DIFF_UPPER_THRESHOLD);
 
 // Display map
 Map.centerObject(pt, 13);
-Map.addLayer(champaign);
 //Map.addLayer(dry, {min:-30,max:0}, 'Dry');
 Map.addLayer(wet, {min:-30,max:0}, 'Wet');
 //Map.addLayer(wet.subtract(dry), {min:-10,max:10}, 'wet - dry', 0); 
