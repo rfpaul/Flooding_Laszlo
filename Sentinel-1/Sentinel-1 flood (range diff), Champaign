@@ -7,6 +7,8 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
 // This script was originally written by Simon Ilyushchenko (GEE team)
 // and adapted by Simon Gascoin (CNRS/CESBIO) and Michel Le Page (IRD/CESBIO)
 
+// Good dates for wet observations: 2016-09-14
+
 // Default location
 var pt = champaign;
 
@@ -17,7 +19,7 @@ var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(pt)
 
 // Filter by date
 var dry = collection.filterDate('2017-03-19', '2017-03-29').mosaic();
-var wet = collection.filterDate('2016-09-10', '2016-09-14').mosaic();
+var wet = collection.filterDate('2015-09-09', '2015-09-14').mosaic();
 
 wet = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters').clip(champaign);
 
@@ -31,7 +33,7 @@ var diff_smoothed = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters')
 var diff_thresholded = diff_smoothed.lt(DIFF_UPPER_THRESHOLD);
 
 // Display map
-Map.centerObject(pt, 13);
+Map.centerObject(pt, 11);
 //Map.addLayer(dry, {min:-30,max:0}, 'Dry');
 Map.addLayer(wet, {min:-25,max:0}, 'Wet');
 //Map.addLayer(wet.subtract(dry), {min:-10,max:10}, 'wet - dry', 0); 
