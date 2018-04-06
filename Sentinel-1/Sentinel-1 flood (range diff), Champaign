@@ -16,23 +16,23 @@ var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(pt)
 .select('VV');
 
 // Filter by date
-var before = collection.filterDate('2017-02-10', '2017-02-28').mosaic();
-var after = collection.filterDate('2017-04-29', '2017-05-08').mosaic();
+var dry = collection.filterDate('2017-02-10', '2017-02-28').mosaic();
+var wet = collection.filterDate('2017-04-29', '2017-05-08').mosaic();
 
 // Threshold smoothed radar intensities to identify "flooded" areas.
 var SMOOTHING_RADIUS = 100;
 var DIFF_UPPER_THRESHOLD = -7; 
 
-var diff_smoothed = after.focal_median(SMOOTHING_RADIUS, 'circle', 'meters')
-    .subtract(before.focal_median(SMOOTHING_RADIUS, 'circle', 'meters'));
+var diff_smoothed = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters')
+    .subtract(dry.focal_median(SMOOTHING_RADIUS, 'circle', 'meters'));
 
 var diff_thresholded = diff_smoothed.lt(DIFF_UPPER_THRESHOLD);
 
 // Display map
 Map.centerObject(pt, 13);
-Map.addLayer(before, {min:-30,max:0}, 'Before flood');
-Map.addLayer(after, {min:-30,max:0}, 'After flood');
-Map.addLayer(after.subtract(before), {min:-10,max:10}, 'After - before', 0); 
+Map.addLayer(dry, {min:-30,max:0}, 'Dry');
+Map.addLayer(wet, {min:-30,max:0}, 'Wet');
+Map.addLayer(wet.subtract(dry), {min:-10,max:10}, 'wet - dry', 0); 
 Map.addLayer(diff_smoothed, {min:-10,max:10}, 'diff smoothed', 0); 
 Map.addLayer(diff_thresholded.updateMask(diff_thresholded),
   {palette:"0000FF"},'flooded areas - blue',1);
