@@ -18,8 +18,8 @@ var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(pt)
 .select('VV');
 
 // Filter by date
-var dry = collection.filterDate('2017-03-19', '2017-03-29').mosaic();
-var wet = collection.filterDate('2015-09-09', '2015-09-14').mosaic();
+var dry = collection.filterDate('2016-09-15', '2016-09-30').mosaic();
+var wet = collection.filterDate('2016-09-09', '2016-09-14').mosaic();
 
 wet = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters').clip(champaign);
 
@@ -34,7 +34,7 @@ var diff_thresholded = diff_smoothed.lt(DIFF_UPPER_THRESHOLD);
 
 // Display map
 Map.centerObject(pt, 11);
-//Map.addLayer(dry, {min:-30,max:0}, 'Dry');
+Map.addLayer(dry, {min:-25,max:0}, 'Dry');
 Map.addLayer(wet, {min:-25,max:0}, 'Wet');
 //Map.addLayer(wet.subtract(dry), {min:-10,max:10}, 'wet - dry', 0); 
 //Map.addLayer(diff_smoothed, {min:-10,max:10}, 'diff smoothed', 0); 
