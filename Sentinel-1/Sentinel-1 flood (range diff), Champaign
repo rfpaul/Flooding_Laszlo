@@ -3,7 +3,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 
 
-// Load Sentinel-1 images to map Champaign County flooding, May-June 2016.
+// Load Sentinel-1 images to map Champaign County flooding.
 // This script was originally written by Simon Ilyushchenko (GEE team)
 // and adapted by Simon Gascoin (CNRS/CESBIO) and Michel Le Page (IRD/CESBIO)
 
