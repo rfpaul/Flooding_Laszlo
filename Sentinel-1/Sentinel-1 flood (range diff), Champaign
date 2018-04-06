@@ -32,9 +32,10 @@ var diff_thresholded = diff_smoothed.lt(DIFF_UPPER_THRESHOLD);
 
 // Display map
 Map.centerObject(pt, 13);
-Map.addLayer(dry, {min:-30,max:0}, 'Dry');
+Map.addLayer(champaign);
+//Map.addLayer(dry, {min:-30,max:0}, 'Dry');
 Map.addLayer(wet, {min:-30,max:0}, 'Wet');
-Map.addLayer(wet.subtract(dry), {min:-10,max:10}, 'wet - dry', 0); 
-Map.addLayer(diff_smoothed, {min:-10,max:10}, 'diff smoothed', 0); 
-Map.addLayer(diff_thresholded.updateMask(diff_thresholded),
-  {palette:"0000FF"},'flooded areas - blue',1);
+//Map.addLayer(wet.subtract(dry), {min:-10,max:10}, 'wet - dry', 0); 
+//Map.addLayer(diff_smoothed, {min:-10,max:10}, 'diff smoothed', 0); 
+//Map.addLayer(diff_thresholded.updateMask(diff_thresholded),
+//  {palette:"0000FF"},'flooded areas - blue',1);
