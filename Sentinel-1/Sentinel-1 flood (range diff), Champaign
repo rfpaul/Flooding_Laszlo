@@ -23,10 +23,9 @@ var CDL_Mask = function(years, extent) {
   for (year in years) {
     // Get CDL for current year and clip it
     year_img = ee.Image('USDA/NASS/CDL/' + years[year]);
-    print(year_img);
     // Select "cultivated" band
-    year_img = year_img.select('cultivated').clip(extent);
-    
+    year_img = year_img.select('cultivated').clip(extent).eq(2);
+    print(year_img);
     // Union combined crop mask with previous mask results
     result_img = result_img.or(year_img);
   }
