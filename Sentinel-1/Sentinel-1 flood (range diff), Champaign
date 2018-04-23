@@ -13,12 +13,9 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
 
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
-var CDL_Mask = function(years, crops, extent) {
+var CDL_Mask = function(years, extent) {
   var year;
-  var crop;
-  var temp_img;
   var year_img;
-  var crop_img;
   // Result-holding raster filled with 0 values
   var result_img = ee.Image(0).clip(extent);
   
@@ -29,17 +26,11 @@ var CDL_Mask = function(years, crops, extent) {
     // Get CDL for current year and clip it
     year_img = ee.Image('USDA/NASS/CDL/' + years[year]);
     print(year_img);
-    year_img = year_img.select('cropland').clip(extent);
+    // Select "cultivated" band
+    year_img = year_img.select('cultivated').clip(extent);
     
-    // Combine crops together
-    for (crop in crops) {
-      // Crop matches index
-      temp_img = year_img.eq(crops[crop]);
-      // Union with crop image
-      crop_img = crop_img.or(temp_img);
-    }
     // Union combined crop mask with previous mask results
-    result_img = result_img.or(crop_img);
+    result_img = result_img.or(year_img);
   }
   // Return resulting mask
   return result_img;
@@ -47,7 +38,7 @@ var CDL_Mask = function(years, crops, extent) {
 
 // Load Cropland Data Layer of maize and soybeans plots from 2013-2016
 // Change champaign to clip region
-var cdl_cult = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], champaign);
+var cdl_cult = CDL_Mask([2013, 2014, 2015, 2016], champaign);
 print(cdl_cult);
 
 // Default location
@@ -78,7 +69,7 @@ var diff_thresholded = diff_smoothed.lt(DIFF_UPPER_THRESHOLD);
 
 // Display map
 Map.centerObject(pt, 11);
-Map.addLayer(dry, {min:-25,max:0}, 'Dry');
+//Map.addLayer(dry, {min:-25,max:0}, 'Dry');
 Map.addLayer(wet, {min:-25,max:0}, 'Wet');
 //Map.addLayer(wet.subtract(dry), {min:-10,max:10}, 'wet - dry', 0); 
 //Map.addLayer(diff_smoothed, {min:-10,max:10}, 'diff smoothed', 0); 
