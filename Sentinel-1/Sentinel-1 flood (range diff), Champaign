@@ -50,7 +50,7 @@ var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(pt)
 var dry = collection.filterDate('2017-09-25', '2016-10-03').mean();
 var wet = collection.filterDate('2017-04-29', '2017-05-05').min();
 
-wet = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters').clip(champaign);
+//wet = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters').clip(champaign);
 
 // Mask images
 wet = wet.updateMask(cdl_cult);
