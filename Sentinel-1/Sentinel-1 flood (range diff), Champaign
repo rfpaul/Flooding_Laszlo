@@ -47,13 +47,14 @@ var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(pt)
 .select('VV');
 
 // Filter by date
-var dry = collection.filterDate('2016-09-15', '2016-09-30').mosaic();
-var wet = collection.filterDate('2017-04-29', '2017-05-05').mosaic();
+var dry = collection.filterDate('2017-09-25', '2016-10-03').mean();
+var wet = collection.filterDate('2017-04-29', '2017-05-05').min();
 
 wet = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters').clip(champaign);
 
-// Mask image
+// Mask images
 wet = wet.updateMask(cdl_cult);
+dry = dry.updateMask(cdl_cult);
 
 // Threshold smoothed radar intensities to identify "flooded" areas.
 var SMOOTHING_RADIUS = 100;
