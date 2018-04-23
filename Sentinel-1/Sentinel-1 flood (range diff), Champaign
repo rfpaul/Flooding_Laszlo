@@ -9,6 +9,57 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
 
 // Good dates for wet observations: 2016-09-14
 
+
+
+// Create a mask of all pixels matching CDL crop class indices
+// for the specified years within the extent
+var CDL_Mask = function(years, crops, extent) {
+  var year;
+  var crop;
+  var temp_img;
+  var year_img;
+  var crop_img;
+  // Result-holding raster filled with 0 values
+  var result_img = ee.Image(0).clip(extent);
+  
+  // Go through each year to extract
+  for (year in years) {
+    // Crop-holding raster filled with 0 values
+    crop_img = ee.Image(0).clip(extent);
+    // Get CDL for current year and clip it
+    year_img = ee.Image('USDA/NASS/CDL/' + years[year]);
+    print(year_img);
+    year_img = year_img.select('cropland').clip(extent);
+    
+    // Combine crops together
+    for (crop in crops) {
+      // Crop matches index
+      temp_img = year_img.eq(crops[crop]);
+      // Union with crop image
+      crop_img = crop_img.or(temp_img);
+    }
+    // Union combined crop mask with previous mask results
+    result_img = result_img.or(crop_img);
+  }
+  // Return resulting mask
+  return result_img;
+}
+
+// Max values of cloudless pixels in the growing season
+var cloud_masked = lsat.map(CloudMask).max();
+
+// Load Cropland Data Layer of maize and soybeans plots from 2013-2016
+// Change champaign to clip region
+var cdl_cult = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], champaign);
+print(cdl_cult);
+
+// Define visualization parameters for a false color image.
+// NIR is green, SWIR1 is red, SWIR2 is blue
+var vizParams = {'bands': ['B6', 'B5', 'B7'], 'max': .8, 'gamma': 1.6};
+
+// Mask image
+var masked_lsat = cloud_masked.updateMask(cdl_cult);
+
 // Default location
 var pt = champaign;
 
@@ -16,6 +67,8 @@ var pt = champaign;
 var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(pt)
 .filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VV'))
 .select('VV');
+
+
 
 // Filter by date
 var dry = collection.filterDate('2016-09-15', '2016-09-30').mosaic();
