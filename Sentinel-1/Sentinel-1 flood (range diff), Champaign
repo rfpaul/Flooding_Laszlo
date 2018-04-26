@@ -67,9 +67,9 @@ var diff_thresholded = diff_smoothed.lt(DIFF_UPPER_THRESHOLD);
 
 // Display map
 Map.centerObject(pt, 11);
-Map.addLayer(dry, {min:-25,max:25}, 'Dry', 0);
-Map.addLayer(wet, {min:-25,max:25}, 'Wet', 1);
+Map.addLayer(dry, {min:-15,max:0}, 'Dry', 0);
+Map.addLayer(wet, {min:-15,max:-10}, 'Wet', 1);
 Map.addLayer(wet.subtract(dry), {min:-10,max:10}, 'wet - dry', 0); 
 Map.addLayer(diff_smoothed, {min:-10,max:10}, 'diff smoothed', 0); 
 Map.addLayer(diff_thresholded.updateMask(diff_thresholded),
-  {palette:"0000FF"},'flooded areas - blue',1);
+  {palette:"0000FF"},'flooded areas - blue',0);
