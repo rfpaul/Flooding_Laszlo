@@ -69,7 +69,7 @@ var diff_thresholded = diff_smoothed.lt(DIFF_UPPER_THRESHOLD);
 // Display map
 // Map.centerObject(pt, 11);
 Map.addLayer(dry, {min:-15,max:0}, 'Dry', 0);
-Map.addLayer(wet, {min:-15,max:-10}, 'Wet', 1);
+Map.addLayer(wet, {min:-15,max:-10,palette:["#2832b1", "#ffffff"]}, 'Wet', 1);
 Map.addLayer(wet.subtract(dry), {min:-10,max:10}, 'wet - dry', 0); 
 Map.addLayer(diff_smoothed, {min:-10,max:10}, 'diff smoothed', 0); 
 Map.addLayer(diff_thresholded.updateMask(diff_thresholded),
