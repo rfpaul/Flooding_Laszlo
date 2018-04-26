@@ -1,5 +1,6 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
+var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
+    sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 
 
@@ -70,6 +71,8 @@ var diff_thresholded = diff_smoothed.lt(DIFF_UPPER_THRESHOLD);
 // Map.centerObject(pt, 11);
 Map.addLayer(dry, {min:-15,max:0}, 'Dry', 0);
 Map.addLayer(wet, {min:-15,max:-10,palette:["#2832b1", "#ffffff"]}, 'Wet', 1);
+// Add sinks
+Map.addLayer(sinks, {min:0, max: 20, opacity: .50, palette:['white', 'blue', 'yellow', 'red']}, "Sinks", 1);
 Map.addLayer(wet.subtract(dry), {min:-10,max:10}, 'wet - dry', 0); 
 Map.addLayer(diff_smoothed, {min:-10,max:10}, 'diff smoothed', 0); 
 Map.addLayer(diff_thresholded.updateMask(diff_thresholded),
