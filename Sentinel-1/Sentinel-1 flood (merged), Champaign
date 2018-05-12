@@ -50,8 +50,10 @@ var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(pt)
 
 // Filter by date
 var dry = collection.filterDate('2017-03-05', '2017-03-28').mean();
-var wet = collection.filterDate('2015-07-20', '2015-07-22')
-.merge(collection.filterDate('2016-04-09', '2016-04-11')).mean();
+var wet = collection.filter(
+  ee.Filter.or(
+    ee.Filter.date('2015-07-20', '2015-07-22'),
+    ee.Filter.date('2016-04-09', '2016-04-11'))).mean();
 
 //wet = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters').clip(champaign);
 
