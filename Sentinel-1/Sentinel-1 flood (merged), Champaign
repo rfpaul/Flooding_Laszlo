@@ -45,11 +45,13 @@ var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(pt)
 .filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VV'))
 .select('VV');
 
+// Filter by date
+
+// Good dates for dry observations: 2017-09-08, 2017-09-14, 2017-09-20
+var dry = collection.filterDate('2017-03-05', '2017-03-28').mean();
+
 // Good dates for wet observations: 2017-04-29, 2017-05-11, 2016-09-14, 
 // 2016-04-10, 2015-07-21
-
-// Filter by date
-var dry = collection.filterDate('2017-03-05', '2017-03-28').mean();
 var wet = collection.filter(
   ee.Filter.or(
     ee.Filter.date('2015-07-20', '2015-07-22'),
