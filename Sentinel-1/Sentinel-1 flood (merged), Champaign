@@ -70,7 +70,7 @@ wet = wet.updateMask(cdl_cult);
 dry = dry.updateMask(cdl_cult);
 
 // Threshold smoothed radar intensities to identify "flooded" areas.
-var SMOOTHING_RADIUS = 100;
+var SMOOTHING_RADIUS = 20;
 var DIFF_UPPER_THRESHOLD = -2; 
 
 var diff_smoothed = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters')
