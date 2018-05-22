@@ -10,14 +10,14 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
 // Latest modifications by Robert Paul
 
 // Converts to natural values from dB
-function toNatVals(image) {
-  return image.divide(10.0).pow(10);  
-}
-// Converts to dB from natural values
-function toDB(image) {
-  return image.log10().multiply(10.0);  
+function toNatural(img) {
+  return ee.Image(10.0).pow(img.select(0).divide(10.0));
 }
 
+// Converts to dB from natural values
+function toDB(img) {
+  return ee.Image(img).log10().multiply(10.0);
+}
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
 var CDL_Mask = function(years, extent) {
