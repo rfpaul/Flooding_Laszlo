@@ -59,7 +59,7 @@ var dry = collection.filter(
     ee.Filter.date('2017-03-23', '2017-03-25'),
     ee.Filter.date('2017-06-03', '2017-06-05'),
     ee.Filter.date('2017-07-09', '2017-07-11'),
-    ee.Filter.date('2017-09-07', '2017-09-21'))).median();
+    ee.Filter.date('2017-09-07', '2017-09-21'))).mean();
 
 // Wet periods: passes during or after the top 90% of 5-day cumulative
 // sums for the year
@@ -75,13 +75,18 @@ var wet = collection.filter(
     ee.Filter.date('2017-05-03', '2017-05-05'),
     //ee.Filter.date('2017-05-10', '2017-05-12'), // *might not have ponds
     ee.Filter.date('2017-10-25', '2017-10-27'),
-    ee.Filter.date('2017-11-18', '2017-11-20'))).median();
+    ee.Filter.date('2017-11-18', '2017-11-20'))).mean();
 
 //wet = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters').clip(champaign);
 
-// Mask images
+/* Mask images
 wet = wet.updateMask(cdl_cult);
 dry = dry.updateMask(cdl_cult);
+*/
+
+// Only the county, include all land cover types
+wet = wet.clip(pt);
+dry = dry.clip(pt);
 
 // Simple subtraction between layers
 var simple_subtract = wet.subtract(dry);
