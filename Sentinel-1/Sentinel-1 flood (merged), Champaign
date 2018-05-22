@@ -101,7 +101,9 @@ dry = dry.clip(pt);
 // */
 
 // Simple subtraction between layers
-var simple_subtract = toDB(toNatural(wet).subtract(toNatural(dry)));
+// Note that we're subtracting logarithms of the same base,
+// so we divide them
+var simple_subtract = toDB(toNatural(wet).divide(toNatural(dry)));
 
 // Threshold smoothed radar intensities to identify "flooded" areas.
 var SMOOTHING_RADIUS = 20;
