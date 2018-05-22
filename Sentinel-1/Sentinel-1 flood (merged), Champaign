@@ -54,8 +54,8 @@ var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(pt)
 
 // Filter by date
 
-// Dry periods: passes during or after the bottom 20% of 10-day cumulative
-// sums for the year
+// Dry periods: passes during or after the bottom 20th percentile of
+// 10-day cumulative sums
 var dry = collection.filter(
   ee.Filter.or(
     ee.Filter.date('2014-10-24', '2014-10-27'),
@@ -69,8 +69,8 @@ var dry = collection.filter(
     ee.Filter.date('2017-07-09', '2017-07-11'),
     ee.Filter.date('2017-09-07', '2017-09-21')));
 
-// Wet periods: passes during or after the top 90% of 5-day cumulative
-// sums for the year
+// Wet periods: passes during or after the top 90th percentile of 
+// 5-day cumulative sums
 var wet = collection.filter(
   ee.Filter.or(
     //ee.Filter.date('2015-07-20', '2015-07-22'), // *might not have ponds
