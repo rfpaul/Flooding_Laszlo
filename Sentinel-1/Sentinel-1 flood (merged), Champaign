@@ -57,12 +57,13 @@ var dry = collection.filter(
     ee.Filter.date('2016-08-07', '2016-08-21'),
     ee.Filter.date('2017-09-07', '2017-09-21'))).mean();
 
-// Wet periods: passes during or after the top 90% of 3-day cumulative
+// Wet periods: passes during or after the top 90% of 5-day cumulative
 // sums for the year
 var wet = collection.filter(
   ee.Filter.or(
     ee.Filter.date('2015-07-20', '2015-07-22'),
     ee.Filter.date('2016-04-09', '2016-04-11'),
+    ee.Filter.date('2016-06-09', '2016-06-10'), // *might not have ponds
     ee.Filter.date('2016-09-13', '2016-09-15'),
     ee.Filter.date('2017-04-28', '2017-04-30'),
     ee.Filter.date('2017-05-10', '2017-05-12'))).mean();
