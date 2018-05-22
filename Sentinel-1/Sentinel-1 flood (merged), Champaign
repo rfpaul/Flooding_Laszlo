@@ -79,14 +79,15 @@ var wet = collection.filter(
 
 //wet = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters').clip(champaign);
 
-/* Mask images
+// Mask images
 wet = wet.updateMask(cdl_cult);
 dry = dry.updateMask(cdl_cult);
-*/
+// */
 
-// Only the county, include all land cover types
+/* Only the county, include all land cover types
 wet = wet.clip(pt);
 dry = dry.clip(pt);
+// */
 
 // Simple subtraction between layers
 var simple_subtract = wet.subtract(dry);
