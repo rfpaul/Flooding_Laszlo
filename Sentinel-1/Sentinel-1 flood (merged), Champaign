@@ -108,7 +108,7 @@ Map.addLayer(wet, {min:-15,max:-10,palette:["#191f72", "#ffffff"]}, 'Wet', 1);
 // Add sinks
 var sinkMask = sinks.updateMask(sinks.gte(5));
 Map.addLayer(sinkMask, {min:5, max: 20, opacity: .50, palette:['yellow', 'red']}, "Sinks", 0);
-Map.addLayer(simple_subtract, {min:-10,max:10}, 'wet - dry', 1); 
+Map.addLayer(simple_subtract, {min:-5,max:-2}, 'wet - dry', 1); 
 Map.addLayer(diff_smoothed, {min:-10,max:10}, 'diff smoothed', 0); 
 Map.addLayer(diff_thresholded.updateMask(diff_thresholded),
   {palette:"0000FF"},'flooded areas - blue',0);
