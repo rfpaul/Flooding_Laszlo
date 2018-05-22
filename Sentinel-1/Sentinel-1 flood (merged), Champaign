@@ -103,7 +103,7 @@ var diff_thresholded = diff_smoothed.lt(DIFF_UPPER_THRESHOLD);
 
 // Display map
 // Map.centerObject(pt, 11);
-Map.addLayer(dry, {min:-15,max:0}, 'Dry', 0);
+Map.addLayer(dry, {min:-15,max:0,palette:["#191f72", "#ffffff"]}, 'Dry', 0);
 Map.addLayer(wet, {min:-15,max:0,palette:["#191f72", "#ffffff"]}, 'Wet', 1);
 // Add sinks
 var sinkMask = sinks.updateMask(sinks.gte(5));
