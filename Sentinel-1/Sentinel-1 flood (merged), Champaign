@@ -60,7 +60,7 @@ var dry = collection.filter(
     ee.Filter.date('2017-03-23', '2017-03-25'),
     ee.Filter.date('2017-06-03', '2017-06-05'),
     ee.Filter.date('2017-07-09', '2017-07-11'),
-    ee.Filter.date('2017-09-07', '2017-09-21'))).mode();
+    ee.Filter.date('2017-09-07', '2017-09-21'))).median();
 
 // Wet periods: passes during or after the top 90% of 5-day cumulative
 // sums for the year
@@ -76,7 +76,7 @@ var wet = collection.filter(
     ee.Filter.date('2017-05-03', '2017-05-05'),
     //ee.Filter.date('2017-05-10', '2017-05-12'), // *might not have ponds
     ee.Filter.date('2017-10-25', '2017-10-27'),
-    ee.Filter.date('2017-11-18', '2017-11-20'))).mode();
+    ee.Filter.date('2017-11-18', '2017-11-20'))).median();
 
 //wet = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters').clip(champaign);
 
@@ -95,7 +95,7 @@ var diff_thresholded = diff_smoothed.lt(DIFF_UPPER_THRESHOLD);
 
 // Display map
 // Map.centerObject(pt, 11);
-Map.addLayer(dry, {min:-15,max:0}, 'Dry', 0);
+Map.addLayer(dry, {min:-15,max:-10}, 'Dry', 0);
 Map.addLayer(wet, {min:-15,max:-10,palette:["#191f72", "#ffffff"]}, 'Wet', 1);
 // Add sinks
 var sinkMask = sinks.updateMask(sinks.gte(5));
