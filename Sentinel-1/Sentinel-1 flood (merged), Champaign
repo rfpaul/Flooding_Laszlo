@@ -130,7 +130,7 @@ Map.addLayer(diff_thresholded.updateMask(diff_thresholded),
 
 //Export image. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
-  image: simple_subtract,
+  image: wet,
   description: 'Wet_Means',
   bucket: 'gee_export_kovi',
   fileNamePrefix: 'sentinel-1/wet_means',
