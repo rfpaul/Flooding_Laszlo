@@ -81,8 +81,8 @@ var wet = collection.filter(
     //ee.Filter.date('2016-09-12', '2016-09-14'),
     //ee.Filter.date('2017-04-28', '2017-04-30'),
     ee.Filter.date('2017-05-03', '2017-05-05')));
-    //ee.Filter.date('2017-05-10', '2017-05-12'), // *might not have ponds
-    //ee.Filter.date('2017-10-25', '2017-10-27'),
+    //ee.Filter.date('2017-05-10', '2017-05-12'))); // *might not have ponds
+    //ee.Filter.date('2017-10-25', '2017-10-27')));
     //ee.Filter.date('2017-11-18', '2017-11-20')));
 
 // The values are logarithmic, so we need to map to natural values
