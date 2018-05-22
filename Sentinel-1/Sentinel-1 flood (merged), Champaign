@@ -74,16 +74,16 @@ var dry = collection.filter(
 var wet = collection.filter(
   ee.Filter.or(
     //ee.Filter.date('2015-07-20', '2015-07-22'), // *might not have ponds
-    //ee.Filter.date('2016-04-09', '2016-04-11'), // *might not have ponds
+    ee.Filter.date('2016-04-09', '2016-04-11'),
     //ee.Filter.date('2016-06-09', '2016-06-10'), // *might not have ponds
     //ee.Filter.date('2016-07-26', '2016-07-28'),
     //ee.Filter.date('2016-08-19', '2016-08-21'),
     //ee.Filter.date('2016-09-12', '2016-09-14'),
-    ee.Filter.date('2017-04-28', '2017-04-30'),
-    ee.Filter.date('2017-05-03', '2017-05-05'),
-    ee.Filter.date('2017-05-10', '2017-05-12'), // *might not have ponds
+    //ee.Filter.date('2017-04-28', '2017-04-30'),
+    ee.Filter.date('2017-05-03', '2017-05-05')));
+    //ee.Filter.date('2017-05-10', '2017-05-12'), // *might not have ponds
     //ee.Filter.date('2017-10-25', '2017-10-27'),
-    ee.Filter.date('2017-11-18', '2017-11-20')));
+    //ee.Filter.date('2017-11-18', '2017-11-20')));
 
 // The values are logarithmic, so we need to map to natural values
 // to perform mathematical operations, then convert back to dB
@@ -123,7 +123,7 @@ Map.addLayer(wet, {min:-15,max:0,palette:["#191f72", "#ffffff"]}, 'Wet', 1);
 // Add sinks
 var sinkMask = sinks.updateMask(sinks.gte(5));
 Map.addLayer(sinkMask, {min:5, max: 20, opacity: .50, palette:['yellow', 'red']}, "Sinks", 0);
-Map.addLayer(simple_subtract, {min:-5,max:-0.1}, 'wet - dry', 1); 
+Map.addLayer(simple_subtract, {min:-5,max:-0.1}, 'wet - dry', 0); 
 Map.addLayer(diff_smoothed, {min:-5,max:-2}, 'diff smoothed', 0); 
 Map.addLayer(diff_thresholded.updateMask(diff_thresholded),
   {palette:"0000FF"},'flooded areas - blue',0);
