@@ -100,7 +100,7 @@ wet = wet.clip(pt);
 dry = dry.clip(pt);
 // */
 
-// Simple subtraction between layers
+// Simple subtraction between wet and dry
 // Note that we're subtracting logarithms of the same base,
 // so we divide them
 var simple_subtract = toDB(toNatural(wet).divide(toNatural(dry)));
