@@ -47,7 +47,8 @@ var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(pt)
 
 // Filter by date
 
-// Good dates for dry observations: 2017-09-08, 2017-09-14, 2017-09-20
+// Dry periods: passes during or after the bottom 20% of 10-day cumulative
+// sums for the year
 var dry = collection.filter(
   ee.Filter.or(
     ee.Filter.date('2014-10-24', '2014-10-27'),
@@ -56,8 +57,8 @@ var dry = collection.filter(
     ee.Filter.date('2016-08-07', '2016-08-21'),
     ee.Filter.date('2017-09-07', '2017-09-21'))).mean();
 
-// Good dates for wet observations: 2017-04-29, 2017-05-11, 2016-09-14, 
-// 2016-04-10, 2015-07-21
+// Wet periods: passes during or after the top 90% of 3-day cumulative
+// sums for the year
 var wet = collection.filter(
   ee.Filter.or(
     ee.Filter.date('2015-07-20', '2015-07-22'),
