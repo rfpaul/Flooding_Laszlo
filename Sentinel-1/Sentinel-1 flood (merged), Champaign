@@ -52,6 +52,7 @@ var dry = collection.filter(
   ee.Filter.or(
     ee.Filter.date('2014-10-24', '2014-10-27'),
     ee.Filter.date('2015-03-16', '2015-03-20'),
+    ee.Filter.date('2015-07-19', '2015-07-22'),
     ee.Filter.date('2016-08-07', '2016-08-21'),
     ee.Filter.date('2017-09-07', '2017-09-21'))).mean();
 
