@@ -74,7 +74,8 @@ var wet = collection.filter(
     ee.Filter.date('2016-09-12', '2016-09-14'),
     ee.Filter.date('2017-04-28', '2017-04-30'),
     ee.Filter.date('2017-05-03', '2017-05-05'),
-    ee.Filter.date('2017-05-10', '2017-05-12'))).mean();
+    ee.Filter.date('2017-05-10', '2017-05-12'),
+    ee.Filter.date('2017-10-25', '2017-10-27'))).mean();
 
 //wet = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters').clip(champaign);
 
