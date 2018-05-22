@@ -86,7 +86,7 @@ var wet = collection.filter(
     ee.Filter.date('2017-11-18', '2017-11-20')));
 
 // The values are logarithmic, so we need to map to natural values
-// to perform mathematical operations
+// to perform mathematical operations, then convert back to dB
 dry = toDB(dry.map(toNatural).mean());
 wet = toDB(wet.map(toNatural).mean());
 
