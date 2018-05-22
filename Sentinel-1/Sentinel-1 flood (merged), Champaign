@@ -2,13 +2,12 @@
 var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
     sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
-
-
 // Load Sentinel-1 images to map Champaign County flooding.
+// Aggregate then compare dry versus wet periods which coincide
+// with satellite passes
 // This script was originally written by Simon Ilyushchenko (GEE team)
 // and adapted by Simon Gascoin (CNRS/CESBIO) and Michel Le Page (IRD/CESBIO)
-
-// Good dates for dry observations: 2017-09-08, 2017-09-14, 2017-09-20
+// Latest modifications by Robert Paul
 
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
@@ -24,7 +23,7 @@ var CDL_Mask = function(years, extent) {
     year_img = ee.Image('USDA/NASS/CDL/' + years[year]);
     // Select "cultivated" band
     year_img = year_img.select('cultivated').clip(extent).eq(2);
-    print(year_img);
+    //print(year_img);
     // Union combined crop mask with previous mask results
     result_img = result_img.or(year_img);
   }
