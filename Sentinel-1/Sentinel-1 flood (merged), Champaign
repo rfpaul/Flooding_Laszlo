@@ -9,6 +9,15 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
 // and adapted by Simon Gascoin (CNRS/CESBIO) and Michel Le Page (IRD/CESBIO)
 // Latest modifications by Robert Paul
 
+// Converts to natural values from dB
+function toNatVals(image) {
+  return image.divide(10.0).pow(10);  
+}
+// Converts to dB from natural values
+function toDB(image) {
+  return image.log10().multiply(10.0);  
+}
+
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
 var CDL_Mask = function(years, extent) {
