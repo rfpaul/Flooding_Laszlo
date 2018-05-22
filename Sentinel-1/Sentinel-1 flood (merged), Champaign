@@ -67,7 +67,7 @@ var dry = collection.filter(
     ee.Filter.date('2017-03-23', '2017-03-25'),
     ee.Filter.date('2017-06-03', '2017-06-05'),
     ee.Filter.date('2017-07-09', '2017-07-11'),
-    ee.Filter.date('2017-09-07', '2017-09-21'))).mean();
+    ee.Filter.date('2017-09-07', '2017-09-21')));
 
 // Wet periods: passes during or after the top 90% of 5-day cumulative
 // sums for the year
@@ -83,7 +83,10 @@ var wet = collection.filter(
     ee.Filter.date('2017-05-03', '2017-05-05'),
     //ee.Filter.date('2017-05-10', '2017-05-12'), // *might not have ponds
     ee.Filter.date('2017-10-25', '2017-10-27'),
-    ee.Filter.date('2017-11-18', '2017-11-20'))).mean();
+    ee.Filter.date('2017-11-18', '2017-11-20')));
+
+dry = dry.mean();
+wet = wet.mean();
 
 //wet = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters').clip(champaign);
 
@@ -124,9 +127,9 @@ Map.addLayer(diff_thresholded.updateMask(diff_thresholded),
 //Export image. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
   image: simple_subtract,
-  description: 'Wet-Dry_Subtraction_Mean',
+  description: 'Wet-Dry_Subtraction_Means',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'sentinel-1/wet-dry_mean',
+  fileNamePrefix: 'sentinel-1/wet-dry_means',
   scale: 10,
   region: champaign,
   maxPixels: 1e13
