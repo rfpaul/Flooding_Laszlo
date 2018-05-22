@@ -116,9 +116,9 @@ Map.addLayer(diff_thresholded.updateMask(diff_thresholded),
 //Export image. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
   image: simple_subtract,
-  description: 'Wet - Dry Subtraction, Mean ',
+  description: 'Wet - Dry Subtraction Mean',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'sentinel-1/wet-dry---mean',
+  fileNamePrefix: 'sentinel-1/wet-dry_mean',
   scale: 10,
   region: champaign,
   maxPixels: 1e13
