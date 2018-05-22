@@ -35,7 +35,6 @@ var CDL_Mask = function(years, extent) {
 // Load Cropland Data Layer of maize and soybeans plots from 2013-2016
 // Change champaign to clip region
 var cdl_cult = CDL_Mask([2013, 2014, 2015, 2016], champaign);
-print(cdl_cult);
 
 // Default location
 var pt = champaign;
