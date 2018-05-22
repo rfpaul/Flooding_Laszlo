@@ -85,8 +85,8 @@ var wet = collection.filter(
     ee.Filter.date('2017-10-25', '2017-10-27'),
     ee.Filter.date('2017-11-18', '2017-11-20')));
 
-dry = toDB(dry.map(toNatVals).mean());
-wet = toDB(wet.map(toNatVals).mean());
+dry = toDB(dry.map(toNatural).mean());
+wet = toDB(wet.map(toNatural).mean());
 
 //wet = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters').clip(champaign);
 
@@ -101,7 +101,7 @@ dry = dry.clip(pt);
 // */
 
 // Simple subtraction between layers
-var simple_subtract = toDB(toNatVals(wet).subtract(toNatVals(dry)));
+var simple_subtract = toDB(toNatural(wet).subtract(toNatural(dry)));
 
 // Threshold smoothed radar intensities to identify "flooded" areas.
 var SMOOTHING_RADIUS = 20;
