@@ -4,7 +4,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 
 # Get data
-myPrecip = pd.read_csv("~/Box_sync/Data/cli-MATE_precip_SD_b2dates.csv")
+myPrecip = pd.read_csv("~/Box_Sync/Data/Soil_flooding_data_figs/Data/cli-MATE_precip_SD_b2dates.csv")
 # Format date strings as datetime objects
 myPrecip["DATE"] = pd.to_datetime(myPrecip["DATE"])
 # Make the date the index
@@ -31,7 +31,7 @@ print(myPrecip["10-day"].describe(
 lowPrecip = myPrecip[myPrecip["10-day"] <= .3]
 highPrecip = myPrecip[myPrecip["5-day"] >= 1.6]
 
-# Plot the data
+## Plot the data
 ax = myPrecip.plot(linewidth = .5)
 plt.tight_layout()
 plt.show()
