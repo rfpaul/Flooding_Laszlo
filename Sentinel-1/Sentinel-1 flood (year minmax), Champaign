@@ -1,0 +1,41 @@
+/**** Start of imports. If edited, may not auto-convert in the playground. ****/
+var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
+    sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm");
+/***** End of imports. If edited, may not auto-convert in the playground. *****/
+// Load Sentinel-1 images to map Champaign County flooding, 2016.
+// This script adapted from Open Geo Blog,
+// https://mygeoblog.com/2016/10/26/sentinel-1-2-for-high-resolution-landuse-mapping/
+
+// Default location
+var cco = champaign;
+
+// Load Sentinel-1 C-band SAR Ground Range collection (log scaling, VV co-polar)
+var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(cco)
+.filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VV'))
+.filterDate('2016-03-01', '2016-11-01')
+.select('VV');
+
+// Get the wet and dry pixels; dry has low scatter/high reflectance to satellite,
+// wet has high scatter/low reflectance back to satellite
+var wet = collection.reduce(ee.Reducer.percentile([10]));
+var dry = collection.reduce(ee.Reducer.percentile([90]));
+
+// calculate the difference between wet and dry conditions
+var diff = wet.subtract(dry);
+
+// set the ponding threshold
+var POND_THRESH = -8;
+
+// select areas smaller than the threshold
+var diff_thresholded = diff.lt(POND_THRESH);
+
+// mask the areas that are not flooded
+var diff_mask = diff_thresholded.updateMask(diff_thresholded).clip(cco);
+
+// Display map
+Map.centerObject(cco,8);
+Map.addLayer(dry);
+Map.addLayer(diff, {min:-10,max:10}, 'diff', 0);
+Map.addLayer(sinks, {min: 0, max: 20}, 'sinks');
+Map.addLayer(diff_thresholded.updateMask(diff_mask),
+  {palette:"0000FF"},'flooded areas - blue',1);

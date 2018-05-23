@@ -1,0 +1,140 @@
+/**** Start of imports. If edited, may not auto-convert in the playground. ****/
+var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
+    sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm");
+/***** End of imports. If edited, may not auto-convert in the playground. *****/
+// Load Sentinel-1 images to map Champaign County flooding.
+// Aggregate then compare dry versus wet periods which coincide
+// with satellite passes
+// This script was originally written by Simon Ilyushchenko (GEE team)
+// and adapted by Simon Gascoin (CNRS/CESBIO) and Michel Le Page (IRD/CESBIO)
+// Latest modifications by Robert Paul
+
+// Converts to natural values from dB
+function toNatural(img) {
+  return ee.Image(10.0).pow(img.select(0).divide(10.0));
+}
+
+// Converts to dB from natural values
+function toDB(img) {
+  return ee.Image(img).log10().multiply(10.0);
+}
+// Create a mask of all pixels matching CDL crop class indices
+// for the specified years within the extent
+var CDL_Mask = function(years, extent) {
+  var year;
+  var year_img;
+  // Result-holding raster filled with 0 values
+  var result_img = ee.Image(0).clip(extent);
+  
+  // Go through each year to extract
+  for (year in years) {
+    // Get CDL for current year and clip it
+    year_img = ee.Image('USDA/NASS/CDL/' + years[year]);
+    // Select "cultivated" band
+    year_img = year_img.select('cultivated').clip(extent).eq(2);
+    //print(year_img);
+    // Union combined crop mask with previous mask results
+    result_img = result_img.or(year_img);
+  }
+  // Return resulting mask
+  return result_img;
+}
+
+// Load Cropland Data Layer of maize and soybeans plots from 2013-2016
+// Change champaign to clip region
+var cdl_cult = CDL_Mask([2013, 2014, 2015, 2016], champaign);
+
+// Default location
+var pt = champaign;
+
+// Load Sentinel-1 C-band SAR Ground Range collection (log scaling, VV co-polar)
+var collection =  ee.ImageCollection('COPERNICUS/S1_GRD').filterBounds(pt)
+.filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VV'))
+.select('VV');
+
+// Filter by date
+
+// Dry periods: passes during or after the bottom 20th percentile of
+// 10-day cumulative sums
+var dry = collection.filter(
+  ee.Filter.or(
+    ee.Filter.date('2014-10-24', '2014-10-27'),
+    ee.Filter.date('2015-03-16', '2015-03-20'),
+    //ee.Filter.date('2015-07-19', '2015-07-22'),
+    //ee.Filter.date('2016-08-07', '2016-08-09'),
+    //ee.Filter.date('2016-10-06', '2016-10-08'),
+    ee.Filter.date('2016-11-11', '2016-11-13'), // *might not be very dry
+    ee.Filter.date('2017-03-23', '2017-03-25')));
+    //ee.Filter.date('2017-06-03', '2017-06-05'),
+    //ee.Filter.date('2017-07-09', '2017-07-11'),
+    //ee.Filter.date('2017-09-07', '2017-09-21')));
+
+// Wet periods: passes during or after the top 90th percentile of 
+// 5-day cumulative sums
+var wet = collection.filter(
+  ee.Filter.or(
+    //ee.Filter.date('2015-07-20', '2015-07-22'), // *might not have ponds
+    ee.Filter.date('2016-04-09', '2016-04-11'),
+    //ee.Filter.date('2016-06-09', '2016-06-10'), // *might not have ponds
+    //ee.Filter.date('2016-07-26', '2016-07-28'),
+    //ee.Filter.date('2016-08-19', '2016-08-21'),
+    //ee.Filter.date('2016-09-12', '2016-09-14'),
+    //ee.Filter.date('2017-04-28', '2017-04-30'),
+    ee.Filter.date('2017-05-03', '2017-05-05')));
+    //ee.Filter.date('2017-05-10', '2017-05-12'))); // *might not have ponds
+    //ee.Filter.date('2017-10-25', '2017-10-27')));
+    //ee.Filter.date('2017-11-18', '2017-11-20')));
+
+// The values are logarithmic, so we need to map to natural values
+// to perform mathematical operations, then convert back to dB
+dry = toDB(dry.map(toNatural).mean());
+wet = toDB(wet.map(toNatural).mean());
+
+//wet = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters').clip(champaign);
+
+// Mask images
+wet = wet.updateMask(cdl_cult);
+dry = dry.updateMask(cdl_cult);
+// */
+
+/* Only the county, include all land cover types
+wet = wet.clip(pt);
+dry = dry.clip(pt);
+// */
+
+// Simple subtraction between wet and dry
+// Note that we're subtracting logarithms of the same base,
+// so we divide them
+var simple_subtract = toDB(toNatural(wet).divide(toNatural(dry)));
+
+// Threshold smoothed radar intensities to identify "flooded" areas.
+var SMOOTHING_RADIUS = 20;
+var DIFF_UPPER_THRESHOLD = -2; 
+
+var diff_smoothed = wet.focal_median(SMOOTHING_RADIUS, 'circle', 'meters')
+    .subtract(dry.focal_median(SMOOTHING_RADIUS, 'circle', 'meters'));
+
+var diff_thresholded = diff_smoothed.lt(DIFF_UPPER_THRESHOLD);
+
+// Display map
+// Map.centerObject(pt, 11);
+Map.addLayer(dry, {min:-15,max:0,palette:["#191f72", "#ffffff"]}, 'Dry', 0);
+Map.addLayer(wet, {min:-15,max:0,palette:["#191f72", "#ffffff"]}, 'Wet', 1);
+// Add sinks
+var sinkMask = sinks.updateMask(sinks.gte(5));
+Map.addLayer(sinkMask, {min:5, max: 20, opacity: .50, palette:['yellow', 'red']}, "Sinks", 0);
+Map.addLayer(simple_subtract, {min:-6.25,max:-.5}, 'wet - dry', 0); 
+Map.addLayer(diff_smoothed, {min:-5,max:-2}, 'diff smoothed', 0); 
+Map.addLayer(diff_thresholded.updateMask(diff_thresholded),
+  {palette:"0000FF"},'flooded areas - blue',0);
+
+//Export image. Uncomment this when ready to export data.
+/*Export.image.toCloudStorage({
+  image: wet,
+  description: 'Wet_Means',
+  bucket: 'gee_export_kovi',
+  fileNamePrefix: 'sentinel-1/wet_means',
+  scale: 10,
+  region: champaign,
+  maxPixels: 1e13
+});*/
