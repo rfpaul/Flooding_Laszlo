@@ -46,7 +46,7 @@ var FetchYear = function(year) {
   return result;
 }
 
-var FetchCrops = function(cropIDs) {
+var FetchCovers = function(coverIDs) {
   return result;
 }
 
