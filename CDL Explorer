@@ -41,7 +41,9 @@ var cdl_cult_water = CDL_Mask([2017], [1, 5, 111], champaign);
 var cdl_water = CDL_Mask([2013, 2014, 2015, 2016, 2017], [111], champaign);
 
 print(cdl_cult_water);
+print(cdl_water);
 Map.addLayer(cdl_cult_water);
+Map.addLayer(cdl_water);
 
 //Export mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
