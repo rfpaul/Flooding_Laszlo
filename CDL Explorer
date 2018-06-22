@@ -41,12 +41,16 @@ var cdl_cult_water = CDL_Mask([2017], [1, 5, 111], champaign);
 // Get CDL of water for 2013-2017 inclusive
 var cdl_water = CDL_Mask([2013, 2014, 2015, 2016, 2017], [111], champaign);
 
-var cdl_collected = ee.ImageCollection('USDA/NASS/CDL').filterDate('2013-01-01', '2017-12-12');
+var cdl_collected = ee.ImageCollection('USDA/NASS/CDL')
+  .filterDate('2013-01-01', '2017-12-12')
+  .filterBounds(champaign);
 
 print(cdl_collected);
 
 Map.addLayer(cdl_cult_water);
 Map.addLayer(cdl_water);
+Map.addLayer(cdl_collected);
+
 
 //Export mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
