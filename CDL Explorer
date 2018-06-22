@@ -46,6 +46,10 @@ var FetchYear = function(year) {
   return result;
 }
 
+var FetchCrops = function(collection) {
+  return result;
+}
+
 var yearList = [2013, 2014, 2015, 2016, 2017];
 
 var cdl_mapped = yearList.map(FetchYear);
