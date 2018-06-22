@@ -50,12 +50,15 @@ var FetchCovers = function(coverIDs) {
   return result;
 }
 
+// List of years from the CDL to fetch
 var yearList = [2013, 2014, 2015, 2016, 2017];
+// List of cover types (as integer IDs) to fetch
+var coverTypes = [1, 5, 111];
 
 var cdl_mapped = yearList.map(FetchYear);
 
 // Get CDL of corn (1), soybean (5), and water (111) for 2017
-var cdl_cult_water = CDL_Mask([2017], [1, 5, 111], champaign);
+var cdl_cult_water = CDL_Mask([2017], coverTypes, champaign);
 // Get CDL of water for 2013-2017 inclusive
 var cdl_water = CDL_Mask(yearList, [111], champaign);
 
