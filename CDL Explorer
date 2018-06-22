@@ -35,12 +35,12 @@ var CDL_Mask = function(years, crops, extent) {
   return result_img;
 }
 
-// Get CDL of corn (1) and soybean (5) for years 2013-2016 inclusive
-var cdl_cult_water = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], corn_belt_region);
+// Get CDL of corn (1), soybean (5), and water (x) for 2017
+var cdl_cult_water = CDL_Mask([2017], [1, 5], champaign);
 var cdl_water;
 
 print(cdl_cult_water);
-Map.addLayer(cdl_cult);
+Map.addLayer(cdl_cult_water);
 
 //Export mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
@@ -49,6 +49,6 @@ Map.addLayer(cdl_cult);
   bucket: 'gee_export_kovi',
   fileNamePrefix: 'cb_mask_2013-2016',
   scale: 30,
-  region: corn_belt_region,
+  region: champaign,
   maxPixels: 1e13
 });*/
