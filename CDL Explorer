@@ -46,7 +46,7 @@ var FetchYear = function(year) {
   return result;
 }
 
-var FetchCrops = function(collection) {
+var FetchCrops = function(cropIDs) {
   return result;
 }
 
