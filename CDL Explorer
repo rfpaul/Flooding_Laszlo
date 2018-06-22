@@ -39,9 +39,11 @@ var CDL_Mask = function(years, crops, extent) {
 var FetchYear = function(year) {
   var start = ee.Date.fromYMD(year, 01, 01);
   var end = ee.Date.fromYMD(year, 12, 31);
-  return ee.ImageCollection('USDA/NASS/CDL')
+  var result = ee.ImageCollection('USDA/NASS/CDL')
     .filterDate(start,end)
     .select('cropland');
+  
+  return result;
 }
 
 var yearList = [2013, 2014, 2015, 2016, 2017];
