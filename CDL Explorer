@@ -1,70 +1,6 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var cdl2014 = ee.Image("USDA/NASS/CDL/2014"),
-    corn_belt_region = /* color: #98ff00 */ee.Geometry.Polygon(
-        [[[-82.1337890625, 42.61132393345391],
-          [-82.4853515625, 44.144375156142864],
-          [-86.396484375, 45.299621281112216],
-          [-87.802734375, 45.39227876798964],
-          [-89.912109375, 45.48478459387111],
-          [-91.93359375, 46.03663519715222],
-          [-95.44921875, 47.09406201244411],
-          [-95.2734375, 48.27734442028102],
-          [-96.15234375, 49.290740050243485],
-          [-100.37109375, 49.290740050243485],
-          [-100.458984375, 48.30658277685742],
-          [-100.5908203125, 46.854181436320886],
-          [-100.458984375, 45.26870174864029],
-          [-100.4150390625, 43.57402423617491],
-          [-99.3603515625, 42.02644643428589],
-          [-100.37109375, 40.573909721497564],
-          [-99.1845703125, 39.90299481572232],
-          [-95.8447265625, 39.22544552735803],
-          [-94.04296874999994, 38.023863033250294],
-          [-92.7685546875, 38.05847296216953],
-          [-90.8349609375, 37.64207544142983],
-          [-87.7587890625, 37.15331243359517],
-          [-86.2646484375, 37.64207544142983],
-          [-84.7705078125, 38.05847296216953],
-          [-82.529296875, 38.747229512898734],
-          [-81.298828125, 41.304222339667696]]]);
+var cdl2014 = ee.Image("USDA/NASS/CDL/2014");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
-// Center the map about IL and IN
-Map.setCenter(-87.36, 41.15, 8);
-
-var landsat = ee.ImageCollection('LC8_L1T_TOA')
-    .filterDate('2013-07-01', '2013-08-20').mosaic();
-
-var cdl2013 = ee.Image('USDA/NASS/CDL/2013');
-print (cdl2013);
-print(cdl2014);
-var cdl2015 = ee.Image('USDA/NASS/CDL/2015');
-print (cdl2015);
-var cdl2016 = ee.Image('USDA/NASS/CDL/2016');
-print (cdl2016);
-
-print(landsat);
-
-var cdl_cult = cdl2014.select('cultivated_land');
-
-// 2013 CDL for corn (1) and soybeans (5)
-var mb2013 = cdl2013.select('cropland');
-mb2013 = mb2013.eq(1).or(mb2013.eq(5));
-
-// 2014 CDL for corn (1) and soybeans (5)
-var mb2014 = cdl2014.select('cropland');
-mb2014 = mb2014.eq(1).or(mb2014.eq(5));
-
-// 2015 CDL for corn (1) and soybeans (5)
-var mb2015 = cdl2015.select('cropland');
-mb2015 = mb2015.eq(1).or(mb2015.eq(5));
-
-// 2015 CDL for corn (1) and soybeans (5)
-var mb2016 = cdl2016.select('cropland');
-mb2016 = mb2016.eq(1).or(mb2016.eq(5));
-
-// Multiply maize and bean CDL classifications
-// across years together
-var maize_bean = mb2013.multiply(mb2014).multiply(mb2015).multiply(mb2016);
 
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
@@ -74,8 +10,8 @@ var CDL_Mask = function(years, crops, extent) {
   var temp_img;
   var year_img;
   var crop_img;
-  // Result-holding raster filled with 1 values
-  var result_img = ee.Image(1).clip(extent);
+  // Result-holding raster filled with 0 values
+  var result_img = ee.Image(0).clip(extent);
   
   // Go through each year to extract
   for (year in years) {
@@ -92,36 +28,23 @@ var CDL_Mask = function(years, crops, extent) {
       // Union with crop image
       crop_img = crop_img.or(temp_img);
     }
-    // Intersect unified crop mask with previous mask results
-    result_img = result_img.multiply(crop_img);
+    // Union combined crop mask with previous mask results
+    result_img = result_img.or(crop_img);
   }
   // Return resulting mask
   return result_img;
 }
 
 // Get CDL of corn (1) and soybean (5) for years 2013-2016 inclusive
-var cdl_func = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], corn_belt_region);
+var cdl_cult_water = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], corn_belt_region);
+var cdl_water;
 
-// Clip to AOI
-cdl_cult = cdl_cult.clip(corn_belt_region);
-maize_bean = maize_bean.clip(corn_belt_region);
-
-cdl_cult = cdl_cult.remap([1, 2], [0, 1]);
-print(cdl_cult);
-print(maize_bean);
-print(cdl_func);
-
-var visParams = {bands: ['B6', 'B5', 'B7']};
+print(cdl_cult_water);
 Map.addLayer(cdl_cult);
-var landsat_masked = landsat.updateMask(maize_bean);
-//Map.addLayer(landsat_masked, visParams);
-//Map.addLayer(mb2013);
-Map.addLayer(maize_bean);
-Map.addLayer(cdl_func);
 
 //Export mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
-  image: maize_bean,
+  image: cdl_cult_water,
   description: 'CDL_Maize-Bean',
   bucket: 'gee_export_kovi',
   fileNamePrefix: 'cb_mask_2013-2016',
