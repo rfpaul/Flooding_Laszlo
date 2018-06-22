@@ -44,7 +44,7 @@ var FetchYear = function(year) {
     .select('cropland');
 }
 
-var yearList = [2013, 2014, 2015, 2016, 2017]
+var yearList = [2013, 2014, 2015, 2016, 2017];
 
 var cdl_mapped = yearList.map(FetchYear);
 
@@ -53,7 +53,7 @@ var cdl_cult_water = CDL_Mask([2017], [1, 5, 111], champaign);
 // Get CDL of water for 2013-2017 inclusive
 var cdl_water = CDL_Mask(yearList, [111], champaign);
 
-print(cdl_mapped)
+print(cdl_mapped);
 
 Map.addLayer(cdl_cult_water);
 Map.addLayer(cdl_water);
