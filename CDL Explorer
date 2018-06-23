@@ -36,19 +36,23 @@ var CDL_Mask = function(years, crops, extent) {
   return result_img;
 }
 
-var FetchYear = function(year) {
+// Get the CDL image for the year
+var FetchCDLYear = function(year) {
+  // Start and end dates
   var start = ee.Date.fromYMD(year, 01, 01);
   var end = ee.Date.fromYMD(year, 12, 31);
+  // Get the cropland layer for the year
   var result = ee.ImageCollection('USDA/NASS/CDL')
     .filterDate(start,end)
     .select('cropland')
-    .first();
+    .first(); // Specifically get the image
   
   return result;
 }
 
 var FetchCover = function(coverIDs) {
-  
+  // Remap coverID values as 1, everything else as 0
+  image.remap(coverIDs, 1);
   return result;
 }
 
@@ -57,7 +61,7 @@ var yearList = [2013, 2014, 2015, 2016, 2017];
 // List of cover types (as integer IDs) to fetch
 var coverTypes = [1, 5, 111];
 
-var cdl_mapped = yearList.map(FetchYear);
+var cdl_mapped = yearList.map(FetchCDLYear);
 
 // Get CDL of corn (1), soybean (5), and water (111) for 2017
 var cdl_cult_water = CDL_Mask([2017], coverTypes, champaign);
