@@ -68,7 +68,7 @@ Map.addLayer(cdl_cult_water);
 Map.addLayer(cdl_water);
 
 //Export mask. Uncomment this when ready to export data.
-Export.image.toCloudStorage({
+/*Export.image.toCloudStorage({
   image: cdl_water,
   description: 'CDL_-Water',
   bucket: 'gee_export_kovi',
@@ -77,4 +77,4 @@ Export.image.toCloudStorage({
   scale: 30,
   region: champaign,
   maxPixels: 1e13
-});
+});*/
