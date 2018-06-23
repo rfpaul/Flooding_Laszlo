@@ -69,10 +69,10 @@ Map.addLayer(cdl_water);
 
 //Export mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
-  image: cdl_water,
-  description: 'CDL_-Water',
+  image: cdl_cult_water,
+  description: 'CDL_Corn-Bean-Water',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'water_mask_2013-2017',
+  fileNamePrefix: 'cbw_mask_2017',
   crs: "EPSG:32616",
   scale: 30,
   region: champaign,
