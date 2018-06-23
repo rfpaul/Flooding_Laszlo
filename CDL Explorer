@@ -41,12 +41,14 @@ var FetchYear = function(year) {
   var end = ee.Date.fromYMD(year, 12, 31);
   var result = ee.ImageCollection('USDA/NASS/CDL')
     .filterDate(start,end)
-    .select('cropland');
+    .select('cropland')
+    .first();
   
   return result;
 }
 
-var FetchCovers = function(coverIDs) {
+var FetchCover = function(coverIDs) {
+  
   return result;
 }
 
