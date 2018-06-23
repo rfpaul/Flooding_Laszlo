@@ -73,7 +73,7 @@ Export.image.toCloudStorage({
   description: 'CDL_-Water',
   bucket: 'gee_export_kovi',
   fileNamePrefix: 'water_mask_2013-2017',
-  crs: ,
+  crs: "EPSG:32616",
   scale: 30,
   region: champaign,
   maxPixels: 1e13
