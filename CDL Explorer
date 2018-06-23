@@ -1,6 +1,7 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var cdl2014 = ee.Image("USDA/NASS/CDL/2014"),
-    champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
+    champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
+    geometry = /* color: #d63000 */ee.Geometry.MultiPoint();
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 
 // Create a mask of all pixels matching CDL crop class indices
@@ -52,7 +53,9 @@ var FetchCDLYear = function(year) {
 
 var FetchCover = function(coverIDs) {
   // Remap coverID values as 1, everything else as 0
-  image.remap(coverIDs, 1);
+  image.remap(coverIDs, // from
+    ee.List.repeat(1, ee.List.length(coverIDs)), // to
+    0); // default value
   return result;
 }
 
