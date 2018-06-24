@@ -7,28 +7,20 @@ var cdl2014 = ee.Image("USDA/NASS/CDL/2014"),
 // for the specified years within the extent
 var CDL_Mask = function(years, crops, extent) {
   var year;
-  var crop;
-  var temp_img;
-  var year_img;
   var crop_img;
   // Result-holding raster filled with 0 values
   var result_img = ee.Image(0).clip(extent);
   
   // Go through each year to extract
   for (year in years) {
-    // Crop-holding raster filled with 0 values
-    crop_img = ee.Image(0).clip(extent);
     // Get CDL for current year and clip it
-    year_img = ee.Image('USDA/NASS/CDL/' + years[year]);
-    year_img = year_img.select('cropland').clip(extent);
+    crop_img = ee.Image('USDA/NASS/CDL/' + years[year]);
+    crop_img = crop_img.select('cropland').clip(extent);
     
-    // Combine crops together
-    for (crop in crops) {
-      // Crop matches index
-      temp_img = year_img.eq(crops[crop]);
-      // Union with crop image
-      crop_img = crop_img.or(temp_img);
-    }
+    crop_img = crop_img.remap(crops, // from
+      ee.List.repeat(1, crops.length), // to
+      0); // default value
+    
     // Union combined crop mask with previous mask results
     result_img = result_img.or(crop_img);
   }
