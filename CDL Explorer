@@ -1,7 +1,6 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var cdl2014 = ee.Image("USDA/NASS/CDL/2014"),
-    champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
-    geometry = /* color: #d63000 */ee.Geometry.MultiPoint();
+    champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 
 // Create a mask of all pixels matching CDL crop class indices
@@ -47,7 +46,7 @@ var FetchCDLYear = function(year) {
     .filterDate(start,end)
     .select('cropland')
     .first(); // Specifically get the image
-  
+  result.clip(champaign);
   return result;
 }
 
@@ -65,6 +64,7 @@ var yearList = [2013, 2014, 2015, 2016, 2017];
 var coverTypes = [1, 5, 111];
 
 var cdl_mapped = yearList.map(FetchCDLYear);
+cdl_mapped = cdl_mapped.map(FetchCover)
 
 // Get CDL of corn (1), soybean (5), and water (111) for 2017
 var cdl_cult_water = CDL_Mask([2017], coverTypes, champaign);
