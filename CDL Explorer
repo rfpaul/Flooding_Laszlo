@@ -46,14 +46,14 @@ var FetchCDLYear = function(year) {
     .filterDate(start,end)
     .select('cropland')
     .first(); // Specifically get the image
-  result.clip(champaign);
+  // result = result.clip(champaign);
   return result;
 }
 
-var FetchCover = function(coverIDs) {
+var FetchCovers = function(imageList, coverIDs) {
   // Remap coverID values as 1, everything else as 0
-  image.remap(coverIDs, // from
-    ee.List.repeat(1, ee.List.length(coverIDs)), // to
+  var result = imageList.remap(coverIDs, // from
+    ee.List.repeat(1, coverIDs.length()), // to
     0); // default value
   return result;
 }
@@ -64,7 +64,7 @@ var yearList = [2013, 2014, 2015, 2016, 2017];
 var coverTypes = [1, 5, 111];
 
 var cdl_mapped = yearList.map(FetchCDLYear);
-cdl_mapped = cdl_mapped.map(FetchCover)
+cdl_mapped = FetchCovers(cdl_mapped, coverTypes);
 
 // Get CDL of corn (1), soybean (5), and water (111) for 2017
 var cdl_cult_water = CDL_Mask([2017], coverTypes, champaign);
