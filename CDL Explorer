@@ -49,7 +49,7 @@ var coverTypes = [1, 5, 111];
 
 // Get CDL of corn (1), soybean (5), and water (111) for 2017
 var cdl_cult_water = CDL_Mask([2017], coverTypes, champaign);
-// Get CDL of water for 2013-2017 inclusive
+// Get CDL of water for 2017 inclusive
 var cdl_water = CDL_Mask([2017], [111], champaign);
 
 Map.addLayer(cdl_cult_water);
