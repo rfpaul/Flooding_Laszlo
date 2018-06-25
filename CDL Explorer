@@ -19,7 +19,7 @@ var CDL_Mask = function(years, crops, extent) {
       .filterDate(start,end)
       .select('cropland') // Get the cropland cover values
       .first(); // Specifically get the image
-    // Clip to extent
+    // Clip to extent geometry
     result = ee.Image(result).clip(extent);
     //print(result)
     return FetchCovers(result);
