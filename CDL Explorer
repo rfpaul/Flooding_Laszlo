@@ -2,35 +2,11 @@
 var cdl2014 = ee.Image("USDA/NASS/CDL/2014"),
     champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
+// Explore the Cropland Data Layer product
 
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
 var CDL_Mask = function(years, crops, extent) {
-  var year;
-  var crop_img;
-  // Result-holding raster filled with 0 values
-  var result_img = ee.Image(0).clip(extent);
-  
-  // Go through each year to extract
-  for (year in years) {
-    // Get CDL for current year and clip it
-    crop_img = ee.Image('USDA/NASS/CDL/' + years[year]);
-    crop_img = crop_img.select('cropland').clip(extent);
-    
-    crop_img = crop_img.remap(crops, // from
-      ee.List.repeat(1, crops.length), // to
-      0); // default value
-    
-    // Union combined crop mask with previous mask results
-    result_img = result_img.or(crop_img);
-  }
-  // Return resulting mask
-  return result_img;
-}
-
-// Create a mask of all pixels matching CDL crop class indices
-// for the specified years within the extent
-var CDL_Mask2 = function(years, crops, extent) {
   var result_img;
   
   // Get the CDL image for the year
