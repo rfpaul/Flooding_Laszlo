@@ -27,7 +27,7 @@ var CDL_Mask = function(years, crops, extent) {
   
   // Specified land covers = 1, all others = 0
   var FetchCovers = function(image) {
-    // Remap crop ID values as 1, everything else as 0
+    // Remap cover ID values as 1, everything else as 0
     var result = image.remap(crops, // from
       ee.List.repeat(1, crops.length), // to
       0); // default value
