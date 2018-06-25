@@ -41,7 +41,7 @@ var CDL_Mask2 = function(years, crops, extent) {
     // Get the cropland layer for the year
     var result = ee.ImageCollection('USDA/NASS/CDL')
       .filterDate(start,end)
-      .select('cropland')
+      .select('cropland') // Get the cropland cover values
       .first(); // Specifically get the image
     // Clip to extent
     result = ee.Image(result).clip(extent);
@@ -49,18 +49,17 @@ var CDL_Mask2 = function(years, crops, extent) {
     return FetchCovers(result);
   }
   
-  // Get the covers 
+  // Specified land covers = 1, all others = 0
   var FetchCovers = function(image) {
-    // Remap coverID values as 1, everything else as 0
+    // Remap crop ID values as 1, everything else as 0
     var result = image.remap(crops, // from
       ee.List.repeat(1, crops.length), // to
       0); // default value
     return result;
   }  
   
-  result_img = ee.ImageCollection(years.map(FetchCDLYear)).or();
   
-  print(result_img);
+  result_img = ee.ImageCollection(years.map(FetchCDLYear)).or();
   
   // Return resulting mask
   return result_img;
