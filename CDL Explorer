@@ -58,7 +58,7 @@ var CDL_Mask2 = function(years, crops, extent) {
     return result;
   }  
   
-  result_img = 
+  result_img = ee.ImageCollection(years.map(FetchCDLYear)).or();
   
   print(result_img);
   
