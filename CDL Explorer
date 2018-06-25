@@ -34,7 +34,7 @@ var CDL_Mask = function(years, crops, extent) {
     return result;
   }  
   
-  
+  // Mask from the union of all specified crop types for specified years
   result_img = ee.ImageCollection(years.map(FetchCDLYear)).or();
   
   // Return resulting mask
@@ -47,17 +47,11 @@ var yearList = [2013, 2014, 2015, 2016, 2017];
 // List of cover types (as integer IDs) to fetch
 var coverTypes = [1, 5, 111];
 
-var cdl_mapped = CDL_Mask2([2017], coverTypes, champaign);
-
 // Get CDL of corn (1), soybean (5), and water (111) for 2017
 var cdl_cult_water = CDL_Mask([2017], coverTypes, champaign);
 // Get CDL of water for 2013-2017 inclusive
-var cdl_water = CDL_Mask(yearList, [111], champaign);
+var cdl_water = CDL_Mask([2017], [111], champaign);
 
-print (cdl_cult_water);
-print(cdl_mapped);
-
-Map.addLayer(cdl_mapped);
 Map.addLayer(cdl_cult_water);
 Map.addLayer(cdl_water);
 
