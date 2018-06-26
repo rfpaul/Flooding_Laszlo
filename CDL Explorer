@@ -34,7 +34,7 @@ var CDL_Mask = function(years, crops, extent) {
   }  
   
   // Mask from the union of all specified crop types for specified years
-  result_img = ee.ImageCollection(years.map(FetchCDLYear)).or();
+  result_img = ee.ImageCollection(years.map(FetchCDLYear)).and();
   
   // Return resulting mask
   return result_img;
@@ -51,8 +51,9 @@ var cdl_cult_water = CDL_Mask([2017], coverTypes, champaign);
 // Get CDL of water for 2017 inclusive
 var cdl_water = CDL_Mask([2017], [111], champaign);
 
+//print(champaign);
 Map.addLayer(cdl_cult_water);
-Map.addLayer(cdl_water);
+//Map.addLayer(cdl_water);
 
 //Export mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
