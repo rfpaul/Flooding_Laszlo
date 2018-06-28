@@ -1,0 +1,3 @@
+/**** Start of imports. If edited, may not auto-convert in the playground. ****/
+var plab = ee.Image("users/RobertFPaul/PL/2017-05-05_Combined");
+/***** End of imports. If edited, may not auto-convert in the playground. *****/
