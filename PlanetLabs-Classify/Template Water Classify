@@ -1,32 +1,11 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var vegetation = /* color: #35c61d */ee.FeatureCollection([]),
-    mixed_soil_veg = /* color: #00ffff */ee.FeatureCollection([]),
-    soil = /* color: #e18b1d */ee.FeatureCollection([]),
-    water = /* color: #2b3fa7 */ee.FeatureCollection([]),
-    champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
-    sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm");
+var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
+    sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm"),
+    table = ee.FeatureCollection("users/RobertFPaul/unified_training_polys");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
 // Classification of cloud-free regions
 // Template
-
-// A mapping from a common name to the sensor-specific bands.
-var LC8_BANDS = ['B2',   'B3',    'B4',  'B5',  'B6',    'B7',    'B10',   'B11'];
-var STD_NAMES = ['blue', 'green', 'red', 'nir', 'swir1', 'swir2', 'temp1', 'temp2'];
-
-// Get the Landsat 8 TOA collection of the 2013 growing season
-var lsat = ee.ImageCollection('LC8_L1T_TOA')
-    .filterDate('2015-05-10', '2015-10-10')
-    .filterBounds(champaign)
-    .select(LC8_BANDS);
-
-var CloudMask = function (image) {
-  // Get the simple cloud scores of the image
-  var cloud_mask = ee.Algorithms.Landsat.simpleCloudScore(image).select('cloud');
-  // Mask from cloud scores less than or equal to 5
-  cloud_mask = cloud_mask.lte(5);
-  return image.updateMask(cloud_mask);
-}
 
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
@@ -60,9 +39,6 @@ var CDL_Mask = function(years, crops, extent) {
   // Return resulting mask
   return result_img;
 }
-
-// Max values of cloudless pixels in the growing season
-var cloud_masked = lsat.map(CloudMask).max();
 
 // Load Cropland Data Layer of maize and soybeans plots from 2013-2016
 // Change champaign to clip region
@@ -115,7 +91,7 @@ Map.addLayer(masked_lsat, vizParams, "Landsat Bands");
   description: '2013_Classified_Corn_Belt',
   bucket: 'gee_export_kovi',
   fileNamePrefix: '2013/2013_cb_class_randomForest02_int8',
-  scale: 30,
+  scale: 3,
   region: champaign,
   maxPixels: 1e13
 });*/
