@@ -46,7 +46,7 @@ var CDL_Mask = function(years, crops, extent) {
 
 // Load Cropland Data Layer of maize and soybeans plots from 2013-2016
 // Change champaign to clip region
-var cdl_cult = CDL_Mask([2013, 2014, 2015, 2016], [1, 5], champaign);
+var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
 print(cdl_cult);
 
 // Define visualization parameters for a false color image.
