@@ -1,7 +1,7 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
     sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm"),
-    table = ee.FeatureCollection("users/RobertFPaul/unified_training_polys");
+    trainers = ee.FeatureCollection("users/RobertFPaul/unified_training_polys");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
 // Classification of cloud-free regions
