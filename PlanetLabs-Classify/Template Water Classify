@@ -45,10 +45,14 @@ var CDL_Mask = function(years, crops, extent) {
   return result_img;
 }
 
-print(trainers);
+// Get the trainers associated with water vs not water cover for this date
 var water = trainers.filter(ee.Filter.inList('cover', ['pond', 'waterbody']))
   .filter(ee.Filter.eq('date', '2017-05-05'));
+var not_water = trainers.filter(ee.Filter.inList('cover', ['not_water']))
+  .filter(ee.Filter.eq('date', '2017-05-05'));
+
 print(water);
+print(not_water);
 
 // Load Cropland Data Layer of maize and soybeans plots from 2013-2016
 // Change champaign to clip region
