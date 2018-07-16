@@ -76,6 +76,7 @@ var classed_pl = masked_pl.classify(classifier);
 // Recast classified image as 8-bit depth integer
 classed_pl = classed_pl.toInt8();
 
+/*
 // Confusion matrix for classification
 var trainAcc = classifier.confusionMatrix();
 print('Confusion matrix: ', trainAcc);
@@ -83,6 +84,7 @@ print('Training overall accuracy: ', trainAcc.accuracy());
 print('Consumers Accuracy', trainAcc.consumersAccuracy());
 print('Producers Accuracy', trainAcc.producersAccuracy());
 print('Kappa', trainAcc.kappa());
+*/
 
 // Draw to map
 //Map.setCenter(-94.866,42.967, 8);
