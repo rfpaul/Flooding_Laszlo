@@ -68,10 +68,10 @@ var masked_pl = plImage.updateMask(cdl_cult);
 masked_pl = masked_pl.clip(champaign);
 
 // Sample pixels for classification
-var training = masked_pl.reduceRegions(training_day, ee.Reducer.median());
-/*var training = masked_pl.sampleRegions({collection: training_day,
-  properties: ["cover"],
-  tileScale: 16});*/
+//var training = masked_pl.reduceRegions(training_day, ee.Reducer.median());
+var training = masked_pl.sampleRegions({collection: training_day,
+  properties: ["cover"]}).limit(5000);
+//  tileScale: 16});*/
 print(training);
 // Train the classifier
 var classifier = ee.Classifier.randomForest().train(training, "cover", training_bands);
