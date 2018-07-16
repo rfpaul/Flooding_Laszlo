@@ -68,10 +68,15 @@ var masked_pl = plImage.updateMask(cdl_cult);
 masked_pl = masked_pl.clip(champaign);
 
 // Sample pixels for classification
-var training = masked_pl.sampleRegions(training_day, ["cover"]);
+var training = masked_pl.reduceRegions(training_day, ee.Reducer.median());
+/*var training = masked_pl.sampleRegions({collection: training_day,
+  properties: ["cover"],
+  tileScale: 16});*/
+print(training);
 // Train the classifier
 var classifier = ee.Classifier.randomForest().train(training, "cover", training_bands);
-// Apply the classifier to the masked Landsat image
+print(classifier);
+// Apply the classifier to the masked Planet Labs image
 var classed_pl = masked_pl.classify(classifier);
 // Recast classified image as 8-bit depth integer
 classed_pl = classed_pl.toInt8();
@@ -91,7 +96,7 @@ print('Kappa', trainAcc.kappa());
 //Map.setCenter(-96.37, 48.29, 8);*/
 Map.addLayer(cdl_cult);
 Map.addLayer(masked_pl, vizParams, "Planet Labs");
-Map.addLayer(classed_pl);
+Map.addLayer(classed_pl, {min: 0, max: 1}, "Classification");
 
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
