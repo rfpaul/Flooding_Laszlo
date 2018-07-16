@@ -47,6 +47,7 @@ var CDL_Mask = function(years, crops, extent) {
 
 // Get the trainers associated with water vs not water cover for this date
 var training_day = trainers.filter(ee.Filter.eq('date', '2017-05-05'));
+var training_bands = ['b1', 'b2', 'b3', 'b4']
 
 training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [1, 1, 0], 'cover');
 
@@ -66,21 +67,14 @@ var masked_pl = plImage.updateMask(cdl_cult);
 // Clip to region of interest
 masked_pl = masked_pl.clip(champaign);
 
-/*print(vegetation);
-
-// Merge classifier points
-var sites = vegetation.merge(water).merge(soil).merge(mixed_soil_veg);
-//var sites = ee.FeatureCollection([vegetation, soil, mixed_soil_veg, water]).flatten();
 // Sample pixels for classification
-var training = masked_lsat.sampleRegions(sites, ["class"], 30);
+var training = masked_pl.sampleRegions(training_day, ["cover"]);
 // Train the classifier
-var classifier = ee.Classifier.randomForest().train(training, "class", LC8_BANDS);
+var classifier = ee.Classifier.randomForest().train(training, "cover", training_bands);
 // Apply the classifier to the masked Landsat image
-var classed_lsat = masked_lsat.classify(classifier);
-// Remap values to prevent category 0 being lost to background after export
-classed_lsat = classed_lsat.remap([0, 1, 2, 3], [1, 2, 3, 4]);
+var classed_pl = masked_pl.classify(classifier);
 // Recast classified image as 8-bit depth integer
-classed_lsat = classed_lsat.toInt8();
+classed_pl = classed_pl.toInt8();
 
 // Confusion matrix for classification
 var trainAcc = classifier.confusionMatrix();
@@ -95,7 +89,7 @@ print('Kappa', trainAcc.kappa());
 //Map.setCenter(-96.37, 48.29, 8);*/
 Map.addLayer(cdl_cult);
 Map.addLayer(masked_pl, vizParams, "Planet Labs");
-//Map.addLayer(classed_lsat, {min:1, max:4, palette:['green', 'yellow', 'red', 'blue']}, "Classification");
+Map.addLayer(classed_pl);
 
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
