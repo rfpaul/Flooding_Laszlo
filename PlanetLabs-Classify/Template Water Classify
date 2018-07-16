@@ -70,7 +70,7 @@ masked_pl = masked_pl.clip(champaign);
 // Sample pixels for classification
 //var training = masked_pl.reduceRegions(training_day, ee.Reducer.median());
 var training = masked_pl.sampleRegions({collection: training_day,
-  properties: ["cover"]}).limit(5000);
+  properties: ["cover"]}).limit(50);
 //  tileScale: 16});*/
 print(training);
 // Train the classifier
