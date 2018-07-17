@@ -67,6 +67,7 @@ var masked_pl = plImage.updateMask(cdl_cult);
 // Clip to region of interest
 masked_pl = masked_pl.clip(champaign);
 
+// Create the sampling raster with an added "cover" band
 var sample_pl = masked_pl.clipToCollection(training_day);
 sample_pl = ee.Image([sample_pl, 
   ee.Image()
