@@ -68,13 +68,14 @@ var masked_pl = plImage.updateMask(cdl_cult);
 masked_pl = masked_pl.clip(champaign);
 
 // Sample pixels for classification
-var training = masked_pl.reduceRegions(training_day, ee.Reducer.median());
-/*var training = masked_pl.sampleRegions({collection: training_day,
-  properties: ["cover"]}).limit(50);
+//var training = masked_pl.reduceRegions(training_day, ee.Reducer.mean());
+var training = masked_pl.select(training_bands)
+  .sampleRegions(training_day, ['cover'])
+  .limit(5000);
 //  tileScale: 16});*/
 print(training);
 // Train the classifier
-var classifier = ee.Classifier.randomForest(10).train(training, "cover", training_bands);
+var classifier = ee.Classifier.randomForest().train(training, "cover", training_bands);
 print(classifier);
 // Apply the classifier to the masked Planet Labs image
 var classed_pl = masked_pl.classify(classifier);
