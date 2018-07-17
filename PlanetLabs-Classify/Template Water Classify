@@ -46,7 +46,7 @@ var CDL_Mask = function(years, crops, extent) {
 }
 
 // Get the trainers associated with water vs not water cover for this date
-var training_day = trainers.filter(ee.Filter.eq('date', '2017-05-05'));
+var training_day = trainers.filter(ee.Filter.eq('date', '2017-05-05')).select('cover');
 var training_bands = ['b1', 'b2', 'b3', 'b4']
 
 training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [2, 2, 1], 'cover');
@@ -68,10 +68,10 @@ var masked_pl = plImage.updateMask(cdl_cult);
 masked_pl = masked_pl.clip(champaign);
 
 // Sample pixels for classification
-//var training = masked_pl.reduceRegions(training_day, ee.Reducer.mean());
-var training = masked_pl.select(training_bands)
-  .sampleRegions(training_day, ['cover'])
-  .limit(5000);
+var training = masked_pl.reduceRegions(training_day, ee.Reducer.mean());
+/*var training = masked_pl.select(training_bands)
+  .sample({region: training_day, numPixels: 50})
+  .limit(50);
 //  tileScale: 16});*/
 print(training);
 // Train the classifier
@@ -97,6 +97,8 @@ print('Kappa', trainAcc.kappa());
 //Map.setCenter(-96.37, 48.29, 8);*/
 Map.addLayer(cdl_cult);
 Map.addLayer(masked_pl, vizParams, "Planet Labs");
+//Map.addLayer(training_day, {}, "Trainer Polys");
+//Map.addLayer(training, {}, "Trainer Points")
 Map.addLayer(classed_pl, {min: 0, max: 2}, "Classification");
 
 //Export image and mask. Uncomment this when ready to export data.
