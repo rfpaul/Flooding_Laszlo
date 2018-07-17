@@ -2,7 +2,7 @@
 var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
     sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm"),
     trainers = ee.FeatureCollection("users/RobertFPaul/unified_training_polys"),
-    plImage = ee.Image("users/RobertFPaul/PL/2017-05-05_Combined");
+    plImage = ee.Image("users/RobertFPaul/PL/2017-05-02_Combined");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
 // Classification of water cover in Planet Labs 
@@ -46,7 +46,7 @@ var CDL_Mask = function(years, crops, extent) {
 }
 
 // Get the trainers associated with water vs not water cover for this date
-var training_day = trainers.filter(ee.Filter.eq('date', '2017-05-05')).select('cover');
+var training_day = trainers.filter(ee.Filter.eq('date', '2017-05-02')).select('cover');
 var training_bands = ['b1', 'b2', 'b3', 'b4']
 
 training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [2, 2, 1], 'cover');
