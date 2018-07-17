@@ -67,14 +67,23 @@ var masked_pl = plImage.updateMask(cdl_cult);
 // Clip to region of interest
 masked_pl = masked_pl.clip(champaign);
 
+var sample_pl = masked_pl.clipToCollection(training_day);
+sample_pl = ee.Image([sample_pl, 
+  ee.Image()
+    .byte()
+    .paint(training_day, 'cover')
+    .rename('cover')]);
+print(sample_pl);
+
 // Sample pixels for classification
-var training = masked_pl.reduceRegions(training_day, ee.Reducer.mean());
+//var training = masked_pl.reduceRegions(training_day, ee.Reducer.mean());
 /*var training = masked_pl.select(training_bands)
   .sample({region: training_day, numPixels: 50})
   .limit(50);
 //  tileScale: 16});*/
+var training = sample_pl.stratifiedSample(2000, 'cover', training_day);
 print(training);
-// Train the classifier
+// Train the classifier.
 var classifier = ee.Classifier.randomForest().train(training, "cover", training_bands);
 print(classifier);
 // Apply the classifier to the masked Planet Labs image
@@ -98,6 +107,7 @@ print('Kappa', trainAcc.kappa());
 Map.addLayer(cdl_cult);
 Map.addLayer(masked_pl, vizParams, "Planet Labs");
 //Map.addLayer(training_day, {}, "Trainer Polys");
+//Map.addLayer(sample_pl, {}, "Sample Points");
 //Map.addLayer(training, {}, "Trainer Points")
 Map.addLayer(classed_pl, {min: 0, max: 2}, "Classification");
 
