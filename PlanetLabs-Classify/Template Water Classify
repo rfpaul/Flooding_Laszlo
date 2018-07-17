@@ -49,7 +49,7 @@ var CDL_Mask = function(years, crops, extent) {
 var training_day = trainers.filter(ee.Filter.eq('date', '2017-05-02')).select('cover');
 var training_bands = ['b1', 'b2', 'b3', 'b4']
 
-training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [2, 2, 1], 'cover');
+training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [1, 1, 0], 'cover');
 
 print(training_day);
 
