@@ -81,7 +81,7 @@ print(sample_pl);
   .sample({region: training_day, numPixels: 50})
   .limit(50);
 //  tileScale: 16});*/
-var training = sample_pl.stratifiedSample(2000, 'cover', training_day);
+var training = sample_pl.stratifiedSample(2500, 'cover', training_day);
 print(training);
 // Train the classifier.
 var classifier = ee.Classifier.randomForest().train(training, "cover", training_bands);
