@@ -49,7 +49,7 @@ var CDL_Mask = function(years, crops, extent) {
 var training_day = trainers.filter(ee.Filter.eq('date', '2017-05-02')).select('cover');
 var training_bands = ['b1', 'b2', 'b3', 'b4']
 
-training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [1, 1, 0], 'cover');
+training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [0, 1, 0], 'cover');
 
 print(training_day);
 
@@ -82,10 +82,16 @@ print(sample_pl);
   .sample({region: training_day, numPixels: 50})
   .limit(50);
 //  tileScale: 16});*/
-var training = sample_pl.stratifiedSample(2500, 'cover', training_day);
+var training = sample_pl.stratifiedSample({ numPoints: 50,
+  classBand: 'cover', 
+  region: training_day,
+  scale: 3,
+  classValues: [0, 1],
+  classPoints: [4500, 500]
+});
 print(training);
 // Train the classifier.
-var classifier = ee.Classifier.randomForest().train(training, "cover", training_bands);
+var classifier = ee.Classifier.randomForest(10).train(training, "cover", training_bands);
 print(classifier);
 // Apply the classifier to the masked Planet Labs image
 var classed_pl = masked_pl.classify(classifier);
