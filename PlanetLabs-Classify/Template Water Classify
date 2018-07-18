@@ -2,7 +2,8 @@
 var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
     sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm"),
     trainers = ee.FeatureCollection("users/RobertFPaul/unified_training_polys"),
-    plImage = ee.Image("users/RobertFPaul/PL/2017-05-02_Combined");
+    plImage = ee.Image("users/RobertFPaul/PL/2017-05-02_Combined"),
+    geometry = /* color: #d63000 */ee.Geometry.MultiPoint();
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
 // Classification of water cover in Planet Labs 
@@ -67,6 +68,17 @@ var masked_pl = plImage.updateMask(cdl_cult);
 // Clip to region of interest
 masked_pl = masked_pl.clip(champaign);
 
+// Remove cloud shadows...?
+var meanVals = masked_pl.reduce(ee.Reducer.mean());
+var percentiles = meanVals.reduceRegion({
+  reducer: ee.Reducer.percentile([5]),
+  geometry: champaign,
+  maxPixels: 1e13
+});
+print(percentiles.get("mean"));
+
+meanVals = meanVals.gte(ee.Image.constant(percentiles.get("mean")));
+
 // Create the sampling raster with an added "cover" band
 var sample_pl = masked_pl.clipToCollection(training_day);
 sample_pl = ee.Image([sample_pl, 
@@ -111,12 +123,14 @@ print('Kappa', trainAcc.kappa());
 // Draw to map
 //Map.setCenter(-94.866,42.967, 8);
 //Map.setCenter(-96.37, 48.29, 8);*/
-Map.addLayer(cdl_cult);
+//Map.addLayer(cdl_cult);
 Map.addLayer(masked_pl, vizParams, "Planet Labs");
+Map.addLayer(meanVals, {}, "Means")
+//Map.addLayer(sample_pl, vizParams, "Sample Raster");
 //Map.addLayer(training_day, {}, "Trainer Polys");
 //Map.addLayer(sample_pl, {}, "Sample Points");
 //Map.addLayer(training, {}, "Trainer Points")
-Map.addLayer(classed_pl, {min: 0, max: 1}, "Classification");
+//Map.addLayer(classed_pl, {min: 0, max: 1}, "Classification");
 
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
