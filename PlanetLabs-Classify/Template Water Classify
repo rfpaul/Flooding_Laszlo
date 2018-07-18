@@ -50,7 +50,7 @@ var CDL_Mask = function(years, crops, extent) {
 var training_day = trainers.filter(ee.Filter.eq('date', '2017-05-02')).select('cover');
 var training_bands = ['b1', 'b2', 'b3', 'b4']
 
-training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [0, 1, 0], 'cover');
+training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [1, 1, 0], 'cover');
 
 print(training_day);
 
@@ -68,7 +68,7 @@ var masked_pl = plImage.updateMask(cdl_cult);
 // Clip to region of interest
 masked_pl = masked_pl.clip(champaign);
 
-// Remove cloud shadows...?
+/* Remove cloud shadows...?
 var meanVals = masked_pl.reduce(ee.Reducer.mean());
 var percentiles = meanVals.reduceRegion({
   reducer: ee.Reducer.percentile([15]),
@@ -79,6 +79,7 @@ var percentiles = meanVals.reduceRegion({
 print(percentiles.get("mean"));
 meanVals = meanVals.gte(ee.Image.constant(percentiles.get("mean")));
 masked_pl = masked_pl.updateMask(meanVals);
+*/
 
 // Create the sampling raster with an added "cover" band
 var sample_pl = masked_pl.clipToCollection(training_day);
