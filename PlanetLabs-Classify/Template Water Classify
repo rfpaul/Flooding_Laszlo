@@ -85,9 +85,9 @@ print(sample_pl);
 var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
   classBand: 'cover', 
   region: training_day,
-  scale: 3,
+  scale: 6,
   classValues: [0, 1], // cover values to sample from 
-  classPoints: [4500, 500] // sample
+  classPoints: [4000, 1000] // sample
 });
 print(training);
 // Train the classifier.
