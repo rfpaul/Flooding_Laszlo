@@ -69,16 +69,19 @@ var masked_pl = plImage.updateMask(cdl_cult);
 masked_pl = masked_pl.clip(champaign);
 
 // Remove cloud shadows...?
-var meanVals = masked_pl.reduce(ee.Reducer.mean());
-var percentiles = meanVals.reduceRegion({
+var cloud_mask = masked_pl.reduce(ee.Reducer.mean());
+var percentiles = cloud_mask.reduceRegion({
   reducer: ee.Reducer.percentile([5]),
   geometry: champaign,
   scale: 30,
   maxPixels: 1e12
 });
 print(percentiles.get("mean"));
-meanVals = meanVals.lte(ee.Image.constant(percentiles.get("mean")));
-meanVals = meanVals.fastDistanceTransform(30);
+cloud_mask = cloud_mask
+  .lte(ee.Image.constant(percentiles
+  .get("mean")))
+  .fastDistanceTransform(30);
+cloud_mask = cloud_mask.fastDistanceTransform(30);
 //masked_pl = masked_pl.updateMask(meanVals);
 
 // Create the sampling raster with an added "cover" band
