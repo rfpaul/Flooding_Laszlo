@@ -63,9 +63,7 @@ var Shadow_Mask = function(image, threshold, bufferDist, extent) {
     maxPixels: 1e12
   });
   // For everything below this percentile...  
-  cloud_mask = cloud_mask.lte(ee.Image.constant(percentiles.get("mean")));
-  // Focal minimum around mask
-  //cloud_mask = cloud_mask.focal_min({kernelType: 'square', radius: bufferDist, units: "meters"});
+  cloud_mask = cloud_mask.lt(ee.Image.constant(percentiles.get("mean")));
 
   // Measure the distance to the closest pixel below this threshold
   cloud_mask = cloud_mask.fastDistanceTransform(100).sqrt().multiply(ee.Image.pixelArea().sqrt());
