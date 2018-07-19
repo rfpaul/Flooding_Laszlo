@@ -63,7 +63,7 @@ var Shadow_Mask = function(image, threshold, bufferDist, extent) {
   cloud_mask = cloud_mask.lte(ee.Image.constant(percentiles.get("mean")));
     
   // Measure the distance to the closest pixel below this threshold
-  cloud_mask = cloud_mask.fastDistanceTransform().clip(extent);
+  cloud_mask = cloud_mask.fastDistanceTransform({units: "pixels"}).clip(extent);
   Map.addLayer(cloud_mask, {min:0, max: bufferDist}, "Buffered"); // Distance
   cloud_mask = cloud_mask
     .where(cloud_mask.lte(bufferDist), 0)
@@ -97,8 +97,8 @@ masked_pl = masked_pl.clip(champaign);
 // Mask of cloud shadow + buffer
 var shade_mask = Shadow_Mask(
   masked_pl, // image
-  5, // percentile
-  10, // buffer distance
+  1, // percentile
+  100, // buffer distance
   champaign // AOI
   );
 masked_pl = masked_pl.updateMask(shade_mask); // */
