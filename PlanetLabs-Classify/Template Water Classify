@@ -45,6 +45,30 @@ var CDL_Mask = function(years, crops, extent) {
   return result_img;
 }
 
+// Remove cloud shadows, by dropping a buffered distance around 
+// a specified percentage of "dark" pixels
+var Shadow_Mask = function(image, threshold, bufferDist, extent) {
+  // Get the mean of all bands
+  var cloud_mask = image.reduce(ee.Reducer.mean());
+  // Get the n-th percentile value for the means
+  var percentiles = cloud_mask.reduceRegion({
+    reducer: ee.Reducer.percentile([theshold]),
+    geometry: extent,
+    scale: 30, // 3m x 10
+    maxPixels: 1e12
+  });
+  cloud_mask = cloud_mask
+    // For everything below this percentile... 
+    .lte(ee.Image.constant(percentiles.get("mean"))) 
+    // Measure the distance to the closest pixel below this threshold
+    .fastDistanceTransform(9); 
+  cloud_mask = cloud_mask
+    .where(cloud_mask.lte(bufferDist), 0)
+    .where(cloud_mask.gt(bufferDist), 1);
+  
+  return cloud_mask
+}
+
 // Get the trainers associated with water vs not water cover for this date
 var training_day = trainers.filter(ee.Filter.eq('date', '2017-05-02')).select('cover');
 var training_bands = ['b1', 'b2', 'b3', 'b4']
@@ -67,27 +91,7 @@ var masked_pl = plImage.updateMask(cdl_cult);
 // Clip to region of interest
 masked_pl = masked_pl.clip(champaign);
 
-/* Remove cloud shadows...?
-// Get the mean of all bands
-var cloud_mask = masked_pl.reduce(ee.Reducer.mean());
-// Get the n-th percentile value for the means
-var percentiles = cloud_mask.reduceRegion({
-  reducer: ee.Reducer.percentile([5]),
-  geometry: champaign,
-  scale: 30, // 3m x 10
-  maxPixels: 1e12
-});
-print(percentiles.get("mean"));
-cloud_mask = cloud_mask
-  // For everything below this percentile... 
-  .lte(ee.Image.constant(percentiles.get("mean"))) 
-  // Measure the distance to the closest pixel below this threshold
-  .fastDistanceTransform(9);
-var bufferDist = 10; // Buffer distance
-cloud_mask = cloud_mask
-  .where(cloud_mask.lte(bufferDist), 0)
-  .where(cloud_mask.gt(bufferDist), 1);
-//masked_pl = masked_pl.updateMask(cloud_mask); // */
+masked_pl = masked_pl.updateMask(cloud_mask); // */
 
 // Create the sampling raster with an added "cover" band
 var sample_pl = masked_pl.clipToCollection(training_day);
