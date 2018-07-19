@@ -71,7 +71,7 @@ masked_pl = masked_pl.clip(champaign);
 // Remove cloud shadows...?
 var cloud_mask = masked_pl.reduce(ee.Reducer.mean());
 var percentiles = cloud_mask.reduceRegion({
-  reducer: ee.Reducer.percentile([10]),
+  reducer: ee.Reducer.percentile([5]),
   geometry: champaign,
   scale: 30,
   maxPixels: 1e12
@@ -83,7 +83,7 @@ cloud_mask = cloud_mask
   .fastDistanceTransform(9);
 var bufferDist = 100;
 cloud_mask = cloud_mask.where(cloud_mask.lte(bufferDist), 0).where(cloud_mask.gt(bufferDist), 1);
-//masked_pl = masked_pl.updateMask(meanVals);
+masked_pl = masked_pl.updateMask(cloud_mask);
 
 // Create the sampling raster with an added "cover" band
 var sample_pl = masked_pl.clipToCollection(training_day);
@@ -134,7 +134,7 @@ print('Kappa', trainAcc.kappa());
 //Map.setCenter(-96.37, 48.29, 8);*/
 //Map.addLayer(cdl_cult);
 Map.addLayer(masked_pl, vizParams, "Planet Labs");
-Map.addLayer(cloud_mask, {min: 0, max: 1}, "Cloud mask")
+//Map.addLayer(cloud_mask, {min: 0, max: 1}, "Cloud mask")
 //Map.addLayer(sample_pl, vizParams, "Sample Raster");
 //Map.addLayer(training_day, {}, "Trainer Polys");
 //Map.addLayer(sample_pl, {}, "Sample Points");
