@@ -164,7 +164,7 @@ Map.addLayer(masked_pl, vizParams, "Planet Labs");
 //Map.addLayer(training, {}, "Trainer Points")
 Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
 
-//Export image and mask. Uncomment this when ready to export data.
+/*Export image and mask. Uncomment this when ready to export data.
 Export.image.toCloudStorage({
   image: classed_pl,
   description: '2017_05_05_PlanetLabs',
