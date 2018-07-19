@@ -62,7 +62,7 @@ var Shadow_Mask = function(image, threshold, bufferDist, extent) {
     maxPixels: 1e12
   });
   // For everything below this percentile...  
-  cloud_mask = cloud_mask.lte(ee.Image.constant(percentiles.get("mean")));
+  cloud_mask = cloud_mask.gt(ee.Image.constant(percentiles.get("mean")));
 
   /* Measure the distance to the closest pixel below this threshold
   cloud_mask = cloud_mask.fastDistanceTransform().clip(extent);
