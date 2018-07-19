@@ -105,7 +105,7 @@ masked_pl = masked_pl.clip(champaign);
 // Mask of cloud shadow + buffer
 var shade_mask = Shadow_Mask(
   masked_pl, // image
-  1, // percentile
+  0.05, // percentile
   150, // buffer distance, in meters
   champaign // AOI
   );
@@ -170,9 +170,9 @@ Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classi
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
   image: classed_pl,
-  description: '2017_05_02_PlanetLabs',
+  description: '2017_05_06_PlanetLabs',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/2017-05-02_randomForest10_int8',
+  fileNamePrefix: 'PL/2017-05-06_randomForest10_int8',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
