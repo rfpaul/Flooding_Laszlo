@@ -105,7 +105,7 @@ masked_pl = masked_pl.clip(champaign);
 var shade_mask = Shadow_Mask(
   masked_pl, // image
   1, // percentile
-  100, // buffer distance, in meters
+  150, // buffer distance, in meters
   champaign // AOI
   );
 masked_pl = masked_pl.updateMask(shade_mask); // */
@@ -128,9 +128,9 @@ print(sample_pl);
 var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
   classBand: 'cover', 
   region: training_day,
-  scale: 9,
+  scale: 6,
   classValues: [0, 1], // cover values to sample from 
-  classPoints: [4000, 1000] // sample
+  classPoints: [4750, 250] // sample
 });
 print(training);
 // Train the classifier.
