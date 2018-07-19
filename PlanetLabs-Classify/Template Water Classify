@@ -48,7 +48,7 @@ var CDL_Mask = function(years, crops, extent) {
 // Remove cloud shadows, by dropping a buffered distance around 
 // a specified percentage of "dark" pixels
 var Shadow_Mask = function(image, threshold, bufferDist, extent) {
-  print(image);
+  // print(image);
   // Get the mean of all bands
   var cloud_mask = image.reduce(ee.Reducer.mean());
   Map.addLayer(cloud_mask, {min:2000, max: 8000, palette: ['violet', 'orange', 'yellow']}, "Mean values");
@@ -63,7 +63,7 @@ var Shadow_Mask = function(image, threshold, bufferDist, extent) {
   cloud_mask = cloud_mask.lte(ee.Image.constant(percentiles.get("mean")));
     
   // Measure the distance to the closest pixel below this threshold
-  cloud_mask = cloud_mask.fastDistanceTransform().int32();
+  cloud_mask = ee.Image(cloud_mask.fastDistanceTransform().clip(extent));
   Map.addLayer(cloud_mask, {min:0, max: bufferDist}); // Distance
   cloud_mask = cloud_mask
     .where(cloud_mask.lte(bufferDist), 0)
