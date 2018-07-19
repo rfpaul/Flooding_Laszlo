@@ -175,6 +175,7 @@ Export.image.toCloudStorage({
   bucket: 'gee_export_kovi',
   fileNamePrefix: 'PL/2017-05-05_randomForest10_int8',
   scale: 3,
+  crs: "EPSG:32616",
   region: champaign,
   maxPixels: 1e13
 }); // */
