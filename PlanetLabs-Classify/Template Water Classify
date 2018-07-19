@@ -8,6 +8,8 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
 // Classification of water cover in Planet Labs 
 // Template
 
+var currentDate = '2017-05-05'
+
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
 var CDL_Mask = function(years, crops, extent) {
@@ -80,7 +82,7 @@ var Shadow_Mask = function(image, threshold, bufferDist, extent) {
 }
 
 // Get the trainers associated with water vs not water cover for this date
-var training_day = trainers.filter(ee.Filter.eq('date', '2017-05-05')).select('cover');
+var training_day = trainers.filter(ee.Filter.eq('date', currentDate)).select('cover');
 var training_bands = ['b1', 'b2', 'b3', 'b4']
 
 training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [1, 1, 0], 'cover');
@@ -140,9 +142,9 @@ var classifier = ee.Classifier.randomForest({
   .train(training, "cover", training_bands);
 print(classifier);
 // Apply the classifier to the masked Planet Labs image
-var classed_pl = masked_pl.classify(classifier);
+var classed_pl = masked_pl.classify(classifier).byte();
 // Recast classified image as 8-bit depth integer
-classed_pl = classed_pl.toInt8();
+//classed_pl = classed_pl.toInt8();
 
 /*
 // Confusion matrix for classification
@@ -168,11 +170,11 @@ Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classi
 
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
-  image: classed_lsat,
-  description: '2013_Classified_Corn_Belt',
+  image: classed_pl,
+  description: '2017-05-05_PlanetLabs',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: '2013/2013_cb_class_randomForest02_int8',
+  fileNamePrefix: 'PL/2017-05-05_randomForest10_int8',
   scale: 3,
   region: champaign,
   maxPixels: 1e13
-});*/
+}); // */
