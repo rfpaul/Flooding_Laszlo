@@ -2,13 +2,13 @@
 var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
     sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm"),
     trainers = ee.FeatureCollection("users/RobertFPaul/unified_training_polys"),
-    plImage = ee.Image("users/RobertFPaul/PL/2017-05-02_Combined");
+    plImage = ee.Image("users/RobertFPaul/PL/2017-05-06_Combined");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
 // Classification of water cover in Planet Labs 
 // Template
 
-var currentDate = '2017-05-02'
+var currentDate = '2017-05-06'
 
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
@@ -168,8 +168,8 @@ Map.addLayer(masked_pl, vizParams, "Planet Labs");
 //Map.addLayer(training, {}, "Trainer Points")
 Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
 
-//Export image and mask. Uncomment this when ready to export data.
-/*Export.image.toCloudStorage({
+/*Export image and mask. Uncomment this when ready to export data.
+Export.image.toCloudStorage({
   image: classed_pl,
   description: '2017_05_02_PlanetLabs',
   bucket: 'gee_export_kovi',
