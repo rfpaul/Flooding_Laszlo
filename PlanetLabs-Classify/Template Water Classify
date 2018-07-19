@@ -68,18 +68,18 @@ var masked_pl = plImage.updateMask(cdl_cult);
 // Clip to region of interest
 masked_pl = masked_pl.clip(champaign);
 
-/* Remove cloud shadows...?
+// Remove cloud shadows...?
 var meanVals = masked_pl.reduce(ee.Reducer.mean());
 var percentiles = meanVals.reduceRegion({
-  reducer: ee.Reducer.percentile([15]),
+  reducer: ee.Reducer.percentile([5]),
   geometry: champaign,
   scale: 30,
   maxPixels: 1e12
 });
 print(percentiles.get("mean"));
-meanVals = meanVals.gte(ee.Image.constant(percentiles.get("mean")));
-masked_pl = masked_pl.updateMask(meanVals);
-*/
+meanVals = meanVals.lte(ee.Image.constant(percentiles.get("mean")));
+meanVals = meanVals.fastDistanceTransform(30);
+//masked_pl = masked_pl.updateMask(meanVals);
 
 // Create the sampling raster with an added "cover" band
 var sample_pl = masked_pl.clipToCollection(training_day);
@@ -105,7 +105,10 @@ var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
 });
 print(training);
 // Train the classifier.
-var classifier = ee.Classifier.randomForest(10).train(training, "cover", training_bands);
+var classifier = ee.Classifier.randomForest({
+  numberOfTrees: 10
+})
+  .train(training, "cover", training_bands);
 print(classifier);
 // Apply the classifier to the masked Planet Labs image
 var classed_pl = masked_pl.classify(classifier);
@@ -127,7 +130,7 @@ print('Kappa', trainAcc.kappa());
 //Map.setCenter(-96.37, 48.29, 8);*/
 //Map.addLayer(cdl_cult);
 Map.addLayer(masked_pl, vizParams, "Planet Labs");
-//Map.addLayer(meanVals, {}, "Means")
+Map.addLayer(meanVals, {}, "Means")
 //Map.addLayer(sample_pl, vizParams, "Sample Raster");
 //Map.addLayer(training_day, {}, "Trainer Polys");
 //Map.addLayer(sample_pl, {}, "Sample Points");
