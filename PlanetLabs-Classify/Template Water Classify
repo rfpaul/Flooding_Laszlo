@@ -96,7 +96,7 @@ masked_pl = masked_pl.clip(champaign);
 var shade_mask = Shadow_Mask(
   masked_pl, // image
   5, // percentile
-  10, // buffer distance
+  300, // buffer distance
   champaign // AOI
   );
 masked_pl = masked_pl.updateMask(shade_mask); // */
