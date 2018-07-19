@@ -132,7 +132,7 @@ var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
   region: training_day,
   scale: 6,
   classValues: [0, 1], // cover values to sample from 
-  classPoints: [4750, 250] // sample
+  classPoints: [4500, 500] // sample
 });
 print(training);
 // Train the classifier.
@@ -169,9 +169,9 @@ Map.addLayer(masked_pl, vizParams, "Planet Labs");
 Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
 
 //Export image and mask. Uncomment this when ready to export data.
-/*Export.image.toCloudStorage({
+Export.image.toCloudStorage({
   image: classed_pl,
-  description: '2017-05-05_PlanetLabs',
+  description: '2017_05_05_PlanetLabs',
   bucket: 'gee_export_kovi',
   fileNamePrefix: 'PL/2017-05-05_randomForest10_int8',
   scale: 3,
