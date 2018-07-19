@@ -105,7 +105,7 @@ masked_pl = masked_pl.clip(champaign);
 // Mask of cloud shadow + buffer
 var shade_mask = Shadow_Mask(
   masked_pl, // image
-  0, // percentile
+  0.5, // percentile
   150, // buffer distance, in meters
   champaign // AOI
   );
