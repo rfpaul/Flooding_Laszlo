@@ -79,7 +79,7 @@ var Shadow_Mask = function(image, threshold, bufferDist, extent) {
 }
 
 // Load Cropland Data Layer of maize and soybeans plots from 2017
-// Change champaign to clip region
+// Use champaign as clip region
 var cdl_cult = CDL_Mask([2017], [1, 5], champaign);
 //print(cdl_cult);
 
