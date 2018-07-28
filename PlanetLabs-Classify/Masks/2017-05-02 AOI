@@ -103,7 +103,7 @@ var shade_mask = Shadow_Mask(
 // Mask the area of interest where the shadows are
 var aoi_mask = cdl_cult.and(shade_mask);
 // Mask out 0 values of the original image, cast image as 8-bit int
-aoi_mask = aoi_mask.and(plImage.gt(0)).byte();
+aoi_mask = aoi_mask.and(plImage.reduce(ee.Reducer.max()).gt(0)).byte();
 
 masked_pl = masked_pl.updateMask(aoi_mask); // */
 
