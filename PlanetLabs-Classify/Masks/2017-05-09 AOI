@@ -1,7 +1,5 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
-    sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm"),
-    trainers = ee.FeatureCollection("users/RobertFPaul/unified_training_polys"),
     plImage = ee.Image("users/RobertFPaul/PL/2017-05-09_Combined");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
@@ -124,9 +122,9 @@ Map.addLayer(aoi_mask, {min: 0, max: 1}, "AOI mask");
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
   image: aoi_mask,
-  description: '2017_05_06_Mask_PlanetLabs',
+  description: '2017_05_09_Mask_PlanetLabs',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/masks/2017-05-06_3m_cb_cover-mask_int8',
+  fileNamePrefix: 'PL/masks/2017-05-09_3m_cb_cover-mask_int8',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
