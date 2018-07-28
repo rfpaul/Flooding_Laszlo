@@ -98,19 +98,14 @@ var shade_mask = Shadow_Mask(
 
 var aoi_mask = cdl_cult.and(shade_mask);
 
-masked_pl = masked_pl.updateMask(shade_mask); // */
+masked_pl = masked_pl.updateMask(aoi_mask); // */
 
 // Draw to map
 //Map.setCenter(-94.866,42.967, 8);
 //Map.setCenter(-96.37, 48.29, 8);*/
 //Map.addLayer(cdl_cult);
 Map.addLayer(masked_pl, vizParams, "Planet Labs");
-Map.addLayer(shade_mask, {min: 0, max: 1}, "Cloud shadow mask")
-//Map.addLayer(sample_pl, vizParams, "Sample Raster");
-//Map.addLayer(training_day, {}, "Trainer Polys");
-//Map.addLayer(sample_pl, {}, "Sample Points");
-//Map.addLayer(training, {}, "Trainer Points")
-Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
+Map.addLayer(aoi_mask, {min: 0, max: 1}, "AOI mask")
 
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
