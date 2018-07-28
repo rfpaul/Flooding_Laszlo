@@ -1,7 +1,5 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
-    sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm"),
-    trainers = ee.FeatureCollection("users/RobertFPaul/unified_training_polys"),
     plImage = ee.Image("users/RobertFPaul/PL/2017-05-14_Combined");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
@@ -54,7 +52,7 @@ var Shadow_Mask = function(image, threshold, bufferDist, extent) {
   // Get the mean of all bands
   var cloud_mask = image.reduce(ee.Reducer.mean());
   // Clouds are bright, get everything below a high value theshold
-  var not_clouds = cloud_mask.lt(7000).byte();
+  var not_clouds = cloud_mask.lt(7500).byte();
   
   Map.addLayer(cloud_mask, {min:2000, max: 8000, palette: ['violet', 'orange', 'yellow']}, "Mean values");
   Map.addLayer(not_clouds, {min: 0, max: 1}, "Not clouds");
@@ -122,7 +120,7 @@ Map.addLayer(masked_pl, vizParams, "Planet Labs");
 Map.addLayer(aoi_mask, {min: 0, max: 1}, "AOI mask");
 
 //Export image and mask. Uncomment this when ready to export data.
-/*Export.image.toCloudStorage({
+Export.image.toCloudStorage({
   image: aoi_mask,
   description: '2017_05_14_Mask_PlanetLabs',
   bucket: 'gee_export_kovi',
