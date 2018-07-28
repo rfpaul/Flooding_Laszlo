@@ -83,6 +83,10 @@ var Shadow_Mask = function(image, threshold, bufferDist, extent) {
 var cdl_cult = CDL_Mask([2017], [1, 5], champaign);
 //print(cdl_cult);
 
+// Define visualization parameters for a false color image.
+// R is red, NIR is green, B is blue
+var vizParams = {'bands': ['b1', 'b4', 'b3'], 'min':2000, 'max': 8000, 'gamma': 1.2};
+
 // Mask image
 var masked_pl = plImage.updateMask(cdl_cult);
 // Clip to region of interest
