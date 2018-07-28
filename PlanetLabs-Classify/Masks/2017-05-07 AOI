@@ -3,7 +3,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
     plImage = ee.Image("users/RobertFPaul/PL/2017-05-07_Combined");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
-// Classification of water cover in Planet Labs 
+// AOI mask of Planet Labs 
 
 var currentDate = '2017-05-07';
 
@@ -44,14 +44,18 @@ var CDL_Mask = function(years, crops, extent) {
   return result_img;
 }
 
-// Remove cloud shadows, by dropping a buffered distance around 
-// a specified percentage of "dark" pixels
+// Remove clouds and shadows, by dropping a buffered distance around 
+// a specified percentage of "dark" pixels and dropping
+// high mean values
 var Shadow_Mask = function(image, threshold, bufferDist, extent) {
   // print(image);
   // Get the mean of all bands
   var cloud_mask = image.reduce(ee.Reducer.mean());
+  // Clouds are bright, get everything below a high value theshold
+  var not_clouds = cloud_mask.lt(7000).byte();
   
-  //Map.addLayer(cloud_mask, {min:2000, max: 8000, palette: ['violet', 'orange', 'yellow']}, "Mean values");
+  Map.addLayer(cloud_mask, {min:2000, max: 8000, palette: ['violet', 'orange', 'yellow']}, "Mean values");
+  Map.addLayer(not_clouds, {min: 0, max: 1}, "Not clouds");
   
   // Get the n-th percentile value for the means
   var percentiles = cloud_mask.reduceRegion({
@@ -74,23 +78,15 @@ var Shadow_Mask = function(image, threshold, bufferDist, extent) {
     .where(cloud_mask.lte(bufferDist), 0)
     .where(cloud_mask.gt(bufferDist), 1)
     .byte(); // */
+  cloud_mask = cloud_mask.and(not_clouds).byte();
   
   return cloud_mask;
 }
 
-// Get the trainers associated with water vs not water cover for this date
-var training_day = trainers.filter(ee.Filter.eq('date', currentDate)).select('cover');
-var training_bands = ['b1', 'b2', 'b3', 'b4']
-
-training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [1, 1, 0], 'cover');
-
-print(training_day);
-
 // Load Cropland Data Layer of maize and soybeans plots from 2013-2016
 // Change champaign to clip region
-var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
+var cdl_cult = CDL_Mask([2017], [1, 5], champaign);
 //print(cdl_cult);
-
 // Define visualization parameters for a false color image.
 // R is red, NIR is green, B is blue
 var vizParams = {'bands': ['b1', 'b4', 'b3'], 'min':2000, 'max': 8000, 'gamma': 1.2};
@@ -125,9 +121,9 @@ Map.addLayer(aoi_mask, {min: 0, max: 1}, "AOI mask");
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
   image: aoi_mask,
-  description: '2017_05_06_Mask_PlanetLabs',
+  description: '2017_05_07_Mask_PlanetLabs',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/masks/2017-05-06_3m_cb_cover-mask_int8',
+  fileNamePrefix: 'PL/masks/2017-05-07_3m_cb_cover-mask_int8',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
