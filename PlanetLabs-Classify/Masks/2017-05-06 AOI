@@ -79,7 +79,7 @@ var Shadow_Mask = function(image, threshold, bufferDist, extent) {
     .byte(); // */
   cloud_mask = cloud_mask.and(not_clouds).byte();
   
-  return cloud_mask
+  return cloud_mask;
 }
 
 // Load Cropland Data Layer of maize and soybeans plots from 2013-2016
