@@ -100,7 +100,10 @@ var shade_mask = Shadow_Mask(
   champaign // AOI
   );
 
+// Mask the area of interest
 var aoi_mask = cdl_cult.and(shade_mask);
+// Mask out 0 values of the image
+aoi_mask = aoi_mask.and(plImage.gt(0)).byte();
 
 masked_pl = masked_pl.updateMask(aoi_mask); // */
 
