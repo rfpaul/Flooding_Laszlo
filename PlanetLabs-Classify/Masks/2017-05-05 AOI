@@ -3,8 +3,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
     plImage = ee.Image("users/RobertFPaul/PL/2017-05-05_Combined");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
-// Classification of water cover in Planet Labs 
-// Template
+// AOI mask based on clear pixels in corn or bean
 
 var currentDate = '2017-05-05';
 
@@ -77,6 +76,8 @@ var Shadow_Mask = function(image, threshold, bufferDist, extent) {
     .where(cloud_mask.lte(bufferDist), 0)
     .where(cloud_mask.gt(bufferDist), 1)
     .byte(); // */
+  
+  // Mask out clouds
   cloud_mask = cloud_mask.and(not_clouds).byte();
   
   return cloud_mask;
