@@ -8,7 +8,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
 // Classification of water cover in Planet Labs 
 // Template
 
-var currentDate = '2017-05-05'
+var currentDate = '2017-05-05';
 
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
