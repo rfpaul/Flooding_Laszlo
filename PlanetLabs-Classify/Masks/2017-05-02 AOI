@@ -75,7 +75,7 @@ var Shadow_Mask = function(image, threshold, bufferDist, extent) {
     .where(cloud_mask.gt(bufferDist), 1)
     .byte(); // */
   
-  return cloud_mask
+  return cloud_mask;
 }
 
 // Load Cropland Data Layer of maize and soybeans plots from 2017
@@ -112,7 +112,7 @@ masked_pl = masked_pl.updateMask(aoi_mask); // */
 //Map.setCenter(-96.37, 48.29, 8);*/
 //Map.addLayer(cdl_cult);
 Map.addLayer(masked_pl, vizParams, "Planet Labs");
-Map.addLayer(aoi_mask, {min: 0, max: 1}, "AOI mask")
+Map.addLayer(aoi_mask, {min: 0, max: 1}, "AOI mask");
 
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
