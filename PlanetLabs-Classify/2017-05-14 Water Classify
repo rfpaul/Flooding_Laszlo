@@ -75,7 +75,7 @@ var Shadow_Mask = function(image, threshold, bufferDist, extent) {
     .where(cloud_mask.gt(bufferDist), 1)
     .byte(); // */
   
-  return cloud_mask
+  return cloud_mask;
 }
 
 // Get the trainers associated with water vs not water cover for this date
