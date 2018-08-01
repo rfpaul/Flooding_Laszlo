@@ -1,0 +1,180 @@
+/**** Start of imports. If edited, may not auto-convert in the playground. ****/
+var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
+    sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm"),
+    trainers = ee.FeatureCollection("users/RobertFPaul/unified_training_polys"),
+    plImage = ee.Image("users/RobertFPaul/PL/2017-05-02_Combined");
+/***** End of imports. If edited, may not auto-convert in the playground. *****/
+// Robert F Paul
+// Classification of water cover in Planet Labs 
+
+var currentDate = '2017-05-02';
+
+// Create a mask of all pixels matching CDL crop class indices
+// for the specified years within the extent
+var CDL_Mask = function(years, crops, extent) {
+  var result_img;
+  
+  // Get the CDL image for the year
+  var FetchCDLYear = function(year) {
+    // Start and end dates
+    var start = ee.Date.fromYMD(year, 01, 01);
+    var end = ee.Date.fromYMD(year, 12, 31);
+    // Get the cropland layer for the year
+    var result = ee.ImageCollection('USDA/NASS/CDL')
+      .filterDate(start,end)
+      .select('cropland') // Get the cropland cover values
+      .first(); // Specifically get the image
+    // Clip to extent geometry
+    result = ee.Image(result).clip(extent);
+    //print(result)
+    return FetchCovers(result);
+  }
+  
+  // Specified land covers = 1, all others = 0
+  var FetchCovers = function(image) {
+    // Remap cover ID values as 1, everything else as 0
+    var result = image.remap(crops, // from
+      ee.List.repeat(1, crops.length), // to
+      0); // default value
+    return result;
+  }  
+  
+  // Mask from the union of all specified crop types for specified years
+  result_img = ee.ImageCollection(years.map(FetchCDLYear)).and();
+  
+  // Return resulting mask
+  return result_img;
+}
+
+// Remove cloud shadows, by dropping a buffered distance around 
+// a specified percentage of "dark" pixels
+var Shadow_Mask = function(image, threshold, bufferDist, extent) {
+  // print(image);
+  // Get the mean of all bands
+  var cloud_mask = image.reduce(ee.Reducer.mean());
+  
+  //Map.addLayer(cloud_mask, {min:2000, max: 8000, palette: ['violet', 'orange', 'yellow']}, "Mean values");
+  
+  // Get the n-th percentile value for the means
+  var percentiles = cloud_mask.reduceRegion({
+    reducer: ee.Reducer.percentile([threshold]),
+    geometry: extent,
+    scale: 30, // 3m x 10
+    maxPixels: 1e12
+  });
+  // For everything below this percentile...  
+  cloud_mask = cloud_mask.lt(ee.Image.constant(percentiles.get("mean")));
+  // Focal minimum around mask
+  //cloud_mask = cloud_mask.focal_min({kernelType: 'square', radius: bufferDist, units: "meters"});
+
+  // Measure the distance to the closest pixel below this threshold
+  cloud_mask = cloud_mask.fastDistanceTransform(100).sqrt().multiply(ee.Image.pixelArea().sqrt());
+  
+  //Map.addLayer(cloud_mask, {min:0, max: bufferDist}, "Buffered"); // Distance
+  
+  cloud_mask = cloud_mask
+    .where(cloud_mask.lte(bufferDist), 0)
+    .where(cloud_mask.gt(bufferDist), 1)
+    .byte(); // */
+  
+  return cloud_mask
+}
+
+// Get the trainers associated with water vs not water cover for this date
+var training_day = trainers.filter(ee.Filter.eq('date', currentDate)).select('cover');
+var training_bands = ['b1', 'b2', 'b3', 'b4']
+
+training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [1, 1, 0], 'cover');
+
+print(training_day);
+
+// Load Cropland Data Layer of maize and soybeans plots from 2013-2016
+// Change champaign to clip region
+var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
+//print(cdl_cult);
+
+// Define visualization parameters for a false color image.
+// R is red, NIR is green, B is blue
+var vizParams = {'bands': ['b1', 'b4', 'b3'], 'min':2000, 'max': 8000, 'gamma': 1.2};
+
+// Mask image
+var masked_pl = plImage.updateMask(cdl_cult);
+// Clip to region of interest
+masked_pl = masked_pl.clip(champaign);
+
+// Mask of cloud shadow + buffer
+var shade_mask = Shadow_Mask(
+  masked_pl, // image
+  5, // percentile
+  150, // buffer distance, in meters
+  champaign // AOI
+  );
+masked_pl = masked_pl.updateMask(shade_mask); // */
+
+// Create the sampling raster with an added "cover" band
+var sample_pl = masked_pl.clipToCollection(training_day);
+sample_pl = ee.Image([sample_pl, 
+  ee.Image()
+    .byte()
+    .paint(training_day, 'cover')
+    .rename('cover')]);
+print(sample_pl);
+
+// Sample pixels for classification
+//var training = masked_pl.reduceRegions(training_day, ee.Reducer.mean());
+/*var training = masked_pl.select(training_bands)
+  .sample({region: training_day, numPixels: 50})
+  .limit(50);
+//  tileScale: 16});*/
+var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
+  classBand: 'cover', 
+  region: training_day,
+  scale: 6,
+  classValues: [0, 1], // cover values to sample from 
+  classPoints: [4500, 500] // sample
+});
+print(training);
+// Train the classifier.
+var classifier = ee.Classifier.randomForest({
+  numberOfTrees: 10
+})
+  .train(training, "cover", training_bands);
+print(classifier);
+// Apply the classifier to the masked Planet Labs image
+var classed_pl = masked_pl.classify(classifier).byte();
+// Recast classified image as 8-bit depth integer
+//classed_pl = classed_pl.toInt8();
+
+/*
+// Confusion matrix for classification
+var trainAcc = classifier.confusionMatrix();
+print('Confusion matrix: ', trainAcc);
+print('Training overall accuracy: ', trainAcc.accuracy());
+print('Consumers Accuracy', trainAcc.consumersAccuracy());
+print('Producers Accuracy', trainAcc.producersAccuracy());
+print('Kappa', trainAcc.kappa());
+*/
+
+// Draw to map
+//Map.setCenter(-94.866,42.967, 8);
+//Map.setCenter(-96.37, 48.29, 8);*/
+//Map.addLayer(cdl_cult);
+Map.addLayer(masked_pl, vizParams, "Planet Labs");
+//Map.addLayer(shade_mask, {min: 0, max: 1}, "Cloud shadow mask")
+//Map.addLayer(sample_pl, vizParams, "Sample Raster");
+//Map.addLayer(training_day, {}, "Trainer Polys");
+//Map.addLayer(sample_pl, {}, "Sample Points");
+//Map.addLayer(training, {}, "Trainer Points")
+Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
+
+//Export image and mask. Uncomment this when ready to export data.
+/*Export.image.toCloudStorage({
+  image: classed_pl,
+  description: '2017_05_02_PlanetLabs',
+  bucket: 'gee_export_kovi',
+  fileNamePrefix: 'PL/2017-05-02_randomForest10_int8',
+  scale: 3,
+  crs: "EPSG:32616",
+  region: champaign,
+  maxPixels: 1e13
+}); // */
