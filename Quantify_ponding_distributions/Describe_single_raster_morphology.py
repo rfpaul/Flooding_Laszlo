@@ -4,21 +4,28 @@
 
 ## Import packages
 import numpy as np
+import gdal
 import matplotlib.pyplot as plt
 from scipy import ndimage
 
 ## Global variables
 # Where is the data?
-inRaster = "/Users/exnihilo//Box_Sync/Data/Soil_flooding_data_figs_docs/Data/CMI_ponded_soils/2017-05-13/Waterlog_0513_combined-no_compression.tif"
+inRaster = "/Users/exnihilo/Box_Sync/Data/Soil_flooding_data_figs_docs/Data/CMI_ponded_soils_classifications/2017-05-05/Waterlog_0505.tif"
 
 # What is the date of observation?
-rastDate = "2017-05-13"
+rastDate = "2017-05-05"
 
 ## Functions
 
 ## Main script run
-# Read in the raster data, mode is an 8-bit black and white image
-rasterData = ndimage.imread(inRaster, mode = 'L')
+# Open the raster
+src = gdal.Open(inRaster)
+
+# Read in the raster data as an array
+rasterData = np.array(src.GetRasterBand(1).ReadAsArray())
+
+# Close the raster i/o
+src = None
 
 # Get the morphology of the image; return the contiguous features labeled and
 # the total number of features
@@ -35,7 +42,7 @@ plt.hist(features_sqm)
 plt.yscale('log')
 plt.xlabel("Area (m$^2$)")
 plt.ylabel("Count")
-plt.title("Size distribution of n={} waterlogged soils\nfrom {} classification data".format(num_features, rastDate))
+plt.title("Size distribution of n={} ponds\nfrom {} classification data".format(num_features, rastDate))
 plt.tick_params(right=True, which="both", direction="in")
 plt.tight_layout()
 plt.show()
