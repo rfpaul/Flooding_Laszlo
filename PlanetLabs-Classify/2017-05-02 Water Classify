@@ -11,7 +11,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.01289081573486, 39.97662680554857],
                   [-88.01336288452148, 39.97721875659055]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "0"
             }),
         ee.Feature(
@@ -21,7 +21,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.00435066223145, 39.97277899879355],
                   [-88.00435066223145, 39.974061625115716]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "1"
             }),
         ee.Feature(
@@ -31,7 +31,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.02546501159668, 39.97113457086164],
                   [-88.02576541900635, 39.97195678977298]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "2"
             }),
         ee.Feature(
@@ -41,7 +41,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.03576469421387, 39.9751797925265],
                   [-88.03572177886963, 39.97577175610235]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "3"
             }),
         ee.Feature(
@@ -50,7 +50,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.00641059875488, 39.95768166498328],
                   [-88.0056381225586, 39.95774745580456]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "4"
             }),
         ee.Feature(
@@ -59,7 +59,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-87.99439430236816, 39.955642118129184],
                   [-87.99366474151611, 39.955642118129184]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "5"
             }),
         ee.Feature(
@@ -68,7 +68,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.0008316040039, 39.95488549657055],
                   [-87.9999303817749, 39.95534604982052]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "6"
             }),
         ee.Feature(
@@ -78,7 +78,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-87.99143314361572, 39.96120138503121],
                   [-87.99083232879639, 39.96202372341873]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "7"
             }),
         ee.Feature(
@@ -88,7 +88,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-87.96443939208984, 39.96261580093376],
                   [-87.96353816986084, 39.96412886462328]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "8"
             }),
         ee.Feature(
@@ -97,7 +97,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-87.96422481536865, 39.9509706687274],
                   [-87.9640531539917, 39.951299654480756]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "9"
             }),
         ee.Feature(
@@ -106,7 +106,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-87.99392223358154, 39.92741117642791],
                   [-87.99357891082764, 39.927740275466675]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "10"
             }),
         ee.Feature(
@@ -115,7 +115,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.00267696380615, 39.92599603253352],
                   [-88.00186157226562, 39.926456780268886]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "11"
             }),
         ee.Feature(
@@ -124,7 +124,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.06567668914795, 39.917142491724604],
                   [-88.06417465209961, 39.91658293581713]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "12"
             }),
         ee.Feature(
@@ -133,7 +133,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.06486129760742, 39.91352175493528],
                   [-88.06447505950928, 39.913719254604935]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "13"
             }),
         ee.Feature(
@@ -142,7 +142,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.07958126068115, 39.917339980953315],
                   [-88.07902336120605, 39.91727415127369]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "14"
             }),
         ee.Feature(
@@ -151,7 +151,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.08207035064697, 39.9238568059999],
                   [-88.08026790618896, 39.92428465665397]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "15"
             }),
         ee.Feature(
@@ -160,7 +160,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.0845594406128, 39.92168459989702],
                   [-88.0834436416626, 39.92237576385941]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "16"
             }),
         ee.Feature(
@@ -169,7 +169,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.0319881439209, 39.947911025436746],
                   [-88.03327560424805, 39.9476478239225]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "17"
             }),
         ee.Feature(
@@ -178,7 +178,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.02743911743164, 39.89753885261862],
                   [-88.02707433700562, 39.89781870892885]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "18"
             }),
         ee.Feature(
@@ -188,7 +188,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.03055047988892, 39.897999791814726],
                   [-88.03020715713501, 39.8983290321995]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "19"
             }),
         ee.Feature(
@@ -197,7 +197,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.0324387550354, 39.896551115330105],
                   [-88.03207397460938, 39.89686390034505]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "20"
             }),
         ee.Feature(
@@ -207,7 +207,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.05215835571289, 39.89925089686174],
                   [-88.05280208587646, 39.89910274087739]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "21"
             }),
         ee.Feature(
@@ -216,7 +216,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.01828742027283, 39.89101952343604],
                   [-88.01804065704346, 39.89116769689487]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "22"
             }),
         ee.Feature(
@@ -225,7 +225,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.02443504333496, 39.891735692186536],
                   [-88.02467107772827, 39.891801546408644]]]),
             {
-              "Type": 1,
+              "cover": 1,
               "system:index": "23"
             })]),
     othersCai = /* color: #009999 */ee.FeatureCollection(
@@ -235,7 +235,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.0640459060669, 39.88563567053391],
                   [-88.06198596954346, 39.888401739516546]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "0"
             }),
         ee.Feature(
@@ -244,7 +244,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.0394983291626, 39.88230965410924],
                   [-88.03812503814697, 39.88494413585031]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "1"
             }),
         ee.Feature(
@@ -253,7 +253,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.05996894836426, 39.88069598405524],
                   [-88.0568790435791, 39.88148635780615]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "2"
             }),
         ee.Feature(
@@ -262,7 +262,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.01194667816162, 39.8908713496569],
                   [-88.01224708557129, 39.89126647902281]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "3"
             }),
         ee.Feature(
@@ -272,7 +272,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.00636768341064, 39.87977386983166],
                   [-88.00756931304932, 39.8827048328235]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "4"
             }),
         ee.Feature(
@@ -281,7 +281,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-87.97770023345947, 39.89781870892885],
                   [-87.97847270965576, 39.89811502612931]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "5"
             }),
         ee.Feature(
@@ -290,7 +290,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-87.96894550323486, 39.899399052525744],
                   [-87.9750394821167, 39.89930028211868]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "6"
             }),
         ee.Feature(
@@ -300,7 +300,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-87.97572612762451, 39.90223041032649],
                   [-87.9773998260498, 39.90302053580942]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "7"
             }),
         ee.Feature(
@@ -309,7 +309,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-87.95474052429199, 39.9070368661347],
                   [-87.95671463012695, 39.911480891668184]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "8"
             }),
         ee.Feature(
@@ -318,7 +318,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-87.97611236572266, 39.91645127493918],
                   [-87.97516822814941, 39.91747164012272]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "9"
             }),
         ee.Feature(
@@ -328,7 +328,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-87.93004274368286, 39.971973234050296],
                   [-87.93057918548584, 39.97284477508793]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "10"
             }),
         ee.Feature(
@@ -339,7 +339,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-87.97630548477173, 40.287775668253055],
                   [-87.97677755355835, 40.28757925139588]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "11"
             }),
         ee.Feature(
@@ -351,7 +351,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-87.97551155090332, 40.284682036452566],
                   [-87.97553300857544, 40.28553320852712]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "12"
             }),
         ee.Feature(
@@ -360,7 +360,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.01301956176758, 40.006744027105434],
                   [-88.01254749298096, 40.007598688913966]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "13"
             }),
         ee.Feature(
@@ -369,7 +369,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.00898551940918, 39.99175283440082],
                   [-88.00259113311768, 39.99428447289062]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "14"
             }),
         ee.Feature(
@@ -380,7 +380,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
                   [-88.02743911743164, 40.00250343142571],
                   [-88.0290699005127, 40.001911699459804]]]),
             {
-              "Type": 0,
+              "cover": 0,
               "system:index": "15"
             })]);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
@@ -465,8 +465,9 @@ var training_day = trainers.filter(ee.Filter.eq('date', currentDate)).select('co
 var training_bands = ['b1', 'b2', 'b3', 'b4']
 
 training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [1, 1, 0], 'cover');
-
 print(training_day);
+print(waterCai);
+print(othersCai);
 
 // Load Cropland Data Layer of maize and soybeans plots from 2013-2016
 // Change champaign to clip region
