@@ -465,9 +465,9 @@ var training_day = trainers.filter(ee.Filter.eq('date', currentDate)).select('co
 var training_bands = ['b1', 'b2', 'b3', 'b4']
 
 training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [1, 1, 0], 'cover');
-print(training_day);
-print(waterCai);
-print(othersCai);
+
+// Merge the polygons contributed by Yaping
+training_day = training_day.merge(waterCai).merge(othersCai);
 
 // Load Cropland Data Layer of maize and soybeans plots from 2013-2016
 // Change champaign to clip region
