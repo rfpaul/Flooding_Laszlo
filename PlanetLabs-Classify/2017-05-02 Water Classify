@@ -543,8 +543,8 @@ Map.addLayer(masked_pl, vizParams, "Planet Labs");
 //Map.addLayer(shade_mask, {min: 0, max: 1}, "Cloud shadow mask")
 //Map.addLayer(sample_pl, vizParams, "Sample Raster");
 Map.addLayer(training_day, {}, "Trainer Polys");
-Map.addLayer(waterCai, {}, "Water polygons, contributed");
-Map.addLayer(othersCai, {}, "Other polygons, contributed");
+//Map.addLayer(waterCai, {}, "Water polygons, contributed");
+//Map.addLayer(othersCai, {}, "Other polygons, contributed");
 //Map.addLayer(sample_pl, {}, "Sample Points");
 //Map.addLayer(training, {}, "Trainer Points")
 Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
