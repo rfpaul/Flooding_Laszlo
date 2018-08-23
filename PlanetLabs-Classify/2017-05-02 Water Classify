@@ -452,9 +452,12 @@ var Shadow_Mask = function(image, threshold, bufferDist, extent) {
   
   // Mask out everything inside the buffer distance
   cloud_mask = cloud_mask
-    .where(cloud_mask.lte(bufferDist), 0)
+    .where(cloud_mask.lte(0), 1)
     .where(cloud_mask.gt(bufferDist), 1)
+    .where(cloud_mask.gt(1), 0)
     .byte(); // */
+    
+  Map.addLayer(cloud_mask, {min:0, max: 1}, "Buffered edge"); // Distance
   
   return cloud_mask
 }
