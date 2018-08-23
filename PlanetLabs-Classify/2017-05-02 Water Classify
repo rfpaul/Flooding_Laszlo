@@ -516,7 +516,10 @@ var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
   classValues: [0, 1], // cover values to sample from 
   classPoints: [4500, 500] // sample
 });
-print(training);
+
+
+
+print(training.size());
 // Train the classifier.
 var classifier = ee.Classifier.randomForest({
   numberOfTrees: 30
