@@ -826,7 +826,7 @@ training_day = training_day.merge(waterCai).merge(othersCai);
 
 print(training_day);
 
-// Load Cropland Data Layer of maize and soybeans plots from 2013-2016
+// Load Cropland Data Layer of maize and soybeans plots from 2017
 // Change champaign to clip region
 var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
 //print(cdl_cult);
@@ -869,13 +869,13 @@ var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
   region: training_day,
   scale: 6,
   classValues: [0, 1], // cover values to sample from 
-  classPoints: [4500, 500] // sample
+  classPoints: [4000, 1000] // sample
 });
 print(training);
 // Train the classifier.
 var classifier = ee.Classifier.randomForest({
   numberOfTrees: 30,
-  minLeafPopulation: 1
+  minLeafPopulation: 10
 })
   .train(training, "cover", training_bands);
 print(classifier);
@@ -908,12 +908,21 @@ Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classi
 
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
-  image: classed_pl,
+  image: masked_pl,
   description: '2017_05_05_PlanetLabs',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/2017-05-05_randomForest30+Cai_int8',
+  fileNamePrefix: 'PL/Raw/2017-05-05_masked_mosaic.tif',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
   maxPixels: 1e13
+}); // */
+
+// Export trainer polygons. Uncomment when needed to export.
+/*Export.table.toCloudStorage({
+  collection: training_day,
+  description: '2017_05_05_PlanetLabs_Trainers',
+  bucket: 'gee_export_kovi',
+  fileNamePrefix: 'PL/Trainers/2017-05-05_trainers',
+  fileFormat: "SHP"
 }); // */
