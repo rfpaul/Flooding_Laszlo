@@ -821,6 +821,9 @@ var training_bands = ['b1', 'b2', 'b3', 'b4']
 
 training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [1, 1, 0], 'cover');
 
+// Merge the polygons contributed by Yaping
+training_day = training_day.merge(waterCai).merge(othersCai);
+
 print(training_day);
 
 // Load Cropland Data Layer of maize and soybeans plots from 2013-2016
@@ -871,7 +874,7 @@ var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
 print(training);
 // Train the classifier.
 var classifier = ee.Classifier.randomForest({
-  numberOfTrees: 10
+  numberOfTrees: 30
 })
   .train(training, "cover", training_bands);
 print(classifier);
