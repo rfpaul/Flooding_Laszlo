@@ -508,16 +508,19 @@ print(sample_pl);
 /*var training = masked_pl.select(training_bands)
   .sample({region: training_day, numPixels: 50})
   .limit(50);
-//  tileScale: 16});*/
+//  tileScale: 16}); */
 var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
   classBand: 'cover', 
   region: training_day,
   scale: 6,
   classValues: [0, 1], // cover values to sample from 
   classPoints: [4500, 500] // sample
-});
+}); // */
 
-
+/* var training = sample_pl.sampleRegions({
+  collection: training_day,
+  properties: ['cover']
+}); // */
 
 print(training.size());
 // Train the classifier.
