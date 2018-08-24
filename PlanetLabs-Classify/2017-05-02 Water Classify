@@ -563,7 +563,7 @@ Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classi
   image: classed_pl,
   description: '2017_05_02_PlanetLabs',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/2017-05-02_randomForest10_int8',
+  fileNamePrefix: 'PL/2017-05-02_randomForest30_int8',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
