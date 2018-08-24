@@ -526,13 +526,10 @@ print(training.size());
 // Train the classifier.
 var classifier = ee.Classifier.randomForest({
   numberOfTrees: 30
-})
-  .train(training, "cover", training_bands);
+}).train(training, "cover", training_bands);
 print(classifier);
 // Apply the classifier to the masked Planet Labs image
 var classed_pl = masked_pl.classify(classifier).byte();
-// Recast classified image as 8-bit depth integer
-//classed_pl = classed_pl.toInt8();
 
 /*
 // Confusion matrix for classification
