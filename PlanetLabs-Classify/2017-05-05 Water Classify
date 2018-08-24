@@ -874,7 +874,8 @@ var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
 print(training);
 // Train the classifier.
 var classifier = ee.Classifier.randomForest({
-  numberOfTrees: 30
+  numberOfTrees: 30,
+  minLeafPopulation: 1
 })
   .train(training, "cover", training_bands);
 print(classifier);
