@@ -2,7 +2,7 @@
 var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
-// Classification of water cover in Planet Labs
+// Masks of AOI/extents for Champaign County
 
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
