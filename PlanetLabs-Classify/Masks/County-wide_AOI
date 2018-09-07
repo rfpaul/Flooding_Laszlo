@@ -1,0 +1,65 @@
+/**** Start of imports. If edited, may not auto-convert in the playground. ****/
+var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
+/***** End of imports. If edited, may not auto-convert in the playground. *****/
+// Robert F Paul
+// Classification of water cover in Planet Labs
+
+// Create a mask of all pixels matching CDL crop class indices
+// for the specified years within the extent
+var CDL_Mask = function(years, crops, extent) {
+  var result_img;
+  
+  // Get the CDL image for the year
+  var FetchCDLYear = function(year) {
+    // Start and end dates
+    var start = ee.Date.fromYMD(year, 01, 01);
+    var end = ee.Date.fromYMD(year, 12, 31);
+    // Get the cropland layer for the year
+    var result = ee.ImageCollection('USDA/NASS/CDL')
+      .filterDate(start,end)
+      .select('cropland') // Get the cropland cover values
+      .first(); // Specifically get the image
+    // Clip to extent geometry
+    result = ee.Image(result).clip(extent);
+    //print(result)
+    return FetchCovers(result);
+  }
+  
+  // Specified land covers = 1, all others = 0
+  var FetchCovers = function(image) {
+    // Remap cover ID values as 1, everything else as 0
+    var result = image.remap(crops, // from
+      ee.List.repeat(1, crops.length), // to
+      0); // default value
+    return result;
+  }  
+  
+  // Mask from the union of all specified crop types for specified years
+  result_img = ee.ImageCollection(years.map(FetchCDLYear)).and();
+  
+  // Return resulting mask
+  return result_img;
+}
+
+// Load Cropland Data Layer of maize and soybeans plots from 2013-2016
+// Change champaign to clip region
+var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
+//print(cdl_cult);
+
+
+// Draw to map
+//Map.setCenter(-94.866,42.967, 8);
+//Map.setCenter(-96.37, 48.29, 8);*/
+Map.addLayer(cdl_cult);
+
+//Export image and mask. Uncomment this when ready to export data.
+/*Export.image.toCloudStorage({
+  image: classed_pl,
+  description: '2017_05_02_PlanetLabs',
+  bucket: 'gee_export_kovi',
+  fileNamePrefix: 'PL/2017-05-02_randomForest30+Cai_int8',
+  scale: 3,
+  crs: "EPSG:32616",
+  region: champaign,
+  maxPixels: 1e13
+}); // */
