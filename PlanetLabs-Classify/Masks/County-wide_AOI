@@ -38,13 +38,16 @@ var CDL_Mask = function(years, crops, extent) {
   result_img = ee.ImageCollection(years.map(FetchCDLYear)).and();
   
   // Return resulting mask
-  return result_img;
+  return result_img.byte();
 }
 
-// Load Cropland Data Layer of maize and soybeans plots from 2013-2016
+// Load Cropland Data Layer in 2017 of--
+// maize (1),
+// soybeans (5),
+// water (111)
 // Change champaign to clip region
 var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
-//print(cdl_cult);
+print(cdl_cult);
 
 
 // Draw to map
