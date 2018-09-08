@@ -58,9 +58,9 @@ Map.addLayer(cdl_cult);
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
   image: cdl_cult,
-  description: '2017_cbw_',
+  description: '2017_cbw_mask_3m',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/2017-05-02_randomForest30+Cai_int8',
+  fileNamePrefix: 'PL/2017_cbw_3m_mask',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
