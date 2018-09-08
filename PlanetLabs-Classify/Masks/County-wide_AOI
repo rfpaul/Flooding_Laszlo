@@ -41,7 +41,8 @@ var CDL_Mask = function(years, crops, extent) {
   return result_img.byte();
 }
 
-countyRaster = ee.Image(0).paint(champaign, 1);
+var countyRaster = ee.Image(1).paint(champaign, 1);
+countyRaster = countyRaster.clip(champaign);
 print(countyRaster);
 
 // Load Cropland Data Layer in 2017 of--
@@ -56,10 +57,11 @@ print(cdl_cult);
 // Draw to map
 //Map.setCenter(-94.866,42.967, 8);
 //Map.setCenter(-96.37, 48.29, 8);*/
+Map.addLayer(countyRaster);
 Map.addLayer(cdl_cult);
 
 //Export image and mask. Uncomment this when ready to export data.
-Export.image.toCloudStorage({
+/*Export.image.toCloudStorage({
   image: cdl_cult,
   description: '2017_cbw_mask_3m',
   bucket: 'gee_export_kovi',
