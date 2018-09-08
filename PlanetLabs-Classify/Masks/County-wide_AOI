@@ -41,7 +41,7 @@ var CDL_Mask = function(years, crops, extent) {
   return result_img.byte();
 }
 
-var countyRaster = ee.Image(1).paint(champaign, 1);
+var countyRaster = ee.Image(1).paint(champaign, 1).byte();
 countyRaster = countyRaster.clip(champaign);
 print(countyRaster);
 
