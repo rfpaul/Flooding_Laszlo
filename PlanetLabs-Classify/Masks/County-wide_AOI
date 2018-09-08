@@ -57,8 +57,8 @@ Map.addLayer(cdl_cult);
 
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
-  image: classed_pl,
-  description: '2017_05_02_PlanetLabs',
+  image: cdl_cult,
+  description: '2017_cbw_',
   bucket: 'gee_export_kovi',
   fileNamePrefix: 'PL/2017-05-02_randomForest30+Cai_int8',
   scale: 3,
