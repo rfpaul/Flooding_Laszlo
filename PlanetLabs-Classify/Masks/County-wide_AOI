@@ -50,7 +50,7 @@ print(countyRaster);
 // soybeans (5),
 // water (111)
 // Change champaign to clip region
-var cdl_cult = CDL_Mask([2017], [111], champaign);
+var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
 print(cdl_cult);
 
 var inverseMask = countyRaster.subtract(cdl_cult).byte();
