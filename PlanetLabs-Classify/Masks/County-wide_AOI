@@ -50,7 +50,7 @@ print(countyRaster);
 // soybeans (5),
 // water (111)
 // Change champaign to clip region
-var cdl_cult = CDL_Mask([2017], [111], champaign);
+var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
 print(cdl_cult);
 
 
@@ -61,11 +61,11 @@ Map.addLayer(countyRaster);
 Map.addLayer(cdl_cult);
 
 //Export image and mask. Uncomment this when ready to export data.
-Export.image.toCloudStorage({
+/*Export.image.toCloudStorage({
   image: cdl_cult,
-  description: '2017_water_mask_3m',
+  description: '2017_cbw_mask_3m',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'masks/2017_water_3m_mask',
+  fileNamePrefix: 'masks/2017_cbw_3m_mask',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
