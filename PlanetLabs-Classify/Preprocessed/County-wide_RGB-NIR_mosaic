@@ -5,6 +5,8 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
 // Robert F Paul
 // Masks of AOI/extents for individual images
 
+thisDate = "2017-05-02";
+
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
 var CDL_Mask = function(years, crops, extent) {
@@ -69,9 +71,9 @@ Map.addLayer(pl_image, {}, "Masked image");
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
   image: pl_image,
-  description: '2017_cbw_date_3m',
+  description: '2017_cbw_" + date + "_3m',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'masks/2017_cbw_date_mosaic_3m',
+  fileNamePrefix: 'masks/2017_cbw_" + date + "_mosaic_3m',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
