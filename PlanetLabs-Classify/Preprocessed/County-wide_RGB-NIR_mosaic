@@ -46,7 +46,7 @@ var CDL_Mask = function(years, crops, extent) {
 
 var countyRaster = ee.Image(1).paint(champaign, 1).byte();
 countyRaster = countyRaster.clip(champaign);
-print(countyRaster);
+//print(countyRaster);
 
 // Load Cropland Data Layer in 2017 of--
 // maize (1),
@@ -54,11 +54,11 @@ print(countyRaster);
 // water (111)
 // Change champaign to clip region
 var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
-print(cdl_cult);
+//print(cdl_cult);
 
 pl_image = pl_image.updateMask(cdl_cult);
 
-print(pl_image);
+//print(pl_image);
 
 // Inverted mask of the CDL
 var inverseMask = countyRaster.subtract(cdl_cult).byte();
