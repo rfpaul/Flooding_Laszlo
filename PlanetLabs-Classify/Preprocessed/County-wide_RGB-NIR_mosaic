@@ -54,6 +54,8 @@ print(countyRaster);
 var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
 print(cdl_cult);
 
+pl_image = pl_image.updateMask(cdl_cult);
+
 // Inverted mask of the CDL
 var inverseMask = countyRaster.subtract(cdl_cult).byte();
 
@@ -67,9 +69,9 @@ Map.addLayer(pl_image, {}, "Masked image");
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
   image: pl_image,
-  description: '2017_cbw_mask_3m',
+  description: '2017_cbw_date_3m',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'masks/2017_cbw-inverted_3m_mask',
+  fileNamePrefix: 'masks/2017_cbw_date_mosaic_3m',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
