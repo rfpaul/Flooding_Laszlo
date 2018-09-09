@@ -1,11 +1,11 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
-    pl_image = ee.Image("users/RobertFPaul/PL/2017-05-02_Combined");
+    pl_image = ee.Image("users/RobertFPaul/PL/2017-05-06_Combined");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
 // Masks of AOI/extents for individual images
 
-var thisDate = "2017-05-02";
+var thisDate = "2017-05-06";
 
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
@@ -58,6 +58,8 @@ print(cdl_cult);
 
 pl_image = pl_image.updateMask(cdl_cult);
 
+print(pl_image);
+
 // Inverted mask of the CDL
 var inverseMask = countyRaster.subtract(cdl_cult).byte();
 
@@ -65,7 +67,7 @@ var inverseMask = countyRaster.subtract(cdl_cult).byte();
 //Map.setCenter(-94.866,42.967, 8);
 //Map.setCenter(-96.37, 48.29, 8);*/
 //Map.addLayer(countyRaster, {min: 0, max: 1}, "County");
-Map.addLayer(cdl_cult, {min: 0, max: 1}, "CDL");
+//Map.addLayer(cdl_cult, {min: 0, max: 1}, "CDL");
 //Map.addLayer(inverseMask, {min: 0, max: 1}, "Inverse CDL");
 Map.addLayer(pl_image, {}, "Masked image, " + thisDate); 
 //Export image and mask. Uncomment this when ready to export data.
