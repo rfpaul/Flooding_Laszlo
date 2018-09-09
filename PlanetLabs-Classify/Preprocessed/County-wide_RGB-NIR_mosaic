@@ -65,7 +65,7 @@ var inverseMask = countyRaster.subtract(cdl_cult).byte();
 //Map.addLayer(countyRaster, {min: 0, max: 1}, "County");
 Map.addLayer(cdl_cult, {min: 0, max: 1}, "CDL");
 //Map.addLayer(inverseMask, {min: 0, max: 1}, "Inverse CDL");
-Map.addLayer(pl_image, {}, "Masked image");
+Map.addLayer(pl_image, {}, "Masked image"); 
 //Export image and mask. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
   image: pl_image,
@@ -75,5 +75,6 @@ Map.addLayer(pl_image, {}, "Masked image");
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
-  maxPixels: 1e13
+  maxPixels: 1e13,
+  skipEmptyTiles: true
 }); // */
