@@ -1,11 +1,11 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
-    pl_image = ee.Image("users/RobertFPaul/PL/2017-05-06_Combined");
+var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
 // Masks of AOI/extents for individual images
 
-var thisDate = "2017-05-06";
+var pl_image = ee.Image("users/cai25/waterlog/after/0531/2017-05-31-103e");
+var thisDate = "2017-05-31-103e";
 
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
