@@ -73,7 +73,7 @@ Export.image.toCloudStorage({
   image: pl_image,
   description: '2017_cbw_' + thisDate + '_3m',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/Raw/' + thisDate + 'masked_mosaic',
+  fileNamePrefix: 'PL/Raw/' + thisDate + '_masked_mosaic',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
