@@ -5,7 +5,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
 // Robert F Paul
 // Masks of AOI/extents for individual images
 
-thisDate = "2017-05-02";
+var thisDate = "2017-05-02";
 
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
