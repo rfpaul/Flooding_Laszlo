@@ -53,6 +53,7 @@ print(countyRaster);
 var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
 print(cdl_cult);
 
+// Inverted mask of the CDL
 var inverseMask = countyRaster.subtract(cdl_cult).byte();
 
 // Draw to map
