@@ -1,5 +1,6 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
+var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
+    pl_image = ee.Image("users/RobertFPaul/PL/2017-05-05_Combined");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
 // Raw Planet data that's been ingested AND mosaicked already
