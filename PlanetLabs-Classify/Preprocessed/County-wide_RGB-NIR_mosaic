@@ -76,7 +76,7 @@ Map.addLayer(pl_image, vizParams, "Masked image, " + thisDate);
   image: pl_image,
   description: '2017_cbw_' + thisDate + '_3m',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/Raw/' + thisDate + '_masked_mosaic_float',
+  fileNamePrefix: 'PL/Raw/' + thisDate + '_masked_mosaic',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
