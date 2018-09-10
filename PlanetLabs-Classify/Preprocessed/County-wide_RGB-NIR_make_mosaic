@@ -7,7 +7,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
 var img1 = ee.Image("users/cai25/waterlog/after/0521/2017-05-21-0e26");
 var img2 = ee.Image("users/cai25/waterlog/after/0521/2017-05-21-1008");
 
-var pl_image = ee.ImageCollection(img1, img2).mosaic();
+var pl_image = ee.ImageCollection([img1, img2]).mosaic();
 
 var thisDate = "2017-05-21";
 var vizParams = {'bands': ['b1', 'b4', 'b3'], 'min':2000, 'max': 8000, 'gamma': 1.2};
