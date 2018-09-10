@@ -58,7 +58,7 @@ var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
 
 pl_image = pl_image.updateMask(cdl_cult);
 
-//print(pl_image);
+print(pl_image);
 
 // Inverted mask of the CDL
 var inverseMask = countyRaster.subtract(cdl_cult).byte();
