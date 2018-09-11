@@ -877,7 +877,7 @@ var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
 print(training);
 // Train the classifier.
 var classifier = ee.Classifier.randomForest({
-  numberOfTrees: 10
+  numberOfTrees: 30
 })
   .train(training, "class", training_bands);
 print(classifier);
@@ -913,7 +913,7 @@ Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classi
   image: classed_pl,
   description: currentDate + '_Classification',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/' + currentDate + '_cbw_masked-mosaic_3m',
+  fileNamePrefix: 'PL/' + currentDate + '_RandomForest30_3m_int8',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
