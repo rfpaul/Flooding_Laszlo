@@ -3,7 +3,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
     plImage = ee.Image("users/RobertFPaul/PL/2017-05-05_Combined");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
-// AOI mask based on clear pixels in corn or bean
+// AOI mask and masked mosaic based on clear pixels in corn or bean
 
 var currentDate = '2017-05-05';
 
