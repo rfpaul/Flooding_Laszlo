@@ -50,9 +50,9 @@ var CDL_Mask = function(years, crops, extent) {
 var Obscuration_Mask = function(image, cloud_thresh, shadow_thresh, bufferDist) {
   // print(image);
   // Get the mean of all bands
-  var cloud_mask = image.reduce(ee.Reducer.mean());
+  var band_mean = image.reduce(ee.Reducer.mean());
   // Clouds are bright, get everything below a high value theshold
-  var not_clouds = cloud_mask.lt(cloud_thresh).byte();
+  var not_clouds = band_mean.lt(cloud_thresh).byte();
   
   /*Map.addLayer(cloud_mask,
     {min:2000, max: 9000, palette: ['black', 'red', 'orange', 'yellow']},
@@ -60,19 +60,20 @@ var Obscuration_Mask = function(image, cloud_thresh, shadow_thresh, bufferDist) 
   //Map.addLayer(not_clouds, {min: 0, max: 1}, "Not clouds");
   
   // For everything below this shadow value...  
-  var shadow_mask = cloud_mask.lte(shadow_thresh).byte();
+  var shadow_mask = band_mean.lte(shadow_thresh).byte();
 
   // Measure the distance to the closest pixel below this threshold
-  cloud_mask = shadow_mask.fastDistanceTransform(100).sqrt().multiply(ee.Image.pixelArea().sqrt());
+  var cloud_mask = shadow_mask.fastDistanceTransform(100).sqrt().multiply(ee.Image.pixelArea().sqrt());
   
   //Map.addLayer(cloud_mask, {min:0, max: bufferDist}, "Buffered"); // Distance
   
+  // Distance measurement to buffered mask around the shadows
   cloud_mask = cloud_mask
     .where(cloud_mask.lte(bufferDist), 0)
     .where(cloud_mask.gt(bufferDist), 1)
     .byte(); // */
   
-  // Mask out clouds
+  // Include the mask for the clouds too
   cloud_mask = cloud_mask.and(not_clouds).byte();
   
   return cloud_mask;
