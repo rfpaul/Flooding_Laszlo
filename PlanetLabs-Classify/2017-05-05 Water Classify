@@ -908,19 +908,12 @@ Map.addLayer(masked_pl, vizParams, "Planet Labs");
 //Map.addLayer(training, {}, "Trainer Points")
 Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
 
-
-// Draw to map
-//Map.setCenter(-94.866,42.967, 8);
-//Map.setCenter(-96.37, 48.29, 8);*/
-//Map.addLayer(cdl_cult);
-Map.addLayer(masked_pl, vizParams, "Planet Labs");
-
 //Export mask and image. Uncomment this when ready to export data.
 /* Export.image.toCloudStorage({
   image: classed_pl,
-  description: '2017_05_05_Classification',
+  description: currentDate + '_Classification',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/2017-05-05_cbw_masked-mosaic_3m',
+  fileNamePrefix: 'PL/' + currentDate + '_cbw_masked-mosaic_3m',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
