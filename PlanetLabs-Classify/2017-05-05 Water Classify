@@ -917,7 +917,7 @@ Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classi
   crs: "EPSG:32616",
   region: champaign,
   maxPixels: 1e13
-}); // */
+}); // 
 
 var cm = ee.Feature(null, 
   {matrix: trainAcc.array(),
