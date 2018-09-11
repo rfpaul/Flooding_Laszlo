@@ -845,6 +845,95 @@ aoi_mask = aoi_mask.and(plImage.gt(0)).byte();
 
 masked_pl = masked_pl.updateMask(aoi_mask); // */
 
+
+// Get the trainers associated with water vs not water cover for this date
+var training_day = trainers.filter(ee.Filter.eq('date', currentDate)).select('cover');
+var training_bands = ['b1', 'b2', 'b3', 'b4']
+
+training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [1, 1, 0], 'cover');
+
+print(training_day);
+
+// Load Cropland Data Layer of maize and soybeans plots from 2013-2016
+// Change champaign to clip region
+var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
+//print(cdl_cult);
+
+// Define visualization parameters for a false color image.
+// R is red, NIR is green, B is blue
+var vizParams = {'bands': ['b1', 'b4', 'b3'], 'min':2000, 'max': 8000, 'gamma': 1.2};
+
+// Mask image
+var masked_pl = plImage.updateMask(cdl_cult);
+// Clip to region of interest
+masked_pl = masked_pl.clip(champaign);
+
+// Mask of cloud shadow + buffer
+var shade_mask = Shadow_Mask(
+  masked_pl, // image
+  0.05, // percentile
+  150, // buffer distance, in meters
+  champaign // AOI
+  );
+masked_pl = masked_pl.updateMask(shade_mask); // */
+
+// Create the sampling raster with an added "cover" band
+var sample_pl = masked_pl.clipToCollection(training_day);
+sample_pl = ee.Image([sample_pl, 
+  ee.Image()
+    .byte()
+    .paint(training_day, 'cover')
+    .rename('cover')]);
+print(sample_pl);
+
+// Sample pixels for classification
+//var training = masked_pl.reduceRegions(training_day, ee.Reducer.mean());
+/*var training = masked_pl.select(training_bands)
+  .sample({region: training_day, numPixels: 50})
+  .limit(50);
+//  tileScale: 16});*/
+var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
+  classBand: 'cover', 
+  region: training_day,
+  scale: 6,
+  classValues: [0, 1], // cover values to sample from 
+  classPoints: [4500, 500] // sample
+});
+print(training);
+// Train the classifier.
+var classifier = ee.Classifier.randomForest({
+  numberOfTrees: 10
+})
+  .train(training, "cover", training_bands);
+print(classifier);
+// Apply the classifier to the masked Planet Labs image
+var classed_pl = masked_pl.classify(classifier).byte();
+// Recast classified image as 8-bit depth integer
+//classed_pl = classed_pl.toInt8();
+
+/*
+// Confusion matrix for classification
+var trainAcc = classifier.confusionMatrix();
+print('Confusion matrix: ', trainAcc);
+print('Training overall accuracy: ', trainAcc.accuracy());
+print('Consumers Accuracy', trainAcc.consumersAccuracy());
+print('Producers Accuracy', trainAcc.producersAccuracy());
+print('Kappa', trainAcc.kappa());
+*/
+
+// Draw to map
+//Map.setCenter(-94.866,42.967, 8);
+//Map.setCenter(-96.37, 48.29, 8);*/
+//Map.addLayer(cdl_cult);
+Map.addLayer(masked_pl, vizParams, "Planet Labs");
+//Map.addLayer(shade_mask, {min: 0, max: 1}, "Cloud shadow mask")
+//Map.addLayer(sample_pl, vizParams, "Sample Raster");
+//Map.addLayer(training_day, {}, "Trainer Polys");
+//Map.addLayer(sample_pl, {}, "Sample Points");
+//Map.addLayer(training, {}, "Trainer Points")
+Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
+
+
 // Draw to map
 //Map.setCenter(-94.866,42.967, 8);
 //Map.setCenter(-96.37, 48.29, 8);*/
