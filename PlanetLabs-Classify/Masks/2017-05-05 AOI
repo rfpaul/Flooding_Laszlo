@@ -47,17 +47,17 @@ var CDL_Mask = function(years, crops, extent) {
 // Remove clouds and shadows, by taking the mean of all bands then
 // dropping a buffered distance around a specified upper limit of "dark" pixels
 // and dropping everything above an upper threshold
-var Obscuration_Mask = function(image, cloud_thresh, shadow_thresh, bufferDist, extent) {
+var Obscuration_Mask = function(image, cloud_thresh, shadow_thresh, bufferDist) {
   // print(image);
   // Get the mean of all bands
   var cloud_mask = image.reduce(ee.Reducer.mean());
   // Clouds are bright, get everything below a high value theshold
   var not_clouds = cloud_mask.lt(cloud_thresh).byte();
   
-  Map.addLayer(cloud_mask,
-    {min:2000, max: 8000, palette: ['violet', 'red', 'orange', 'yellow']},
-    "Mean values");
-  Map.addLayer(not_clouds, {min: 0, max: 1}, "Not clouds");
+  /* Map.addLayer(cloud_mask,
+    {min:1000, max: 9000, palette: ['black', 'red', 'orange', 'yellow']},
+    "Mean values"); // */
+  //Map.addLayer(not_clouds, {min: 0, max: 1}, "Not clouds");
   
   // For everything below this shadow value...  
   var shadow_mask = cloud_mask.lte(shadow_thresh).byte();
@@ -65,7 +65,7 @@ var Obscuration_Mask = function(image, cloud_thresh, shadow_thresh, bufferDist, 
   // Measure the distance to the closest pixel below this threshold
   cloud_mask = shadow_mask.fastDistanceTransform(100).sqrt().multiply(ee.Image.pixelArea().sqrt());
   
-  Map.addLayer(cloud_mask, {min:0, max: bufferDist}, "Buffered"); // Distance
+  //Map.addLayer(cloud_mask, {min:0, max: bufferDist}, "Buffered"); // Distance
   
   cloud_mask = cloud_mask
     .where(cloud_mask.lte(bufferDist), 0)
@@ -95,9 +95,9 @@ masked_pl = masked_pl.clip(champaign);
 // Mask of cloud shadow + buffer
 var shade_mask = Obscuration_Mask(
   masked_pl, // image
-  1, // percentile
-  150, // buffer distance, in meters
-  champaign // AOI
+  7000, // upper bound mean value to cut off clouds
+  3000, // lower bound mean value to cut off cloud shadows
+  150 // cloud shadow buffer distance
   );
 
 masked_pl = masked_pl.updateMask(shade_mask); // */
