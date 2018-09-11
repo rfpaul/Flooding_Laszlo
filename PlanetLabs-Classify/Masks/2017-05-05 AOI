@@ -54,7 +54,7 @@ var Obscuration_Mask = function(image, cloud_thresh, shadow_thresh, bufferDist) 
   // Clouds are bright, get everything below a high value theshold
   var not_clouds = cloud_mask.lt(cloud_thresh).byte();
   
-  Map.addLayer(cloud_mask,
+  /*Map.addLayer(cloud_mask,
     {min:2000, max: 9000, palette: ['black', 'red', 'orange', 'yellow']},
     "Mean values"); // */
   //Map.addLayer(not_clouds, {min: 0, max: 1}, "Not clouds");
