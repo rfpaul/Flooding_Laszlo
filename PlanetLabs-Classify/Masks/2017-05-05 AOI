@@ -118,7 +118,7 @@ Map.addLayer(masked_pl, vizParams, "Planet Labs");
 Map.addLayer(aoi_mask, {min: 0, max: 1}, "AOI mask");
 
 //Export mask and image. Uncomment this when ready to export data.
-/*Export.image.toCloudStorage({
+Export.image.toCloudStorage({
   image: aoi_mask,
   description: '2017_05_05_Visibility_Mask',
   bucket: 'gee_export_kovi',
@@ -133,7 +133,7 @@ Export.image.toCloudStorage({
   image: masked_pl,
   description: '2017_05_05_Masked_Mosaic',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/2017-05-05_cbw_masked-mosaic_3m',
+  fileNamePrefix: 'PL/Raw/2017-05-05_cbw_masked-mosaic_3m',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
