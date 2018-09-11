@@ -916,22 +916,11 @@ Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classi
 Map.addLayer(masked_pl, vizParams, "Planet Labs");
 
 //Export mask and image. Uncomment this when ready to export data.
-/*Export.image.toCloudStorage({
-  image: aoi_mask,
-  description: '2017_05_05_Visibility_Mask',
+/* Export.image.toCloudStorage({
+  image: classed_pl,
+  description: '2017_05_05_Classification',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/masks/2017-05-05_cbw_viz-mask_3m_int8',
-  scale: 3,
-  crs: "EPSG:32616",
-  region: champaign,
-  maxPixels: 1e13
-});
-
-Export.image.toCloudStorage({
-  image: masked_pl,
-  description: '2017_05_05_Masked_Mosaic',
-  bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/Raw/2017-05-05_cbw_masked-mosaic_3m',
+  fileNamePrefix: 'PL/2017-05-05_cbw_masked-mosaic_3m',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
