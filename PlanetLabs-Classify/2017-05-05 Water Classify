@@ -908,7 +908,7 @@ Map.addLayer(masked_pl, vizParams, "Planet Labs");
 Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
 
 //Export image and accuracy. Uncomment this when ready to export data.
-Export.image.toCloudStorage({
+/*Export.image.toCloudStorage({
   image: classed_pl,
   description: currentDate + '_Classification',
   bucket: 'gee_export_kovi',
@@ -919,7 +919,12 @@ Export.image.toCloudStorage({
   maxPixels: 1e13
 });
 
-var cm = ee.Feature(null, {matrix: trainAcc.array()})
+var cm = ee.Feature(null, 
+  {matrix: trainAcc.array(),
+    overall_accuracy: trainAcc.accuracy(),
+    consumer_accuracy: trainAcc.consumersAccuracy(),
+    producer_accuracy: trainAcc.producersAccuracy(),
+    kappa: trainAcc.kappa()});
 
 Export.table.toCloudStorage({
   collection: ee.FeatureCollection(cm),
