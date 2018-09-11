@@ -4,12 +4,13 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
 // Robert F Paul
 // Raw Planet data that's been ingested but not mosaicked
 
-var img1 = ee.Image("users/cai25/waterlog/after/0521/2017-05-21-0e26");
-var img2 = ee.Image("users/cai25/waterlog/after/0521/2017-05-21-1008");
+var img1 = ee.Image("users/cai25/waterlog/after/0531/2017-05-31-0e0f");
+var img2 = ee.Image("users/cai25/waterlog/after/0531/2017-05-31-1036");
+var img3 = ee.Image("users/cai25/waterlog/after/0531/2017-05-31-103e");
 
-var pl_image = ee.ImageCollection([img1, img2]).mosaic();
+var pl_image = ee.ImageCollection([img1, img2, img3]).mosaic();
 
-var thisDate = "2017-05-21";
+var thisDate = "2017-05-31";
 var vizParams = {'bands': ['b1', 'b4', 'b3'], 'min':2000, 'max': 8000, 'gamma': 1.2};
 
 // Create a mask of all pixels matching CDL crop class indices
@@ -76,7 +77,7 @@ var inverseMask = countyRaster.subtract(cdl_cult).byte();
 //Map.addLayer(inverseMask, {min: 0, max: 1}, "Inverse CDL");
 Map.addLayer(pl_image, vizParams, "Masked image, " + thisDate); 
 //Export image and mask. Uncomment this when ready to export data.
-/*Export.image.toCloudStorage({
+Export.image.toCloudStorage({
   image: pl_image,
   description: '2017_cbw_' + thisDate + '_3m',
   bucket: 'gee_export_kovi',
