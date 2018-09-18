@@ -77,7 +77,7 @@ var inverseMask = countyRaster.subtract(cdl_cult).byte();
 //Map.addLayer(inverseMask, {min: 0, max: 1}, "Inverse CDL");
 Map.addLayer(pl_image, vizParams, "Masked image, " + thisDate); 
 //Export image and mask. Uncomment this when ready to export data.
-Export.image.toCloudStorage({
+/* Export.image.toCloudStorage({
   image: pl_image,
   description: '2017_cbw_' + thisDate + '_3m',
   bucket: 'gee_export_kovi',
