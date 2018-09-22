@@ -1,5 +1,5 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var modis_veg = ee.ImageCollection("MODIS/MCD43A4_EVI"),
+var modis_veg = ee.ImageCollection("MODIS/MCD43A4_006_EVI"),
     shawnee = /* color: #91d61c */ee.Geometry.Polygon(
         [[[-89.45068359375, 36.98149274461218],
           [-88.3740234375, 36.99904313383703],
@@ -13,7 +13,7 @@ var COLOR = {
   FOREST: '00ff00'
 };
 
-// Get brightness temperature data for 1 year.
+// Get brightness temperature data for date range.
 var modis_years = modis_veg
     .filterDate('2012-01-01', '2016-12-31');
 
