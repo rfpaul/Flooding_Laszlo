@@ -12,6 +12,8 @@ var modis_veg = ee.ImageCollection("MODIS/MCD43A4_006_EVI"),
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Plot a time series of a band's value in defined region
 
+var modis250 = ee.ImageCollection("MODIS/006/MCD43A4");
+
 var COLOR = {
   FOREST: '00ff00'
 };
