@@ -16,7 +16,7 @@ var modis_veg = ee.ImageCollection("MODIS/MCD43A4_006_EVI"),
 // 250m product
 
 
-var myModis = modis_veg.select("Nadir_Reflectance_Band1");
+var myModis = modis_veg;
 
 var COLOR = {
   FOREST: '00ff00'
