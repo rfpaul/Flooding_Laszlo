@@ -8,11 +8,15 @@ var modis_veg = ee.ImageCollection("MODIS/MCD43A4_006_EVI"),
           [-88.0255450765984, 37.4732651058197],
           [-88.06666870374954, 37.6932000677039],
           [-88.90925161589166, 37.61727376869463],
-          [-89.56585842214628, 37.77137808451022]]]);
+          [-89.56585842214628, 37.77137808451022]]]),
+    modis250 = ee.ImageCollection("MODIS/006/MCD43A4");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Plot a time series of a band's value in defined region
 
-var modis250 = ee.ImageCollection("MODIS/006/MCD43A4");
+// 250m product
+
+
+var myModis = modis250.select("Nadir_Reflectance_Band1");
 
 var COLOR = {
   FOREST: '00ff00'
