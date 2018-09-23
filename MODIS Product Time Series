@@ -23,7 +23,7 @@ var COLOR = {
 };
 
 // Get brightness temperature data for date range.
-var modis_years = modis_veg
+var modis_years = myModis
     .filterDate('2012-01-01', '2016-12-31');
 
 var eviTimeSeries = ui.Chart.image.seriesByRegion({
