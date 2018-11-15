@@ -933,4 +933,12 @@ Export.table.toCloudStorage({
   fileNamePrefix: 'PL/Accuracy/' + currentDate + '_RandomForests30_Accuracy_',
   fileFormat: 'CSV'
 });
+
+Export.table.toCloudStorage({
+  collection: ee.FeatureCollection(trainers),
+  description: currentDate + '_Classification_Accuracy',
+  bucket: 'gee_export_kovi',
+  fileNamePrefix: 'PL/Geometry/' + currentDate + '_Combined',
+  fileFormat: 'SHP'
+});
 // */
