@@ -483,14 +483,14 @@ var shade_mask = Obscuration_Mask(
   150 // cloud shadow buffer distance
   );
 
-// masked_pl = masked_pl.updateMask(shade_mask); // */
+// masked_pl = masked_pl.updateMask(shade_mask); // 
 
 // Mask the area of interest where the shadows are
 var aoi_mask = cdl_cult.and(shade_mask);
 // Mask out 0 values of the original image, cast image as 8-bit int
 aoi_mask = aoi_mask.and(plImage.gt(0)).byte();
 
-masked_pl = masked_pl.updateMask(aoi_mask); // */
+masked_pl = masked_pl.updateMask(aoi_mask); // 
 
 // Get the trainers associated with water vs not water cover for this date
 var training_day = trainers.filter(ee.Filter.eq('date', currentDate)).select('class');
@@ -512,7 +512,7 @@ print(sample_pl);
 /*var training = masked_pl.select(training_bands)
   .sample({region: training_day, numPixels: 50})
   .limit(50);
-//  tileScale: 16});*/
+//  tileScale: 16});
 var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
   classBand: 'class', 
   region: training_day,
@@ -539,7 +539,7 @@ print('Training overall accuracy: ', trainAcc.accuracy());
 print('Consumers Accuracy', trainAcc.consumersAccuracy());
 print('Producers Accuracy', trainAcc.producersAccuracy());
 print('Kappa', trainAcc.kappa());
-// */
+// 
 
 // Draw to map
 //Map.setCenter(-94.866,42.967, 8);
@@ -563,7 +563,8 @@ Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classi
   crs: "EPSG:32616",
   region: champaign,
   maxPixels: 1e13
-}); // 
+});
+// 
 
 var cm = ee.Feature(null, 
   {matrix: trainAcc.array(),
@@ -578,7 +579,13 @@ Export.table.toCloudStorage({
   bucket: 'gee_export_kovi',
   fileNamePrefix: 'PL/Accuracy/' + currentDate + '_RandomForests30_Accuracy_',
   fileFormat: 'CSV'
-}); // 
+});
+// */
+
+var trainOut = trainers.merge(waterCai);
+trainOut = trainOut.merge(othersCai);
+
+print(trainOut);
 
 Export.table.toCloudStorage({
   collection: ee.FeatureCollection(trainers),
