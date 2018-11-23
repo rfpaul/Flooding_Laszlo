@@ -936,9 +936,9 @@ Export.table.toCloudStorage({
 
 Export.table.toCloudStorage({
   collection: ee.FeatureCollection(trainers),
-  description: currentDate + '_Classification_Accuracy',
+  description: currentDate + '_Trainers',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/Geometry/' + currentDate + '_Combined',
+  fileNamePrefix: 'PL/Geometry/' + currentDate + '_Trainers_Combined',
   fileFormat: 'SHP'
 });
 // */
