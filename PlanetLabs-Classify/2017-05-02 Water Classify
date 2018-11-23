@@ -493,7 +493,8 @@ aoi_mask = aoi_mask.and(plImage.gt(0)).byte();
 masked_pl = masked_pl.updateMask(aoi_mask); // 
 
 // Get the trainers associated with water vs not water cover for this date
-var training_day = trainers.filter(ee.Filter.eq('date', currentDate)).select('class');
+var date_filtered = trainers.filter(ee.Filter.eq('date', currentDate));
+var training_day = date_filtered.select('class');
 var training_bands = ['b1', 'b2', 'b3', 'b4']
 
 print(training_day);
@@ -584,23 +585,6 @@ Export.table.toCloudStorage({
 
 var trainOut = trainers.merge(waterCai);
 trainOut = trainOut.merge(othersCai);
-
-/*
-// Remove all non-polygons from a geometry
-function remove_non_polygons(geometry) { 
-  return ee.Algorithms.If(ee.Algorithms.IsEqual(ee.Geometry(geometry).type()
-                          , ee.String('Polygon'))
-                          , ee.Feature(ee.Geometry(geometry)), null);
-}
-
-// Clean a polygon from other types of geometries (eg. lines, points,...)
-function clean_polygon_feature(feature) { 
-    var geometries = feature.geometry().geometries();
-    var geometries_cleaned = ee.FeatureCollection(geometries.map(remove_non_polygons)).union().first();
-    return ee.Feature(feature).setGeometry(geometries_cleaned.geometry());
-}
-
-trainOut = trainOut.map(clean_polygon_feature);*/
 
 print(trainOut);
 
