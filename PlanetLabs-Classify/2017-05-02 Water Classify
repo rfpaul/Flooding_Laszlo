@@ -609,7 +609,6 @@ Export.table.toCloudStorage({
   description: currentDate + '_Trainers',
   bucket: 'gee_export_kovi',
   fileNamePrefix: 'PL/Geometry/' + currentDate + '_Trainers_Combined',
-  crs: "EPSG:32616",
   fileFormat: 'GeoJSON'
 });
 // */
