@@ -582,7 +582,7 @@ Export.table.toCloudStorage({
 });
 // */
 
-var trainOut = trainers;.merge(waterCai);
+var trainOut = trainers.merge(waterCai);
 trainOut = trainOut.merge(othersCai);
 
 /*
