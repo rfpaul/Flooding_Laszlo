@@ -506,10 +506,10 @@ sample_pl = ee.Image([sample_pl,
     .paint(training_day, 'class')
     .rename('class')]);
 print(sample_pl);
-
+/*
 // Sample pixels for classification
 //var training = masked_pl.reduceRegions(training_day, ee.Reducer.mean());
-/*var training = masked_pl.select(training_bands)
+var training = masked_pl.select(training_bands)
   .sample({region: training_day, numPixels: 50})
   .limit(50);
 //  tileScale: 16});
@@ -543,7 +543,7 @@ print('Kappa', trainAcc.kappa());
 
 // Draw to map
 //Map.setCenter(-94.866,42.967, 8);
-//Map.setCenter(-96.37, 48.29, 8);*/
+//Map.setCenter(-96.37, 48.29, 8);
 //Map.addLayer(cdl_cult);
 Map.addLayer(masked_pl, vizParams, "Planet Labs");
 //Map.addLayer(shade_mask, {min: 0, max: 1}, "Cloud shadow mask")
@@ -582,16 +582,34 @@ Export.table.toCloudStorage({
 });
 // */
 
-var trainOut = trainers.merge(waterCai);
+var trainOut = trainers;.merge(waterCai);
 trainOut = trainOut.merge(othersCai);
+
+/*
+// Remove all non-polygons from a geometry
+function remove_non_polygons(geometry) { 
+  return ee.Algorithms.If(ee.Algorithms.IsEqual(ee.Geometry(geometry).type()
+                          , ee.String('Polygon'))
+                          , ee.Feature(ee.Geometry(geometry)), null);
+}
+
+// Clean a polygon from other types of geometries (eg. lines, points,...)
+function clean_polygon_feature(feature) { 
+    var geometries = feature.geometry().geometries();
+    var geometries_cleaned = ee.FeatureCollection(geometries.map(remove_non_polygons)).union().first();
+    return ee.Feature(feature).setGeometry(geometries_cleaned.geometry());
+}
+
+trainOut = trainOut.map(clean_polygon_feature);*/
 
 print(trainOut);
 
 Export.table.toCloudStorage({
-  collection: ee.FeatureCollection(trainers),
+  collection: ee.FeatureCollection(trainOut),
   description: currentDate + '_Trainers',
   bucket: 'gee_export_kovi',
   fileNamePrefix: 'PL/Geometry/' + currentDate + '_Trainers_Combined',
-  fileFormat: 'SHP'
+  crs: "EPSG:32616",
+  fileFormat: 'GeoJSON'
 });
 // */
