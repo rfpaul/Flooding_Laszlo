@@ -583,7 +583,7 @@ Export.table.toCloudStorage({
 });
 // */
 
-var trainOut = trainers.merge(waterCai);
+var trainOut = date_filtered.merge(waterCai);
 trainOut = trainOut.merge(othersCai);
 
 print(trainOut);
