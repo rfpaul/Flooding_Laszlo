@@ -172,7 +172,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
 var currentDate = '2017-05-02';
 
 var upper_mean = 7500; // upper bound mean band value to cut off clouds
-var lower_mean = 4000; // lower bound mean band value to cut off cloud shadows
+var lower_mean = 3700; // lower bound mean band value to cut off cloud shadows
 var buffer_shadow_dist = 150; // cloud shadow buffer distance (in m)
 
 // Create a mask of all pixels matching CDL crop class indices
