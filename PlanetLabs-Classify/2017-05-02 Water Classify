@@ -343,7 +343,7 @@ Map.addLayer(masked_pl, vizParams, "Planet Labs");
 //Export image. Uncomment this when ready to export data.
 Export.image.toCloudStorage({
   image: masked_pl,
-  description: currentDate + '__PL_Masked_Raw',
+  description: currentDate + '_PL_Masked_Raw',
   bucket: 'gee_export_kovi',
   fileNamePrefix: 'PL/Raw/' + currentDate + '_cbw_masked-mosaic_3m',
   scale: 3,
@@ -355,7 +355,7 @@ Export.image.toCloudStorage({
 
 Export.image.toCloudStorage({
   image: aoi_mask,
-  description: currentDate + '__PL_AOI_Mask',
+  description: currentDate + '_PL_AOI_Mask',
   bucket: 'gee_export_kovi',
   fileNamePrefix: 'PL/Masks/' + currentDate + '_cbw_viz-mask_3m_int8',
   scale: 3,
