@@ -680,6 +680,7 @@ othersCai = othersCai.map(function (feat) { return feat.set({"source":"Cai"}); }
 othersCai = othersCai.map(function (feat) { return feat.set({"class":0}); });
 othersCai = othersCai.map(function (feat) { return feat.set({"date":currentDate}); });
 
+// Merge the polygons
 var trainOut = date_filtered.merge(waterCai);
 trainOut = trainOut.merge(othersCai);
 
