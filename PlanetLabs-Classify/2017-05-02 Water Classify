@@ -663,7 +663,7 @@ Export.table.toCloudStorage({
 });
 // */
 
-// Set the "source" property of the geometries
+// Set the "source" property of the trainer geometries
 date_filtered = date_filtered.map(function (feat) { return feat.set({"source":"Paul"}); });
 
 // Set the "source" and "date" properties of the trainers from Yaping
