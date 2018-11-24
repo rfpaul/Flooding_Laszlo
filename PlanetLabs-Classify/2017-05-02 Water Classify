@@ -663,6 +663,15 @@ Export.table.toCloudStorage({
 });
 // */
 
+// Set the "source" property of the geometries
+date_filtered = date_filtered.map(function (feat) { return feat.set({"source":"Paul"}); });
+
+// Set the "source" and "date" properties of the trainers from Yaping
+waterCai = waterCai.map(function (feat) { return feat.set({"source":"Cai"}); });
+waterCai = waterCai.map(function (feat) { return feat.set({"date":currentDate}); });
+othersCai = othersCai.map(function (feat) { return feat.set({"source":"Cai"}); });
+othersCai = othersCai.map(function (feat) { return feat.set({"date":currentDate}); });
+
 var trainOut = date_filtered.merge(waterCai);
 trainOut = trainOut.merge(othersCai);
 
