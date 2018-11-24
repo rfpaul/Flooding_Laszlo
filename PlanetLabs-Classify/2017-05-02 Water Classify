@@ -672,7 +672,7 @@ Export.table.toCloudStorage({
   collection: ee.FeatureCollection(trainOut),
   description: currentDate + '_Trainers',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/Geometry/' + currentDate + '_Trainers_Combined',
+  fileNamePrefix: 'PL/Geometry/' + currentDate + '_Trainers_Combined_',
   fileFormat: 'GeoJSON'
 });
 // */
