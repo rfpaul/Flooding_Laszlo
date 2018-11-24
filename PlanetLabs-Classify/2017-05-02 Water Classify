@@ -516,8 +516,8 @@ var Obscuration_Mask = function(image, cloud_thresh, shadow_thresh, bufferDist) 
   // Clouds are bright, get everything below a high value theshold
   var not_clouds = band_mean.lt(cloud_thresh).byte();
   
-  /*Map.addLayer(cloud_mask,
-    {min:2000, max: 9000, palette: ['black', 'red', 'orange', 'yellow']},
+  /*Map.addLayer(band_mean,
+    {min:shadow_thresh, max: cloud_thresh, palette: ['black', 'red', 'orange', 'yellow']},
     "Mean values"); // */
   //Map.addLayer(not_clouds, {min: 0, max: 1}, "Not clouds");
   
@@ -620,7 +620,7 @@ print('Training overall accuracy: ', trainAcc.accuracy());
 print('Consumers Accuracy', trainAcc.consumersAccuracy());
 print('Producers Accuracy', trainAcc.producersAccuracy());
 print('Kappa', trainAcc.kappa());
-// 
+// */
 
 // Draw to map
 //Map.setCenter(-94.866,42.967, 8);
