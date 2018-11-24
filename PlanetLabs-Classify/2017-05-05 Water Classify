@@ -487,6 +487,8 @@ othersCai = othersCai.map(function (feat) { return feat.set({"date":currentDate}
 // Merge the polygons
 var trainOut = date_filtered.merge(waterCai);
 trainOut = trainOut.merge(othersCai);
+// Select specific properties from the FeatureCollection
+trainOut = trainOut.select(["date", "class", "cover", "hidden", "source"]);
 
 print(trainOut);
 
