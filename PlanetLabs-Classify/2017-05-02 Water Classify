@@ -562,9 +562,9 @@ masked_pl = masked_pl.clip(champaign);
 // Mask of cloud shadow + buffer
 var shade_mask = Obscuration_Mask(
   masked_pl, // image
-  8000, // upper bound mean band value to cut off clouds
-  3500, // lower bound mean band value to cut off cloud shadows
-  150 // cloud shadow buffer distance
+  upper_mean, // upper bound mean band value to cut off clouds
+  lower_mean, // lower bound mean band value to cut off cloud shadows
+  buffer_shadow_dist // cloud shadow buffer distance
   );
 
 // masked_pl = masked_pl.updateMask(shade_mask); // 
