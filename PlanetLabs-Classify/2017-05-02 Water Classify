@@ -632,9 +632,9 @@ Map.addLayer(masked_pl, vizParams, "Planet Labs");
 //Map.addLayer(training_day, {}, "Trainer Polys");
 //Map.addLayer(sample_pl, {}, "Sample Points");
 //Map.addLayer(training, {}, "Trainer Points")
-Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
+//Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
 
-//Export image and accuracy. Uncomment this when ready to export data.
+//Export image. Uncomment this when ready to export data.
 /*Export.image.toCloudStorage({
   image: classed_pl,
   description: currentDate + '_Classification',
@@ -647,6 +647,7 @@ Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classi
 });
 // 
 
+// Export accuracy statistics
 var cm = ee.Feature(null, 
   {matrix: trainAcc.array(),
     overall_accuracy: trainAcc.accuracy(),
@@ -663,6 +664,7 @@ Export.table.toCloudStorage({
 });
 // */
 
+// Export trainer geometries
 // Set the "source" property of the trainer geometries
 date_filtered = date_filtered.map(function (feat) { return feat.set({"source":"Paul"}); });
 
