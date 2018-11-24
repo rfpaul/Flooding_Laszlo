@@ -2,12 +2,771 @@
 var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
     sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm"),
     trainers = ee.FeatureCollection("users/RobertFPaul/unified_training_polys"),
-    plImage = ee.Image("users/RobertFPaul/PL/2017-05-10_Combined");
+    plImage = ee.Image("users/RobertFPaul/PL/2017-05-10_Combined"),
+    waterCai = /* color: #ffc82d */ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.34999084472656, 40.37368597785355],
+                  [-88.3509349822998, 40.37427447537182],
+                  [-88.35187911987305, 40.37335903256703]]]),
+            {
+              "Type": 1,
+              "system:index": "0"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.37586879730225, 40.37849189051302],
+                  [-88.37621212005615, 40.378132276261354],
+                  [-88.37586879730225, 40.37787073741817]]]),
+            {
+              "Type": 1,
+              "system:index": "1"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.374924659729, 40.37901496236165],
+                  [-88.37496757507324, 40.378132276261354],
+                  [-88.37445259094238, 40.378753426944954]]]),
+            {
+              "Type": 1,
+              "system:index": "2"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.39054584503174, 40.39316905216198],
+                  [-88.38981628417969, 40.391469411000145],
+                  [-88.38921546936035, 40.39143672517279]]]),
+            {
+              "Type": 1,
+              "system:index": "3"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.41775417327881, 40.38941017289237],
+                  [-88.4153938293457, 40.38967166693593],
+                  [-88.4156084060669, 40.39003121958799]]]),
+            {
+              "Type": 1,
+              "system:index": "4"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.25514793395996, 40.388494935744305],
+                  [-88.25476169586182, 40.38810268744484],
+                  [-88.25471878051758, 40.38856031023877]]]),
+            {
+              "Type": 1,
+              "system:index": "5"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.23789596557617, 40.378688042932154],
+                  [-88.23832511901855, 40.37829573752278],
+                  [-88.23789596557617, 40.37809958396149]]]),
+            {
+              "Type": 1,
+              "system:index": "6"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.24746608734131, 40.375876470354555],
+                  [-88.24673652648926, 40.37512451826901],
+                  [-88.24660778045654, 40.37541876138882]]]),
+            {
+              "Type": 1,
+              "system:index": "7"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.26523303985596, 40.36135904318462],
+                  [-88.26536178588867, 40.36103203809681],
+                  [-88.265061378479, 40.36106473867697]]]),
+            {
+              "Type": 1,
+              "system:index": "8"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.2517147064209, 40.3375162154661],
+                  [-88.25180053710938, 40.33689468475563],
+                  [-88.25124263763428, 40.33748350346619]]]),
+            {
+              "Type": 1,
+              "system:index": "9"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.27261447906494, 40.317002679155664],
+                  [-88.27270030975342, 40.3166100147886],
+                  [-88.27231407165527, 40.31687179128705]]]),
+            {
+              "Type": 1,
+              "system:index": "10"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.26905250549316, 40.27998402852904],
+                  [-88.26913833618164, 40.27910004629408],
+                  [-88.26836585998535, 40.27932922798331]]]),
+            {
+              "Type": 1,
+              "system:index": "11"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.2987928390503, 40.26171271360677],
+                  [-88.29896450042725, 40.26099223803924],
+                  [-88.29844951629639, 40.261548969833335]]]),
+            {
+              "Type": 1,
+              "system:index": "12"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.27373027801514, 40.22541740708274],
+                  [-88.27295780181885, 40.22407397636125],
+                  [-88.27205657958984, 40.22482761151021]]]),
+            {
+              "Type": 1,
+              "system:index": "13"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.31754684448242, 40.14115573931809],
+                  [-88.3176326751709, 40.13994186944253],
+                  [-88.31655979156494, 40.14056521073614]]]),
+            {
+              "Type": 1,
+              "system:index": "14"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.33205223083496, 40.11969657306735],
+                  [-88.33205223083496, 40.11884331633978],
+                  [-88.33059310913086, 40.119237128467624]]]),
+            {
+              "Type": 1,
+              "system:index": "15"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.31265449523926, 40.08864426295524],
+                  [-88.3130407333374, 40.08808611083158],
+                  [-88.31025123596191, 40.089038249934056]]]),
+            {
+              "Type": 1,
+              "system:index": "16"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.3275032043457, 40.07186486800323],
+                  [-88.32668781280518, 40.070879647818934],
+                  [-88.32703113555908, 40.07018998521041],
+                  [-88.32634449005127, 40.070682602071926],
+                  [-88.3266019821167, 40.0714051003574]]]),
+            {
+              "Type": 1,
+              "system:index": "17"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.3954381942749, 39.92727953636945],
+                  [-88.39530944824219, 39.926522601120816],
+                  [-88.39505195617676, 39.92704916565799]]]),
+            {
+              "Type": 1,
+              "system:index": "18"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.4304141998291, 39.915562557392484],
+                  [-88.43088626861572, 39.91487132466086],
+                  [-88.43054294586182, 39.91487132466086]]]),
+            {
+              "Type": 1,
+              "system:index": "19"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.4364652633667, 39.98336816685067],
+                  [-88.43616485595703, 39.98274338571903],
+                  [-88.43569278717041, 39.98284203575121]]]),
+            {
+              "Type": 1,
+              "system:index": "20"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.45453262329102, 39.986031643367674],
+                  [-88.45431804656982, 39.985702824724704],
+                  [-88.45358848571777, 39.98606452514494]]]),
+            {
+              "Type": 1,
+              "system:index": "21"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.42432022094727, 40.028666005765274],
+                  [-88.4245777130127, 40.02843597658951],
+                  [-88.42444896697998, 40.02794305431509],
+                  [-88.42397689819336, 40.02830453099795]]]),
+            {
+              "Type": 1,
+              "system:index": "22"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.4113597869873, 40.11897458730246],
+                  [-88.4113597869873, 40.118088503386005],
+                  [-88.4101152420044, 40.11825259387132]]]),
+            {
+              "Type": 1,
+              "system:index": "23"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.41492176055908, 40.174151565587294],
+                  [-88.41492176055908, 40.17382365416743],
+                  [-88.41269016265869, 40.17323340961883],
+                  [-88.41333389282227, 40.1737252804325]]]),
+            {
+              "Type": 1,
+              "system:index": "24"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.41487884521484, 40.18870923563903],
+                  [-88.41170310974121, 40.186676595480805],
+                  [-88.41196060180664, 40.18962718219624]]]),
+            {
+              "Type": 1,
+              "system:index": "25"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.40329170227051, 40.25902726567574],
+                  [-88.40161800384521, 40.25814300949332],
+                  [-88.40221881866455, 40.25892901555948]]]),
+            {
+              "Type": 1,
+              "system:index": "26"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.41015815734863, 40.28476388038702],
+                  [-88.40904235839844, 40.28469840524736],
+                  [-88.40904235839844, 40.285058517730526]]]),
+            {
+              "Type": 1,
+              "system:index": "27"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.44629287719727, 40.34719827029987],
+                  [-88.44646453857422, 40.346707659054786],
+                  [-88.4459924697876, 40.34683848906906]]]),
+            {
+              "Type": 1,
+              "system:index": "28"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.46084117889404, 40.383297460379886],
+                  [-88.46084117889404, 40.382774421781434],
+                  [-88.46041202545166, 40.38306863149277]]]),
+            {
+              "Type": 1,
+              "system:index": "29"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.39073896408081, 40.11580760463422],
+                  [-88.39125394821167, 40.11498711874736],
+                  [-88.390953540802, 40.11475738092506]]]),
+            {
+              "Type": 1,
+              "system:index": "30"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.38812112808228, 40.11093377322551],
+                  [-88.38764905929565, 40.11037580391439],
+                  [-88.38762760162354, 40.110851719202124]]]),
+            {
+              "Type": 1,
+              "system:index": "31"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.38595390319824, 40.00868343656941],
+                  [-88.38676929473877, 40.00809175816695],
+                  [-88.38599681854248, 40.00832185593287]]]),
+            {
+              "Type": 1,
+              "system:index": "32"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.42097282409668, 39.99165419723572],
+                  [-88.42105865478516, 39.9910294918822],
+                  [-88.42050075531006, 39.99139116409905]]]),
+            {
+              "Type": 1,
+              "system:index": "33"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.39749813079834, 39.95781324656254],
+                  [-88.39749813079834, 39.95728691872636],
+                  [-88.3971118927002, 39.95731981433479]]]),
+            {
+              "Type": 1,
+              "system:index": "34"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.3846664428711, 39.95383279178168],
+                  [-88.38488101959229, 39.953339330834154],
+                  [-88.38423728942871, 39.95343802330847]]]),
+            {
+              "Type": 1,
+              "system:index": "35"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.35762977600098, 39.94008034732476],
+                  [-88.35702896118164, 39.93919193648093],
+                  [-88.35668563842773, 39.93932355363005]]]),
+            {
+              "Type": 1,
+              "system:index": "36"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.3956527709961, 39.928464287782994],
+                  [-88.39552402496338, 39.92820101146302],
+                  [-88.39505195617676, 39.92862883496879]]]),
+            {
+              "Type": 1,
+              "system:index": "37"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.4295129776001, 39.91078961774283],
+                  [-88.43019962310791, 39.90980207146212],
+                  [-88.42899799346924, 39.91026292816486]]]),
+            {
+              "Type": 1,
+              "system:index": "38"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.42663764953613, 39.917767872328454],
+                  [-88.42655181884766, 39.917043746896674],
+                  [-88.42620849609375, 39.91760329903903]]]),
+            {
+              "Type": 1,
+              "system:index": "39"
+            })]),
+    othersCai = /* color: #00ffff */ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.45367431640625, 40.403431358312524],
+                  [-88.45084190368652, 40.39973841557208],
+                  [-88.45264434814453, 40.403267958050165]]]),
+            {
+              "Type": 0,
+              "system:index": "0"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.46800804138184, 40.39859454265842],
+                  [-88.46800804138184, 40.3947052293797],
+                  [-88.46530437469482, 40.394868650425536]]]),
+            {
+              "Type": 0,
+              "system:index": "1"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.44513416290283, 40.397810161427905],
+                  [-88.44178676605225, 40.39807162285346],
+                  [-88.44410419464111, 40.398365765743506]]]),
+            {
+              "Type": 0,
+              "system:index": "2"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.44388961791992, 40.385062685666924],
+                  [-88.43054294586182, 40.37362058892316],
+                  [-88.44075679779053, 40.38401663182168]]]),
+            {
+              "Type": 0,
+              "system:index": "3"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.43629360198975, 40.391011807973285],
+                  [-88.43577861785889, 40.3895082332777],
+                  [-88.43530654907227, 40.39091374977727]]]),
+            {
+              "Type": 0,
+              "system:index": "4"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.42916965484619, 40.38650098317953],
+                  [-88.42573642730713, 40.38538957416215],
+                  [-88.42517852783203, 40.38699130485715]]]),
+            {
+              "Type": 0,
+              "system:index": "5"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.42050075531006, 40.373914838610276],
+                  [-88.41530799865723, 40.37231279699025],
+                  [-88.41702461242676, 40.37453602817463]]]),
+            {
+              "Type": 0,
+              "system:index": "6"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.4425163269043, 40.36041072406002],
+                  [-88.43642234802246, 40.35913537730798],
+                  [-88.44024181365967, 40.36041072406002]]]),
+            {
+              "Type": 0,
+              "system:index": "7"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.44646453857422, 40.35511297183033],
+                  [-88.44401836395264, 40.34840842944653],
+                  [-88.44414710998535, 40.35141737969346]]]),
+            {
+              "Type": 0,
+              "system:index": "8"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.44590663909912, 40.33211852089986],
+                  [-88.4485673904419, 40.328519817984215],
+                  [-88.44410419464111, 40.33221666465491]]]),
+            {
+              "Type": 0,
+              "system:index": "9"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.45487594604492, 40.32184535192423],
+                  [-88.45170021057129, 40.321681753783764],
+                  [-88.4526014328003, 40.322237985843785]]]),
+            {
+              "Type": 0,
+              "system:index": "10"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.40655326843262, 40.32374306138046],
+                  [-88.40011596679688, 40.32053655569972],
+                  [-88.4029483795166, 40.323710342703876]]]),
+            {
+              "Type": 0,
+              "system:index": "11"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.3983564376831, 40.320176632289765],
+                  [-88.38955879211426, 40.32004575057402],
+                  [-88.39213371276855, 40.32034023407761]]]),
+            {
+              "Type": 0,
+              "system:index": "12"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.39749813079834, 40.30325806764601],
+                  [-88.40020179748535, 40.2971048114835],
+                  [-88.3974552154541, 40.29897048558321]]]),
+            {
+              "Type": 0,
+              "system:index": "13"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.41535091400146, 40.29356970875478],
+                  [-88.41672420501709, 40.289936216010034],
+                  [-88.41500759124756, 40.29091826034062]]]),
+            {
+              "Type": 0,
+              "system:index": "14"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.41590881347656, 40.28371627054259],
+                  [-88.41638088226318, 40.27913278658297],
+                  [-88.41547966003418, 40.28227578049736]]]),
+            {
+              "Type": 0,
+              "system:index": "15"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.3965539932251, 40.26521673536766],
+                  [-88.39621067047119, 40.2606319973782],
+                  [-88.3954381942749, 40.26433256008191]]]),
+            {
+              "Type": 0,
+              "system:index": "16"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.40247631072998, 40.249103283452385],
+                  [-88.3994722366333, 40.242846824049785],
+                  [-88.40088844299316, 40.24697418678681]]]),
+            {
+              "Type": 0,
+              "system:index": "17"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.40569496154785, 40.244058853492156],
+                  [-88.40457916259766, 40.23911232663611],
+                  [-88.40449333190918, 40.241241670579385]]]),
+            {
+              "Type": 0,
+              "system:index": "18"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.3971118927002, 40.213391115693305],
+                  [-88.3971118927002, 40.2094911242261],
+                  [-88.3965539932251, 40.21198190097492]]]),
+            {
+              "Type": 0,
+              "system:index": "19"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.40603828430176, 40.19359387983041],
+                  [-88.40839862823486, 40.19054511633009],
+                  [-88.40702533721924, 40.19116799313138]]]),
+            {
+              "Type": 0,
+              "system:index": "20"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.39603900909424, 40.16329685585592],
+                  [-88.39603900909424, 40.160017145922765],
+                  [-88.39552402496338, 40.16237855304483]]]),
+            {
+              "Type": 0,
+              "system:index": "21"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.41333389282227, 40.155950085574716],
+                  [-88.41196060180664, 40.15450687657304],
+                  [-88.41161727905273, 40.15598288542285]]]),
+            {
+              "Type": 0,
+              "system:index": "22"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.3835506439209, 40.13446278151591],
+                  [-88.38539600372314, 40.12986919373177],
+                  [-88.38325023651123, 40.13318317040281]]]),
+            {
+              "Type": 0,
+              "system:index": "23"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.43363285064697, 40.06670872450823],
+                  [-88.4304141998291, 40.06431114906107],
+                  [-88.43127250671387, 40.06684009606687]]]),
+            {
+              "Type": 0,
+              "system:index": "24"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.43852519989014, 40.02074598348557],
+                  [-88.43964099884033, 40.01831392492451],
+                  [-88.43835353851318, 40.01982575530556]]]),
+            {
+              "Type": 0,
+              "system:index": "25"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.42101573944092, 40.00723710253161],
+                  [-88.42101573944092, 40.00414710442305],
+                  [-88.4205436706543, 40.00582361011448]]]),
+            {
+              "Type": 0,
+              "system:index": "26"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.43989849090576, 39.98481500648339],
+                  [-88.439040184021, 39.98688656443254],
+                  [-88.43985557556152, 39.98678792024032]]]),
+            {
+              "Type": 0,
+              "system:index": "27"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.44148635864258, 39.97383141190724],
+                  [-88.44208717346191, 39.972647446014925],
+                  [-88.44092845916748, 39.97350253455001]]]),
+            {
+              "Type": 0,
+              "system:index": "28"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.43110084533691, 39.94241648375783],
+                  [-88.43075752258301, 39.938435132960805],
+                  [-88.4283971786499, 39.94126487717428]]]),
+            {
+              "Type": 0,
+              "system:index": "29"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.37822914123535, 39.977712045208676],
+                  [-88.37277889251709, 39.97869861176252],
+                  [-88.37445259094238, 39.97925765982062]]]),
+            {
+              "Type": 0,
+              "system:index": "30"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.3778429031372, 39.99342964441351],
+                  [-88.3725643157959, 39.98981294400754],
+                  [-88.37084770202637, 39.99125964715087],
+                  [-88.37655544281006, 39.99369266969988]]]),
+            {
+              "Type": 0,
+              "system:index": "31"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.37737083435059, 40.00690838597654],
+                  [-88.37488174438477, 40.00483743528193],
+                  [-88.37496757507324, 40.00595509901582]]]),
+            {
+              "Type": 0,
+              "system:index": "32"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.37844371795654, 40.02988186137954],
+                  [-88.37071895599365, 40.02590560445986],
+                  [-88.3694314956665, 40.02735154288408],
+                  [-88.37732791900635, 40.03057193195208]]]),
+            {
+              "Type": 0,
+              "system:index": "33"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.35831642150879, 40.066872938916944],
+                  [-88.35853099822998, 40.05853034623291],
+                  [-88.35715770721436, 40.0632929750588]]]),
+            {
+              "Type": 0,
+              "system:index": "34"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.36243629455566, 40.10545234691061],
+                  [-88.35136413574219, 40.10331873820635],
+                  [-88.3517074584961, 40.10387676540629]]]),
+            {
+              "Type": 0,
+              "system:index": "35"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.36230754852295, 40.1234704647896],
+                  [-88.3633804321289, 40.12507840718369],
+                  [-88.36402416229248, 40.12471744383432]]]),
+            {
+              "Type": 0,
+              "system:index": "36"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.35934638977051, 40.32351403031128],
+                  [-88.3624792098999, 40.3194895004515],
+                  [-88.3599042892456, 40.32207438865482]]]),
+            {
+              "Type": 0,
+              "system:index": "37"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.34492683410645, 40.337156382594706],
+                  [-88.34402561187744, 40.33391780039674],
+                  [-88.34359645843506, 40.33725451902267]]]),
+            {
+              "Type": 0,
+              "system:index": "38"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.34110736846924, 40.348179482084134],
+                  [-88.34084987640381, 40.34641329059479],
+                  [-88.33964824676514, 40.34641329059479]]]),
+            {
+              "Type": 0,
+              "system:index": "39"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.35531234741211, 40.363190242363586],
+                  [-88.35398197174072, 40.36430201759625],
+                  [-88.3551836013794, 40.364955994461646]]]),
+            {
+              "Type": 0,
+              "system:index": "40"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.21025848388672, 40.39597990301882],
+                  [-88.21025848388672, 40.3873508718188],
+                  [-88.2088851928711, 40.39284220142399]]]),
+            {
+              "Type": 0,
+              "system:index": "41"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-88.20304870605469, 40.37950533853148],
+                  [-88.19995880126953, 40.37505913073455],
+                  [-88.19961547851562, 40.37898227049007]]]),
+            {
+              "Type": 0,
+              "system:index": "42"
+            })]);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
 // Classification of water cover in Planet Labs 
 
 var currentDate = '2017-05-10';
+
+var upper_mean = 12000; // upper bound mean band value to cut off clouds
+var lower_mean = 2000; // lower bound mean band value to cut off cloud shadows
+var buffer_shadow_dist = 150; // cloud shadow buffer distance (in m)
 
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
@@ -46,49 +805,42 @@ var CDL_Mask = function(years, crops, extent) {
   return result_img;
 }
 
-// Remove cloud shadows, by dropping a buffered distance around 
-// a specified percentage of "dark" pixels
-var Shadow_Mask = function(image, threshold, bufferDist, extent) {
+// Remove clouds and shadows, by taking the mean of all bands then
+// dropping a buffered distance around a specified upper limit of "dark" pixels
+// and dropping everything above an upper threshold
+var Obscuration_Mask = function(image, cloud_thresh, shadow_thresh, bufferDist) {
   // print(image);
   // Get the mean of all bands
-  var cloud_mask = image.reduce(ee.Reducer.mean());
+  var band_mean = image.reduce(ee.Reducer.mean());
+  // Clouds are bright, get everything below a high value theshold
+  var not_clouds = band_mean.lt(cloud_thresh).byte();
   
-  //Map.addLayer(cloud_mask, {min:2000, max: 8000, palette: ['violet', 'orange', 'yellow']}, "Mean values");
+  Map.addLayer(band_mean,
+    {min:shadow_thresh, max: cloud_thresh, palette: ['red', 'black', 'gray', 'white', 'blue']},
+    "Mean values"); // */
+  //Map.addLayer(not_clouds, {min: 0, max: 1}, "Not clouds");
   
-  // Get the n-th percentile value for the means
-  var percentiles = cloud_mask.reduceRegion({
-    reducer: ee.Reducer.percentile([threshold]),
-    geometry: extent,
-    scale: 30, // 3m x 10
-    maxPixels: 1e12
-  });
-  // For everything below this percentile...  
-  cloud_mask = cloud_mask.lte(ee.Image.constant(percentiles.get("mean")));
-  // Focal minimum around mask
-  //cloud_mask = cloud_mask.focal_min({kernelType: 'square', radius: bufferDist, units: "meters"});
+  // For everything below this shadow value...  
+  var shadow_mask = band_mean.lte(shadow_thresh).byte();
 
   // Measure the distance to the closest pixel below this threshold
-  cloud_mask = cloud_mask.fastDistanceTransform(100).sqrt().multiply(ee.Image.pixelArea().sqrt());
+  var cloud_mask = shadow_mask.fastDistanceTransform(100).sqrt().multiply(ee.Image.pixelArea().sqrt());
   
   //Map.addLayer(cloud_mask, {min:0, max: bufferDist}, "Buffered"); // Distance
   
+  // Distance measurement to buffered mask around the shadows
   cloud_mask = cloud_mask
     .where(cloud_mask.lte(bufferDist), 0)
     .where(cloud_mask.gt(bufferDist), 1)
     .byte(); // */
   
+  // Include the mask for the cloud shadows too
+  cloud_mask = cloud_mask.and(not_clouds).byte();
+  
   return cloud_mask;
 }
 
-// Get the trainers associated with water vs not water cover for this date
-var training_day = trainers.filter(ee.Filter.eq('date', currentDate)).select('cover');
-var training_bands = ['b1', 'b2', 'b3', 'b4']
-
-training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [1, 1, 0], 'cover');
-
-print(training_day);
-
-// Load Cropland Data Layer of maize and soybeans plots from 2013-2016
+// Load Cropland Data Layer of maize and soybeans plots plus water cover in 2017
 // Change champaign to clip region
 var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
 //print(cdl_cult);
@@ -103,31 +855,46 @@ var masked_pl = plImage.updateMask(cdl_cult);
 masked_pl = masked_pl.clip(champaign);
 
 // Mask of cloud shadow + buffer
-var shade_mask = Shadow_Mask(
+var shade_mask = Obscuration_Mask(
   masked_pl, // image
-  0, // percentile
-  150, // buffer distance, in meters
-  champaign // AOI
+  upper_mean, // upper bound mean band value to cut off clouds
+  lower_mean, // lower bound mean band value to cut off cloud shadows
+  buffer_shadow_dist // cloud shadow buffer distance
   );
-masked_pl = masked_pl.updateMask(shade_mask); // */
 
-// Create the sampling raster with an added "cover" band
+// masked_pl = masked_pl.updateMask(shade_mask); // 
+
+// Mask the area of interest where the shadows are
+var aoi_mask = cdl_cult.and(shade_mask);
+// Mask out 0 values of the original image, cast image as 8-bit int
+aoi_mask = aoi_mask.and(plImage.gt(0)).byte();
+
+masked_pl = masked_pl.updateMask(aoi_mask); // 
+
+// Get the trainers associated with water vs not water cover for this date
+var date_filtered = trainers.filter(ee.Filter.eq('date', currentDate));
+var training_day = date_filtered.select('class');
+var training_bands = ['b1', 'b2', 'b3', 'b4']
+
+print(training_day);
+
+// Create the sampling raster with an added "class" band
 var sample_pl = masked_pl.clipToCollection(training_day);
 sample_pl = ee.Image([sample_pl, 
   ee.Image()
     .byte()
-    .paint(training_day, 'cover')
-    .rename('cover')]);
+    .paint(training_day, 'class')
+    .rename('class')]);
 print(sample_pl);
-
+/*
 // Sample pixels for classification
 //var training = masked_pl.reduceRegions(training_day, ee.Reducer.mean());
-/*var training = masked_pl.select(training_bands)
+var training = masked_pl.select(training_bands)
   .sample({region: training_day, numPixels: 50})
   .limit(50);
-//  tileScale: 16});*/
+//  tileScale: 16});
 var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
-  classBand: 'cover', 
+  classBand: 'class', 
   region: training_day,
   scale: 6,
   classValues: [0, 1], // cover values to sample from 
@@ -136,28 +903,27 @@ var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
 print(training);
 // Train the classifier.
 var classifier = ee.Classifier.randomForest({
-  numberOfTrees: 10
+  numberOfTrees: 30
 })
-  .train(training, "cover", training_bands);
+  .train(training, "class", training_bands);
 print(classifier);
 // Apply the classifier to the masked Planet Labs image
 var classed_pl = masked_pl.classify(classifier).byte();
 // Recast classified image as 8-bit depth integer
 //classed_pl = classed_pl.toInt8();
 
-/*
 // Confusion matrix for classification
 var trainAcc = classifier.confusionMatrix();
-print('Confusion matrix: ', trainAcc);
+print('Confusion matrix: ', trainAcc.array());
 print('Training overall accuracy: ', trainAcc.accuracy());
 print('Consumers Accuracy', trainAcc.consumersAccuracy());
 print('Producers Accuracy', trainAcc.producersAccuracy());
 print('Kappa', trainAcc.kappa());
-*/
+// */
 
 // Draw to map
 //Map.setCenter(-94.866,42.967, 8);
-//Map.setCenter(-96.37, 48.29, 8);*/
+//Map.setCenter(-96.37, 48.29, 8);
 //Map.addLayer(cdl_cult);
 Map.addLayer(masked_pl, vizParams, "Planet Labs");
 //Map.addLayer(shade_mask, {min: 0, max: 1}, "Cloud shadow mask")
@@ -165,16 +931,75 @@ Map.addLayer(masked_pl, vizParams, "Planet Labs");
 //Map.addLayer(training_day, {}, "Trainer Polys");
 //Map.addLayer(sample_pl, {}, "Sample Points");
 //Map.addLayer(training, {}, "Trainer Points")
-Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
+//Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
 
-// Export image and mask. Uncomment this when ready to export data.
+//Export image. Uncomment this when ready to export data.
 Export.image.toCloudStorage({
-  image: classed_pl,
-  description: '2017_05_10_PlanetLabs',
+  image: masked_pl,
+  description: currentDate + '_PL_Masked_Raw',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/2017-05-10_randomForest10_int8',
+  fileNamePrefix: 'PL/Raw/' + currentDate + '_cbw_masked-mosaic_3m',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
   maxPixels: 1e13
-}); // */
+});
+// 
+
+Export.image.toCloudStorage({
+  image: aoi_mask,
+  description: currentDate + '_PL_AOI_Mask',
+  bucket: 'gee_export_kovi',
+  fileNamePrefix: 'PL/Masks/' + currentDate + '_cbw_viz-mask_3m_int8',
+  scale: 3,
+  crs: "EPSG:32616",
+  region: champaign,
+  maxPixels: 1e13
+});
+//
+
+// Export accuracy statistics
+/*var cm = ee.Feature(null, 
+  {matrix: trainAcc.array(),
+    overall_accuracy: trainAcc.accuracy(),
+    consumer_accuracy: trainAcc.consumersAccuracy(),
+    producer_accuracy: trainAcc.producersAccuracy(),
+    kappa: trainAcc.kappa()});
+
+Export.table.toCloudStorage({
+  collection: ee.FeatureCollection(cm),
+  description: currentDate + '_Classification_Accuracy',
+  bucket: 'gee_export_kovi',
+  fileNamePrefix: 'PL/Accuracy/' + currentDate + '_RandomForests30_Accuracy_',
+  fileFormat: 'CSV'
+});
+// */
+
+// Export trainer geometries
+// Set the "source" property of the trainer geometries
+date_filtered = date_filtered.map(function (feat) { return feat.set({"source":"Paul"}); });
+
+// Set the "source", "class", and "date" properties of the trainers from Yaping
+waterCai = waterCai.map(function (feat) { return feat.set({"source":"Cai"}); });
+waterCai = waterCai.map(function (feat) { return feat.set({"class":1}); });
+waterCai = waterCai.map(function (feat) { return feat.set({"date":currentDate}); });
+othersCai = othersCai.map(function (feat) { return feat.set({"source":"Cai"}); });
+othersCai = othersCai.map(function (feat) { return feat.set({"class":0}); });
+othersCai = othersCai.map(function (feat) { return feat.set({"date":currentDate}); });
+
+// Merge the polygons
+var trainOut = date_filtered.merge(waterCai);
+trainOut = trainOut.merge(othersCai);
+// Select specific properties from the FeatureCollection
+trainOut = trainOut.select(["date", "class", "cover", "hidden", "source"]);
+
+print(trainOut);
+
+Export.table.toCloudStorage({
+  collection: ee.FeatureCollection(trainOut),
+  description: currentDate + '_Trainers',
+  bucket: 'gee_export_kovi',
+  fileNamePrefix: 'PL/Geometry/' + currentDate + '_Trainers_Combined_',
+  fileFormat: 'GeoJSON'
+});
+// */
