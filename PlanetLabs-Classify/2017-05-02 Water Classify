@@ -223,7 +223,7 @@ var Obscuration_Mask = function(image, cloud_thresh, shadow_thresh, bufferDist) 
   var not_clouds = band_mean.lt(cloud_thresh).byte();
   
   Map.addLayer(band_mean,
-    {min:shadow_thresh, max: cloud_thresh, palette: ['black', 'red', 'orange', 'yellow']},
+    {min:shadow_thresh, max: cloud_thresh, palette: ['black', 'gray', 'white', 'blue']},
     "Mean values"); // */
   //Map.addLayer(not_clouds, {min: 0, max: 1}, "Not clouds");
   
@@ -397,6 +397,8 @@ othersCai = othersCai.map(function (feat) { return feat.set({"date":currentDate}
 // Merge the polygons
 var trainOut = date_filtered.merge(waterCai);
 trainOut = trainOut.merge(othersCai);
+// Select specific properties from the FeatureCollection
+trainOut = trainOut.select(["date", "class", "cover", "hidden", "source"]);
 
 print(trainOut);
 
