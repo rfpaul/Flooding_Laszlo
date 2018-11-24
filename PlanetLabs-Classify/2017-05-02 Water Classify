@@ -241,7 +241,7 @@ var Obscuration_Mask = function(image, cloud_thresh, shadow_thresh, bufferDist) 
     .where(cloud_mask.gt(bufferDist), 1)
     .byte(); // */
   
-  // Include the mask for the clouds too
+  // Include the mask for the cloud shadows too
   cloud_mask = cloud_mask.and(not_clouds).byte();
   
   return cloud_mask;
@@ -341,7 +341,7 @@ Map.addLayer(masked_pl, vizParams, "Planet Labs");
 //Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
 
 //Export image. Uncomment this when ready to export data.
-/*Export.image.toCloudStorage({
+Export.image.toCloudStorage({
   image: masked_pl,
   description: currentDate + '__PL_Masked_Raw',
   bucket: 'gee_export_kovi',
@@ -357,17 +357,16 @@ Export.image.toCloudStorage({
   image: aoi_mask,
   description: currentDate + '__PL_AOI_Mask',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/Raw/' + currentDate + '_cbw_viz-mask_3m_int8',
+  fileNamePrefix: 'PL/Masks/' + currentDate + '_cbw_viz-mask_3m_int8',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
   maxPixels: 1e13
 });
-
 //
 
 // Export accuracy statistics
-var cm = ee.Feature(null, 
+/*var cm = ee.Feature(null, 
   {matrix: trainAcc.array(),
     overall_accuracy: trainAcc.accuracy(),
     consumer_accuracy: trainAcc.consumersAccuracy(),
