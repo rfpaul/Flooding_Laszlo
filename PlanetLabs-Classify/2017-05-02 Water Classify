@@ -169,11 +169,6 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
 // Robert F Paul
 // Classification of water cover in Planet Labs
 
-    water1 = /* color: #0b4a8b *//* color: #0b4a8b */
-waters,
-    others1 = /* color: #ffc82d *//* color: #ffc82d */
-other;
-
 var currentDate = '2017-05-02';
 
 var upper_mean = 8000; // upper bound mean band value to cut off clouds
