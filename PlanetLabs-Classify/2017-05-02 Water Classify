@@ -516,7 +516,7 @@ var Obscuration_Mask = function(image, cloud_thresh, shadow_thresh, bufferDist) 
   // Clouds are bright, get everything below a high value theshold
   var not_clouds = band_mean.lt(cloud_thresh).byte();
   
-  /*Map.addLayer(band_mean,
+  Map.addLayer(band_mean,
     {min:shadow_thresh, max: cloud_thresh, palette: ['black', 'red', 'orange', 'yellow']},
     "Mean values"); // */
   //Map.addLayer(not_clouds, {min: 0, max: 1}, "Not clouds");
@@ -558,8 +558,8 @@ masked_pl = masked_pl.clip(champaign);
 // Mask of cloud shadow + buffer
 var shade_mask = Obscuration_Mask(
   masked_pl, // image
-  8000, // upper bound mean value to cut off clouds
-  3500, // lower bound mean value to cut off cloud shadows
+  8000, // upper bound mean band value to cut off clouds
+  3500, // lower bound mean band value to cut off cloud shadows
   150 // cloud shadow buffer distance
   );
 
