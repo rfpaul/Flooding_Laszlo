@@ -418,7 +418,7 @@ var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
 // Robert F Paul
 // Classification of water cover in Planet Labs 
 
-var currentDate = '2017-05-06'
+var currentDate = '2017-05-06';
 
 var upper_mean = 6500; // upper bound mean band value to cut off clouds
 var lower_mean = 4000; // lower bound mean band value to cut off cloud shadows
