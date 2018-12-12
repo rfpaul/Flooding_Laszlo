@@ -1,4 +1,4 @@
-## Describe_single_raster_morphology.py
+## Describe_multi_day_rasters_morphology.py
 # Describes 3D "islands" of chronologically ordered binomial classification
 # rasters by numbers of islands, sizes, and frequency distribution
 
@@ -7,9 +7,16 @@ import numpy as np
 import glob
 import re
 import gdal
+import sys
 import matplotlib.pyplot as plt
+from matplotlib import rc_file
 import datetime as dt
 from scipy import ndimage
+import rasterio
+from rasterio.profiles import DefaultGTiffProfile
+
+# Matplotlib parameters file
+rc_file("/Users/exnihilo/Box_Sync/Data/Soil_flooding_data_figs_docs/Documents/aguposter2018rc")
 
 ## Functions
 # Parse date from a file path with a YYYY-MM-DD year
@@ -47,8 +54,6 @@ def LoadRasterSlices(pathList, maskPath):
     # Empty array for the slices
     arrayList = []
     # Load mask of the permanent water features in the image
-    # Note: Somehow CDL water classifications snuck into the extents, otherwise
-    # this step wouldn't be necessary. Not sure how that happened.
     try:
         # Open mask
         src = gdal.Open(maskPath)
@@ -72,6 +77,8 @@ def LoadRasterSlices(pathList, maskPath):
                 src.GetRasterBand(1).ReadAsArray())
             # Close the raster i/o
             src = None
+            # Redefine NA value of 255 to 0
+            inData[inData == 255] = 0
             # Mask out permanent water features
             inData = np.bitwise_and(inData, mask)
             # Append array to list
@@ -126,23 +133,40 @@ def ExtendTimeSlices(dataArray, extentsArray):
 # Take the number of slices a labeled feature lasts, and then by looking up the
 # dates associated with the ending slice, return an array of day lengths
 def SlicesToDays(sliceLens, dates):
-    firstDay = dates[0]
     dayLens = np.array(
-        [(dates[x-1] - firstDay).days for x in sliceLens]).astype('int')
+        [(dates[j - 1] - dates[i]).days for i, j in sliceLens]).astype('int')
     return dayLens
  
 ## Global variables
 # Searchable pattern for the filepaths of the data
-dataPathPattern = "/Users/exnihilo/Box_Sync/Data/Soil_flooding_data_figs_docs/Data/PL/*_randomForest10_int8.tif"
+dataPathPattern = "/Users/exnihilo/tmp/2017-05/Classified/R_randomforest_bin-class_*.tif"
 dataPaths, dateList = SortExtractChrono(dataPathPattern)
 
 # Searchable pattern for the filepaths of the extent data
 # IMPORTANT! These MUST have exactly the same scale and extent as the
 # data rasters!
-extentPathPattern = "/Users/exnihilo/Box_Sync/GIS/Flooding_Remote_Sensing/Masks/daily_coverage/*_3m_cb_cover-mask_int8.tif"
+extentPathPattern = "/Users/exnihilo/tmp/2017-05/Masks/*_cbw_viz-mask_3m_int8.tif"
 extentPaths, extentDates = SortExtractChrono(extentPathPattern)
 
-maskPath = "/Users/exnihilo/Box_Sync/GIS/Flooding_Remote_Sensing/Masks/3m_water_mask_2017.tif"
+# Where is the CDL mask for permanent water features?
+maskPath = "/Users/exnihilo/Box_Sync/GIS/Flooding_Remote_Sensing/Masks/2017_water_3m_mask.tif"
+
+# Large structuring array for noise removal via binary opening
+# structElement = np.array(
+#   [[[0, 0, 1, 0, 0],
+#     [0, 1, 1, 1, 0],
+#     [1, 1, 1, 1, 1],
+#     [0, 1, 1, 1, 0],
+#     [0, 0, 1, 0, 0]]])
+
+# Small structuring array
+structElement = np.array(
+  [[[0, 1, 0],
+    [1, 1, 1],
+    [0, 1, 0]]])
+
+# Color for plotting histograms
+plotColor = 'steelblue'
 
 ## Main script run
 # Get the raster data and extents loaded into arrays
@@ -169,19 +193,6 @@ if (not sameProperties):
 
 # Binary opening; remove regions smaller than the defined structuring element
 print("Removing areas smaller than structuring element...", end = ' ')
-# Large structuring array
-# structElement = np.array(
-#   [[[0, 0, 1, 0, 0],
-#     [0, 1, 1, 1, 0],
-#     [1, 1, 1, 1, 1],
-#     [0, 1, 1, 1, 0],
-#     [0, 0, 1, 0, 0]]])
-
-# Small structuring array
-structElement = np.array(
-  [[[0, 1, 0],
-    [1, 1, 1],
-    [0, 1, 0]]])
 
 rasterData = ndimage.binary_opening(
     rasterData,
@@ -197,14 +208,18 @@ print("Done")
 # the total number of features
 print("Labeling morphological structure...", end = ' ')
 labeled, num_features = ndimage.label(rasterData)
-primaryLabeled, primaryFeatureCount = ndimage.label(rasterData[0])
+# Grab the first raster layer and the first label layer
+firstSlice = rasterData[0]
+primaryLabeled = labeled[0]
 print("Done")
 
 # "Bounding box" of found objects
 print("Finding and describing labeled objects...", end = ' ')
 found = ndimage.find_objects(labeled)
-# "Lengths" of each label starting at the first slice
-labelLens = np.array([x[0].stop for x in found if x[0].start == 0])
+# "Lengths" of each label
+allLabelLens = np.array([(x[0].start, x[0].stop) for x in found])
+# "Lengths" of each label that starts at the first slice
+labelLens = np.array([x for x in allLabelLens if x[0] == 0])
 print("Done")
 
 # Convert number of slices to duration in days
@@ -224,22 +239,74 @@ feature_areas = np.bincount(primaryLabeled.ravel())[1:]
 # Each cell is 3m resolution, so multiply by 3^2 to get sqm
 features_sqm = feature_areas * 3**2
 
+# Also get the hectares
+features_ha = features_sqm / 1e4
+
+# What percent area in the AOI gets ponded?
+allExtents = np.bitwise_or.reduce(extents, axis = 0)
+percentPonded = firstSlice.sum() / allExtents.sum()
+
 ## Plot duration results in a histogram
-plt.hist(dryDayLens)
+plt.subplot(1, 2, 1)
+plt.hist(dryDayLens, color = plotColor)
 plt.yscale('log')
 plt.xlabel("Duration (days)")
 plt.ylabel("Count")
-plt.title("Duration distribution of n={} ponds lasting at least\none day after significant rainfall (> 1 cm daily accumulation)".format(len(dryDayLens)))
+#plt.title("Duration distribution of n={} ponds lasting at least\none day after significant rainfall (> 1 cm daily accumulation)".format(len(dryDayLens)))
+plt.tick_params(right=True, which="both", direction="in")
+plt.tight_layout()
+#plt.show()
+
+## Plot first slice results in a histogram
+plt.subplot(1, 2, 2)
+# Histagram bin breaks
+plt.hist(features_ha,
+    color = plotColor,
+    bins = [0, .0078125, .015625, .03125, .0625, .125, .25, .5,
+            1, 4, 8, 16, 32])
+# Use log scales on X and Y axes; data set has high density around short
+# durations and low pond sizes 
+plt.yscale('log')
+plt.xscale('log')
+plt.xlabel("Area (ha)")
+plt.ylabel("Count")
+#plt.title("Size distribution of n={} ponds\nfrom May 2017 classification data".format(num_features, dateList[0]))
 plt.tick_params(right=True, which="both", direction="in")
 plt.tight_layout()
 plt.show()
 
-## Plot first slice results in a histogram
-plt.hist(features_sqm)
-plt.yscale('log')
-plt.xlabel("Area (m$^2$)")
-plt.ylabel("Count")
-plt.title("Size distribution of n={} ponds\nfrom May 2017 classification data".format(num_features, dateList[0]))
+## Plot a hex bin of feature duration * size
+fig, ax = plt.subplots()
+hb = ax.hexbin(dayLens,
+    features_ha,
+    gridsize = 12,
+    yscale = 'log',
+    cmap = 'Blues',
+    bins = 'log')
+plt.xlabel("Duration (days)")
+plt.ylabel("Area (ha)")
+cb = fig.colorbar(hb, ax=ax)
+cb.set_label('Count')
 plt.tick_params(right=True, which="both", direction="in")
 plt.tight_layout()
 plt.show()
+
+## Raster + crs output of first slice
+# Where are we saving the file?
+destPath = "/Users/exnihilo/Box_Sync/Work/Conferences/AGU2018/first_slice_class.tif"
+
+# Prepare the mask values
+mask = allExtents.copy()
+rasterOut = firstSlice.copy()
+# 255 is the "nodata" value
+rasterOut[mask == 0] = 255
+
+# Open any classified raster as source--we just need to copy the profile
+with rasterio.open(dataPaths[0]) as src:
+    # Copy driver, dimensions, data type, crs, etc.
+    matchParams = src.profile
+    # Open the write stream
+    with rasterio.open(destPath, 'w', **matchParams) as dest:
+        # Write the raster to disk
+        dest.write(rasterOut, 1)
+    

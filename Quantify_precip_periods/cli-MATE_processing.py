@@ -2,9 +2,13 @@
 # Import packages
 import pandas as pd
 from matplotlib import pyplot as plt
+from matplotlib import rc_file
+
+# Matplotlib parameters file
+rc_file("/Users/exnihilo/Box_Sync/Data/Soil_flooding_data_figs_docs/Documents/aguposter2018rc")
 
 # Get data
-myPrecip = pd.read_csv("~/Box_Sync/Data/Soil_flooding_data_figs/Data/cli-MATE_precip_SD_b2dates.csv")
+myPrecip = pd.read_csv("/Users/exnihilo/Box_Sync/Data/Soil_flooding_data_figs_docs/Data/cli-MATE/cli-MATE_precip_SD_b2dates.csv")
 # Format date strings as datetime objects
 myPrecip["DATE"] = pd.to_datetime(myPrecip["DATE"])
 # Make the date the index

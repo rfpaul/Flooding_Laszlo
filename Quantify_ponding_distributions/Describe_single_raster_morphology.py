@@ -10,14 +10,15 @@ from scipy import ndimage
 
 ## Global variables
 # Where is the data?
-inRaster = "/Users/exnihilo/Box_Sync/Data/Soil_flooding_data_figs_docs/Data/CMI_ponded_soils_classifications/2017-05-05/Waterlog_0505.tif"
+#inRaster = "/Users/exnihilo/tmp/2017-05-05_RandomForest30_3m_int8.tif"
+inRaster = "/Users/exnihilo/tmp/R_randomforest_bin-class_2017-05-05.tif"
 
 # What is the date of observation?
 rastDate = "2017-05-05"
 
 ## Functions
 
-## Main script run
+## Load raster data as 2D array
 # Open the raster
 src = gdal.Open(inRaster)
 
@@ -26,6 +27,29 @@ rasterData = np.array(src.GetRasterBand(1).ReadAsArray())
 
 # Close the raster i/o
 src = None
+
+# Do this if it's the R output where 255 = NA
+rasterData[rasterData == 255] = 0
+
+## Process image array
+# Binary opening; remove regions smaller than the defined structuring element
+# Large structuring array
+# structElement = np.array(
+#   [[[0, 0, 1, 0, 0],
+#     [0, 1, 1, 1, 0],
+#     [1, 1, 1, 1, 1],
+#     [0, 1, 1, 1, 0],
+#     [0, 0, 1, 0, 0]]])
+
+# Small structuring array
+structElement = np.array(
+  [[0, 1, 0],
+   [1, 1, 1],
+   [0, 1, 0]])
+
+rasterData = ndimage.binary_opening(
+    rasterData,
+    structure = structElement).astype('uint8')
 
 # Get the morphology of the image; return the contiguous features labeled and
 # the total number of features
