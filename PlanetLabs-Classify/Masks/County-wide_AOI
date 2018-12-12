@@ -1,0 +1,76 @@
+/**** Start of imports. If edited, may not auto-convert in the playground. ****/
+var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty");
+/***** End of imports. If edited, may not auto-convert in the playground. *****/
+// Robert F Paul
+// Masks of AOI/extents for Champaign County
+
+// Create a mask of all pixels matching CDL crop class indices
+// for the specified years within the extent
+var CDL_Mask = function(years, crops, extent) {
+  var result_img;
+  
+  // Get the CDL image for the year
+  var FetchCDLYear = function(year) {
+    // Start and end dates
+    var start = ee.Date.fromYMD(year, 01, 01);
+    var end = ee.Date.fromYMD(year, 12, 31);
+    // Get the cropland layer for the year
+    var result = ee.ImageCollection('USDA/NASS/CDL')
+      .filterDate(start,end)
+      .select('cropland') // Get the cropland cover values
+      .first(); // Specifically get the image
+    // Clip to extent geometry
+    result = ee.Image(result).clip(extent);
+    //print(result)
+    return FetchCovers(result);
+  }
+  
+  // Specified land covers = 1, all others = 0
+  var FetchCovers = function(image) {
+    // Remap cover ID values as 1, everything else as 0
+    var result = image.remap(crops, // from
+      ee.List.repeat(1, crops.length), // to
+      0); // default value
+    return result;
+  }  
+  
+  // Mask from the union of all specified crop types for specified years
+  result_img = ee.ImageCollection(years.map(FetchCDLYear)).and();
+  
+  // Return resulting mask
+  return result_img.byte();
+}
+
+var countyRaster = ee.Image(1).paint(champaign, 1).byte();
+countyRaster = countyRaster.clip(champaign);
+print(countyRaster);
+
+// Load Cropland Data Layer in 2017 of--
+// maize (1),
+// soybeans (5),
+// water (111)
+// Change champaign to clip region
+var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
+print(cdl_cult);
+
+// Inverted mask of the CDL
+var inverseMask = countyRaster.subtract(cdl_cult).byte();
+
+// Draw to map
+//Map.setCenter(-94.866,42.967, 8);
+//Map.setCenter(-96.37, 48.29, 8);*/
+Map.addLayer(countyRaster, {min: 0, max: 1}, "County");
+Map.addLayer(cdl_cult, {min: 0, max: 1}, "CDL");
+Map.addLayer(inverseMask, {min: 0, max: 1}, "Inverse CDL");
+
+//Export image and mask. Uncomment this when ready to export data.
+/*Export.image.toCloudStorage({
+  image: cdl_cult,
+  description: '2017_cbw_mask_3m',
+  bucket: 'gee_export_kovi',
+  fileNamePrefix: 'masks/2017_cbw-inverted_3m_mask',
+  scale: 3,
+  crs: "EPSG:32616",
+  region: champaign,
+  maxPixels: 1e13
+}); // */

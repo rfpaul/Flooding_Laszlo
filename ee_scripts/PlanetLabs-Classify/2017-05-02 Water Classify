@@ -2,12 +2,178 @@
 var champaign = ee.FeatureCollection("users/RobertFPaul/ChampaignCounty"),
     sinks = ee.Image("users/RobertFPaul/Champ_sinks_x10cm"),
     trainers = ee.FeatureCollection("users/RobertFPaul/unified_training_polys"),
-    plImage = ee.Image("users/RobertFPaul/PL/2017-05-02_Combined");
+    plImage = ee.Image("users/RobertFPaul/PL/2017-05-02_Combined"),
+    othersCai = /* color: #ffc82d */ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.97244179565911, 40.27529120554573],
+                  [-87.96842921097283, 40.27571685204108],
+                  [-87.96842921097283, 40.27635531676035],
+                  [-87.97227013428216, 40.276289833476845]]]),
+            {
+              "Type": 0,
+              "system:index": "0"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.96432377689894, 40.27481421160965],
+                  [-87.96432377689894, 40.27391379038165],
+                  [-87.9637229620796, 40.274372188141356]]]),
+            {
+              "Type": 0,
+              "system:index": "1"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.9588115371946, 40.287718671554806],
+                  [-87.95949818270242, 40.28712941877403],
+                  [-87.95763136522805, 40.28708031414376]]]),
+            {
+              "Type": 0,
+              "system:index": "2"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.96180222962931, 40.329010843385255],
+                  [-87.9593131396635, 40.32730958394969],
+                  [-87.95811151002482, 40.32786576963702]]]),
+            {
+              "Type": 0,
+              "system:index": "3"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.95530813300098, 40.282214205992304],
+                  [-87.95346277319874, 40.280871902328094],
+                  [-87.95269029700245, 40.2813466225237]]]),
+            {
+              "Type": 0,
+              "system:index": "4"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.9764836395002, 40.2798962274986],
+                  [-87.97498160245186, 40.27880761668521],
+                  [-87.9736726844526, 40.27924142610254],
+                  [-87.97615104558236, 40.280649241264065]]]),
+            {
+              "Type": 0,
+              "system:index": "5"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.9450042842733, 40.27757323625189],
+                  [-87.94430690992942, 40.27655825651328],
+                  [-87.94314819563499, 40.277581421510426],
+                  [-87.94507938612571, 40.27772057075403]]]),
+            {
+              "Type": 0,
+              "system:index": "6"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.97675059100595, 40.27301362292753],
+                  [-87.97359631320444, 40.2721950368744],
+                  [-87.9705278660914, 40.27268618969533],
+                  [-87.97027037402597, 40.274045027246565],
+                  [-87.97829554339853, 40.273488398298234]]]),
+            {
+              "Type": 0,
+              "system:index": "7"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.98232958575693, 40.2734638410332],
+                  [-87.9817287709376, 40.27321826789262],
+                  [-87.9806129719874, 40.276312424292776],
+                  [-87.9814069058558, 40.27634516593151]]]),
+            {
+              "Type": 0,
+              "system:index": "8"
+            })]),
+    waterCai = /* color: #0b4a8b */ee.FeatureCollection(
+        [ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.95675192824774, 40.278561256986855],
+                  [-87.95647297851019, 40.277808219965934],
+                  [-87.9559150790351, 40.27815199877679],
+                  [-87.95634423247748, 40.27849577583972]]]),
+            {
+              "Type": 1,
+              "system:index": "0"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.94806157103949, 40.27582736514778],
+                  [-87.94778262130194, 40.2756636555419],
+                  [-87.94769679061346, 40.275925590721045]]]),
+            {
+              "Type": 1,
+              "system:index": "1"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.95621548644476, 40.27957620665803],
+                  [-87.95643006316595, 40.27939613605394],
+                  [-87.95619402877264, 40.27937976597528]]]),
+            {
+              "Type": 1,
+              "system:index": "2"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.9579321002143, 40.27847940554302],
+                  [-87.9579321002143, 40.27813562839686],
+                  [-87.9576102351325, 40.27821748025687]]]),
+            {
+              "Type": 1,
+              "system:index": "3"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.95739996750359, 40.27424344891155],
+                  [-87.95703518707757, 40.27424344891155],
+                  [-87.95682061035637, 40.274358048084125]]]),
+            {
+              "Type": 1,
+              "system:index": "4"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.9811750682116, 40.27381779314163],
+                  [-87.98123944122796, 40.27342487774517],
+                  [-87.98093903381829, 40.273654078670546]]]),
+            {
+              "Type": 1,
+              "system:index": "5"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.93117757261439, 40.325870023241244],
+                  [-87.92989011228724, 40.323645187211234],
+                  [-87.92946095884486, 40.324364995127716]]]),
+            {
+              "Type": 1,
+              "system:index": "6"
+            }),
+        ee.Feature(
+            ee.Geometry.Polygon(
+                [[[-87.9338812393014, 40.32145299763833],
+                  [-87.93452496946497, 40.320962199175135],
+                  [-87.93349500120326, 40.32102763917638]]]),
+            {
+              "Type": 1,
+              "system:index": "7"
+            })]);
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // Robert F Paul
-// Classification of water cover in Planet Labs 
+// Classification of water cover in Planet Labs
 
 var currentDate = '2017-05-02';
+
+var upper_mean = 7500; // upper bound mean band value to cut off clouds
+var lower_mean = 3700; // lower bound mean band value to cut off cloud shadows
+var buffer_shadow_dist = 150; // cloud shadow buffer distance (in m)
 
 // Create a mask of all pixels matching CDL crop class indices
 // for the specified years within the extent
@@ -46,49 +212,42 @@ var CDL_Mask = function(years, crops, extent) {
   return result_img;
 }
 
-// Remove cloud shadows, by dropping a buffered distance around 
-// a specified percentage of "dark" pixels
-var Shadow_Mask = function(image, threshold, bufferDist, extent) {
+// Remove clouds and shadows, by taking the mean of all bands then
+// dropping a buffered distance around a specified upper limit of "dark" pixels
+// and dropping everything above an upper threshold
+var Obscuration_Mask = function(image, cloud_thresh, shadow_thresh, bufferDist) {
   // print(image);
   // Get the mean of all bands
-  var cloud_mask = image.reduce(ee.Reducer.mean());
+  var band_mean = image.reduce(ee.Reducer.mean());
+  // Clouds are bright, get everything below a high value theshold
+  var not_clouds = band_mean.lt(cloud_thresh).byte();
   
-  //Map.addLayer(cloud_mask, {min:2000, max: 8000, palette: ['violet', 'orange', 'yellow']}, "Mean values");
+  Map.addLayer(band_mean,
+    {min:shadow_thresh, max: cloud_thresh, palette: ['black', 'gray', 'white', 'blue']},
+    "Mean values"); // */
+  //Map.addLayer(not_clouds, {min: 0, max: 1}, "Not clouds");
   
-  // Get the n-th percentile value for the means
-  var percentiles = cloud_mask.reduceRegion({
-    reducer: ee.Reducer.percentile([threshold]),
-    geometry: extent,
-    scale: 30, // 3m x 10
-    maxPixels: 1e12
-  });
-  // For everything below this percentile...  
-  cloud_mask = cloud_mask.lt(ee.Image.constant(percentiles.get("mean")));
-  // Focal minimum around mask
-  //cloud_mask = cloud_mask.focal_min({kernelType: 'square', radius: bufferDist, units: "meters"});
+  // For everything below this shadow value...  
+  var shadow_mask = band_mean.lte(shadow_thresh).byte();
 
   // Measure the distance to the closest pixel below this threshold
-  cloud_mask = cloud_mask.fastDistanceTransform(100).sqrt().multiply(ee.Image.pixelArea().sqrt());
+  var cloud_mask = shadow_mask.fastDistanceTransform(100).sqrt().multiply(ee.Image.pixelArea().sqrt());
   
   //Map.addLayer(cloud_mask, {min:0, max: bufferDist}, "Buffered"); // Distance
   
+  // Distance measurement to buffered mask around the shadows
   cloud_mask = cloud_mask
     .where(cloud_mask.lte(bufferDist), 0)
     .where(cloud_mask.gt(bufferDist), 1)
     .byte(); // */
   
-  return cloud_mask
+  // Include the mask for the cloud shadows too
+  cloud_mask = cloud_mask.and(not_clouds).byte();
+  
+  return cloud_mask;
 }
 
-// Get the trainers associated with water vs not water cover for this date
-var training_day = trainers.filter(ee.Filter.eq('date', currentDate)).select('cover');
-var training_bands = ['b1', 'b2', 'b3', 'b4']
-
-training_day = training_day.remap(['waterbody', 'pond', 'not_water'], [1, 1, 0], 'cover');
-
-print(training_day);
-
-// Load Cropland Data Layer of maize and soybeans plots from 2013-2016
+// Load Cropland Data Layer of maize and soybeans plots plus water cover in 2017
 // Change champaign to clip region
 var cdl_cult = CDL_Mask([2017], [1, 5, 111], champaign);
 //print(cdl_cult);
@@ -103,31 +262,46 @@ var masked_pl = plImage.updateMask(cdl_cult);
 masked_pl = masked_pl.clip(champaign);
 
 // Mask of cloud shadow + buffer
-var shade_mask = Shadow_Mask(
+var shade_mask = Obscuration_Mask(
   masked_pl, // image
-  5, // percentile
-  150, // buffer distance, in meters
-  champaign // AOI
+  upper_mean, // upper bound mean band value to cut off clouds
+  lower_mean, // lower bound mean band value to cut off cloud shadows
+  buffer_shadow_dist // cloud shadow buffer distance
   );
-masked_pl = masked_pl.updateMask(shade_mask); // */
 
-// Create the sampling raster with an added "cover" band
+// masked_pl = masked_pl.updateMask(shade_mask); // 
+
+// Mask the area of interest where the shadows are
+var aoi_mask = cdl_cult.and(shade_mask);
+// Mask out 0 values of the original image, cast image as 8-bit int
+aoi_mask = aoi_mask.and(plImage.gt(0)).byte();
+
+masked_pl = masked_pl.updateMask(aoi_mask); // 
+
+// Get the trainers associated with water vs not water cover for this date
+var date_filtered = trainers.filter(ee.Filter.eq('date', currentDate));
+var training_day = date_filtered.select('class');
+var training_bands = ['b1', 'b2', 'b3', 'b4']
+
+print(training_day);
+
+// Create the sampling raster with an added "class" band
 var sample_pl = masked_pl.clipToCollection(training_day);
 sample_pl = ee.Image([sample_pl, 
   ee.Image()
     .byte()
-    .paint(training_day, 'cover')
-    .rename('cover')]);
+    .paint(training_day, 'class')
+    .rename('class')]);
 print(sample_pl);
-
+/*
 // Sample pixels for classification
 //var training = masked_pl.reduceRegions(training_day, ee.Reducer.mean());
-/*var training = masked_pl.select(training_bands)
+var training = masked_pl.select(training_bands)
   .sample({region: training_day, numPixels: 50})
   .limit(50);
-//  tileScale: 16});*/
+//  tileScale: 16});
 var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
-  classBand: 'cover', 
+  classBand: 'class', 
   region: training_day,
   scale: 6,
   classValues: [0, 1], // cover values to sample from 
@@ -136,28 +310,27 @@ var training = sample_pl.stratifiedSample({ numPoints: 50, // value overridden
 print(training);
 // Train the classifier.
 var classifier = ee.Classifier.randomForest({
-  numberOfTrees: 10
+  numberOfTrees: 30
 })
-  .train(training, "cover", training_bands);
+  .train(training, "class", training_bands);
 print(classifier);
 // Apply the classifier to the masked Planet Labs image
 var classed_pl = masked_pl.classify(classifier).byte();
 // Recast classified image as 8-bit depth integer
 //classed_pl = classed_pl.toInt8();
 
-/*
 // Confusion matrix for classification
 var trainAcc = classifier.confusionMatrix();
-print('Confusion matrix: ', trainAcc);
+print('Confusion matrix: ', trainAcc.array());
 print('Training overall accuracy: ', trainAcc.accuracy());
 print('Consumers Accuracy', trainAcc.consumersAccuracy());
 print('Producers Accuracy', trainAcc.producersAccuracy());
 print('Kappa', trainAcc.kappa());
-*/
+// */
 
 // Draw to map
 //Map.setCenter(-94.866,42.967, 8);
-//Map.setCenter(-96.37, 48.29, 8);*/
+//Map.setCenter(-96.37, 48.29, 8);
 //Map.addLayer(cdl_cult);
 Map.addLayer(masked_pl, vizParams, "Planet Labs");
 //Map.addLayer(shade_mask, {min: 0, max: 1}, "Cloud shadow mask")
@@ -165,16 +338,75 @@ Map.addLayer(masked_pl, vizParams, "Planet Labs");
 //Map.addLayer(training_day, {}, "Trainer Polys");
 //Map.addLayer(sample_pl, {}, "Sample Points");
 //Map.addLayer(training, {}, "Trainer Points")
-Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
+//Map.addLayer(classed_pl, {min: 0, max: 1, palette: ["a93f26","1fc1ff"]}, "Classification");
 
-//Export image and mask. Uncomment this when ready to export data.
-/*Export.image.toCloudStorage({
-  image: classed_pl,
-  description: '2017_05_02_PlanetLabs',
+//Export image. Uncomment this when ready to export data.
+Export.image.toCloudStorage({
+  image: masked_pl,
+  description: currentDate + '_PL_Masked_Raw',
   bucket: 'gee_export_kovi',
-  fileNamePrefix: 'PL/2017-05-02_randomForest10_int8',
+  fileNamePrefix: 'PL/Raw/' + currentDate + '_cbw_masked-mosaic_3m',
   scale: 3,
   crs: "EPSG:32616",
   region: champaign,
   maxPixels: 1e13
-}); // */
+});
+// 
+
+Export.image.toCloudStorage({
+  image: aoi_mask,
+  description: currentDate + '_PL_AOI_Mask',
+  bucket: 'gee_export_kovi',
+  fileNamePrefix: 'PL/Masks/' + currentDate + '_cbw_viz-mask_3m_int8',
+  scale: 3,
+  crs: "EPSG:32616",
+  region: champaign,
+  maxPixels: 1e13
+});
+//
+
+// Export accuracy statistics
+/*var cm = ee.Feature(null, 
+  {matrix: trainAcc.array(),
+    overall_accuracy: trainAcc.accuracy(),
+    consumer_accuracy: trainAcc.consumersAccuracy(),
+    producer_accuracy: trainAcc.producersAccuracy(),
+    kappa: trainAcc.kappa()});
+
+Export.table.toCloudStorage({
+  collection: ee.FeatureCollection(cm),
+  description: currentDate + '_Classification_Accuracy',
+  bucket: 'gee_export_kovi',
+  fileNamePrefix: 'PL/Accuracy/' + currentDate + '_RandomForests30_Accuracy_',
+  fileFormat: 'CSV'
+});
+// */
+
+// Export trainer geometries
+// Set the "source" property of the trainer geometries
+date_filtered = date_filtered.map(function (feat) { return feat.set({"source":"Paul"}); });
+
+// Set the "source", "class", and "date" properties of the trainers from Yaping
+waterCai = waterCai.map(function (feat) { return feat.set({"source":"Cai"}); });
+waterCai = waterCai.map(function (feat) { return feat.set({"class":1}); });
+waterCai = waterCai.map(function (feat) { return feat.set({"date":currentDate}); });
+othersCai = othersCai.map(function (feat) { return feat.set({"source":"Cai"}); });
+othersCai = othersCai.map(function (feat) { return feat.set({"class":0}); });
+othersCai = othersCai.map(function (feat) { return feat.set({"date":currentDate}); });
+
+// Merge the polygons
+var trainOut = date_filtered.merge(waterCai);
+trainOut = trainOut.merge(othersCai);
+// Select specific properties from the FeatureCollection
+trainOut = trainOut.select(["date", "class", "cover", "hidden", "source"]);
+
+print(trainOut);
+
+Export.table.toCloudStorage({
+  collection: ee.FeatureCollection(trainOut),
+  description: currentDate + '_Trainers',
+  bucket: 'gee_export_kovi',
+  fileNamePrefix: 'PL/Geometry/' + currentDate + '_Trainers_Combined_',
+  fileFormat: 'GeoJSON'
+});
+// */
