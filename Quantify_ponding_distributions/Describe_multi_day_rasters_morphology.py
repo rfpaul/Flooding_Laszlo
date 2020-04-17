@@ -16,7 +16,7 @@ import rasterio
 from rasterio.profiles import DefaultGTiffProfile
 
 # Matplotlib parameters file
-rc_file("/Users/exnihilo/Box_Sync/Data/Soil_flooding_data_figs_docs/Documents/aguposter2018rc")
+rc_file("/Users/exnihilo/Box_Sync/Data/Soil_flooding_data_figs_docs/Documents/manuscript_figure_rc_params")
 
 ## Functions
 # Parse date from a file path with a YYYY-MM-DD year
@@ -139,13 +139,13 @@ def SlicesToDays(sliceLens, dates):
  
 ## Global variables
 # Searchable pattern for the filepaths of the data
-dataPathPattern = "/Users/exnihilo/tmp/2017-05/Classified/R_randomforest_bin-class_*.tif"
+dataPathPattern = "/Users/exnihilo/Box_Sync/tmp/2017-05/Classified/R_randomforest_bin-class_*.tif"
 dataPaths, dateList = SortExtractChrono(dataPathPattern)
 
 # Searchable pattern for the filepaths of the extent data
 # IMPORTANT! These MUST have exactly the same scale and extent as the
 # data rasters!
-extentPathPattern = "/Users/exnihilo/tmp/2017-05/Masks/*_cbw_viz-mask_3m_int8.tif"
+extentPathPattern = "/Users/exnihilo/Box_Sync/tmp/2017-05/Masks/*_cbw_viz-mask_3m_int8.tif"
 extentPaths, extentDates = SortExtractChrono(extentPathPattern)
 
 # Where is the CDL mask for permanent water features?
@@ -168,7 +168,7 @@ structElement = np.array(
 # Color for plotting histograms
 plotColor = 'steelblue'
 
-## Main script run
+## Main script run -- load data
 # Get the raster data and extents loaded into arrays
 print("Gathering raster data...", end = ' ')
 inputData = LoadRasterSlices(dataPaths, maskPath)
@@ -204,13 +204,17 @@ print("Extending non-overlapping data from later to earlier...", end = ' ')
 rasterData = ExtendTimeSlices(rasterData, extents)
 print("Done")
 
+## Main script run -- morphology
 # Get the morphology of the image; return the contiguous features labeled and
 # the total number of features
 print("Labeling morphological structure...", end = ' ')
 labeled, num_features = ndimage.label(rasterData)
 # Grab the first raster layer and the first label layer
-firstSlice = rasterData[0]
+# firstSlice = rasterData[0]
 primaryLabeled = labeled[0]
+# Alternatively, grab the layer for 2017-05-06 (first day after precip)
+firstSlice = rasterData[2]
+
 print("Done")
 
 # "Bounding box" of found objects
@@ -229,12 +233,21 @@ lastRainyDay = dt.date(2017, 5, 5)
 # Days between first measurement date and the last rainy day
 numRainyDays = (lastRainyDay - dateList[0]).days
 # Change durations to days after rain
-dryDayLens = dayLens - numRainyDays
+allDayLens = dayLens - numRainyDays
 # We only care about ponds that last at least 1 day
-dryDayLens = dryDayLens[dryDayLens > 0]
+dryDayLens = allDayLens[allDayLens > 0]
 
 # Count up the number of cells (as a flattened array) that share a label
 feature_areas = np.bincount(primaryLabeled.ravel())[1:]
+# Copy all the features in case we need to use them again
+all_features = feature_areas.copy()
+# We only care about ponds that last at least 1 day
+feature_areas = feature_areas[allDayLens > 0]
+
+# We have a few leftover small features that started in previous days;
+# remove them
+dryDayLens = dryDayLens[feature_areas >=5]
+feature_areas = feature_areas[feature_areas >=5]
 
 # Each cell is 3m resolution, so multiply by 3^2 to get sqm
 features_sqm = feature_areas * 3**2
@@ -244,10 +257,13 @@ features_ha = features_sqm / 1e4
 
 # What percent area in the AOI gets ponded?
 allExtents = np.bitwise_or.reduce(extents, axis = 0)
-percentPonded = firstSlice.sum() / allExtents.sum()
+percentPonded = np.bitwise_or.reduce(rasterData, axis = 0).sum() / allExtents.sum()
 
 ## Plot duration results in a histogram
-plt.subplot(1, 2, 1)
+# Single plot
+fig, ax = plt.subplots()
+# 1 row, 2 col plot
+#plt.subplot(1, 2, 1)
 plt.hist(dryDayLens, color = plotColor)
 plt.yscale('log')
 plt.xlabel("Duration (days)")
@@ -255,11 +271,14 @@ plt.ylabel("Count")
 #plt.title("Duration distribution of n={} ponds lasting at least\none day after significant rainfall (> 1 cm daily accumulation)".format(len(dryDayLens)))
 plt.tick_params(right=True, which="both", direction="in")
 plt.tight_layout()
-#plt.show()
+plt.show()
 
 ## Plot first slice results in a histogram
-plt.subplot(1, 2, 2)
-# Histagram bin breaks
+# Single plot
+fig, ax = plt.subplots()
+# 1 row, 2 col plot
+#plt.subplot(1, 2, 2)
+# Histogram bin breaks
 plt.hist(features_ha,
     color = plotColor,
     bins = [0, .0078125, .015625, .03125, .0625, .125, .25, .5,
@@ -277,7 +296,7 @@ plt.show()
 
 ## Plot a hex bin of feature duration * size
 fig, ax = plt.subplots()
-hb = ax.hexbin(dayLens,
+hb = ax.hexbin(dryDayLens,
     features_ha,
     gridsize = 12,
     yscale = 'log',
@@ -309,4 +328,24 @@ with rasterio.open(dataPaths[0]) as src:
     with rasterio.open(destPath, 'w', **matchParams) as dest:
         # Write the raster to disk
         dest.write(rasterOut, 1)
+    
+## Raster + crs output of all slices
+# Where are we saving the file?
+destBase = "/Users/exnihilo/Box_Sync/tmp/2017-05/Gap-filled/"
+
+# Open any classified raster as source--we just need to copy the profile
+with rasterio.open(dataPaths[0]) as src:
+    # Copy driver, dimensions, data type, crs, etc.
+    matchParams = src.profile
+    
+    for index, rSlice, date in zip(range(len(rasterData)), rasterData, dateList):
+        destPath = destBase + "GF_" + date.isoformat() + ".tif"
+        # Open the write stream
+        with rasterio.open(destPath, 'w', **matchParams) as dest:
+            rasterOut = rSlice.copy()
+            maskOut = np.bitwise_or.reduce(extents[index:], axis = 0)
+            # 255 is the "nodata" value
+            rasterOut[maskOut == 0] = 255
+            # Write the raster to disk
+            dest.write(rasterOut, 1)
     

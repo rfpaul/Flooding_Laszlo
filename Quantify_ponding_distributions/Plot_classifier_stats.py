@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 from matplotlib import rc_file
 
 # Matplotlib parameters file
-rc_file("/Users/exnihilo/Box_Sync/Data/Soil_flooding_data_figs_docs/Documents/aguposter2018rc")
+rc_file("/Users/exnihilo/Box_Sync/Data/Soil_flooding_data_figs_docs/Documents/manuscript_figure_rc_params")
 
 ## Global variables
 statsPath = "/Users/exnihilo/tmp/2017-05/Statistics/Collected_training_stats.csv"
